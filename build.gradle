@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.0.0-1.7.2"
+version = "2.0.0-1.7.x"
 group= "de.eydamos.backpack" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "backpack"
 
@@ -27,6 +27,8 @@ minecraft {
 }
 
 dependencies {
+    compile files('mods/CodeChickenCore-1.7.2-1.0.0-dev.jar', 'mods/NotEnoughItems-1.7.2-1.0.1-dev.jar', 'mods/InventoryTweaks-1.57-116.jar')
+
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

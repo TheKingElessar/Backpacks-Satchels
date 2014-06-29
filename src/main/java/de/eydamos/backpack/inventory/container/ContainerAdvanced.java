@@ -1,8 +1,11 @@
 package de.eydamos.backpack.inventory.container;
 
 import invtweaks.api.container.ChestContainer;
+import invtweaks.api.container.ContainerSection;
+import invtweaks.api.container.ContainerSectionCallback;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -301,5 +304,35 @@ public class ContainerAdvanced extends Container {
 
     public IInventory getInventoryToSave() {
         return inventory;
+    }
+
+    @ContainerSectionCallback
+    public Map<ContainerSection, List<Slot>> getContainerSections() {
+        Map<ContainerSection, List<Slot>> slotRefs = new HashMap<ContainerSection, List<Slot>>();
+
+        if(boundaries.containsKey(Boundaries.CRAFTING)) {
+            slotRefs.put(ContainerSection.CRAFTING_OUT, inventorySlots.subList(0, 1));
+            slotRefs.put(
+                ContainerSection.CRAFTING_IN_PERSISTENT,
+                inventorySlots.subList(getBoundary(Boundaries.CRAFTING), getBoundary(Boundaries.CRAFTING_END))
+            );
+        }
+        slotRefs.put(
+            ContainerSection.INVENTORY, 
+            inventorySlots.subList(getBoundary(Boundaries.INVENTORY), getBoundary(Boundaries.HOTBAR_END))
+        );
+        slotRefs.put(
+            ContainerSection.INVENTORY_NOT_HOTBAR,
+            inventorySlots.subList(getBoundary(Boundaries.INVENTORY), getBoundary(Boundaries.INVENTORY_END))
+        );
+        slotRefs.put(
+            ContainerSection.INVENTORY_HOTBAR,
+            inventorySlots.subList(getBoundary(Boundaries.HOTBAR), getBoundary(Boundaries.HOTBAR_END))
+        );
+        slotRefs.put(
+            ContainerSection.CHEST,
+            inventorySlots.subList(getBoundary(Boundaries.BACKPACK), getBoundary(Boundaries.BACKPACK_END))
+        );
+        return slotRefs;
     }
 }

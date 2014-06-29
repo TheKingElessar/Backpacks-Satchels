@@ -1,8 +1,14 @@
 package de.eydamos.backpack.inventory.container;
 
+import java.util.List;
+import java.util.Map;
+
 import invtweaks.api.container.ChestContainer;
+import invtweaks.api.container.ContainerSection;
+import invtweaks.api.container.ContainerSectionCallback;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import de.eydamos.backpack.inventory.AbstractInventoryBackpack;
 import de.eydamos.backpack.inventory.ISaveableInventory;
 import de.eydamos.backpack.inventory.InventoryPickup;
@@ -52,5 +58,10 @@ public class ContainerPersonalSlot extends ContainerAdvanced {
 
     public IInventory getInventoryPickup() {
         return inventoryPickup;
+    }
+
+    @ContainerSectionCallback
+    public Map<ContainerSection, List<Slot>> getContainerSections() {
+        return super.getContainerSections();
     }
 }

@@ -5,6 +5,8 @@ import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigurationBackpack {
+    public static Configuration config;
+
     public static int ENDER_RECIPE;
     public static int BACKPACK_SLOTS_S;
     public static int BACKPACK_SLOTS_L;
@@ -22,10 +24,13 @@ public class ConfigurationBackpack {
     public static boolean NEISupport = false;
 
     public static void init(File configFile) {
-        Configuration config = new Configuration(configFile);
-        // load the content of the configuration file
-        config.load();
+        if(config == null) {
+            config = new Configuration(configFile);
+            loadConfiguration();
+        }
+    }
 
+    public static void loadConfiguration() {
         ENDER_RECIPE = config.get(Configuration.CATEGORY_GENERAL, "enderRecipe", 0, getEnderRecipeComment()).getInt();
         if(ENDER_RECIPE < 0 || ENDER_RECIPE > 1) {
             ENDER_RECIPE = 0;
@@ -53,8 +58,9 @@ public class ConfigurationBackpack {
 
         DISALLOW_ITEMS = config.get(Configuration.CATEGORY_GENERAL, "disallowItems", "", getDisallowItemsComment()).getString();
 
-        // save the file so it will be generated if it doesn't exists
-        config.save();
+        if(config.hasChanged()) {
+            config.save();
+        }
     }
 
     private static String getEnderRecipeComment() {

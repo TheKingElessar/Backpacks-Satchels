@@ -20,12 +20,12 @@ import de.eydamos.backpack.network.PacketHandlerBackpack;
 import de.eydamos.backpack.proxy.CommonProxy;
 import de.eydamos.backpack.recipes.RecipeHelper;
 
-@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT)
+@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT, guiFactory = Constants.CLASS_GUI_FACTORY)
 public class Backpack {
     @Instance(Constants.MOD_ID)
     public static Backpack instance;
 
-    @SidedProxy(clientSide = "de.eydamos.backpack.proxy.ClientProxy", serverSide = "de.eydamos.backpack.proxy.ServerProxy")
+    @SidedProxy(clientSide = Constants.CLASS_PROXY_CLIENT, serverSide = Constants.CLASS_PROXY_SERVER)
     public static CommonProxy proxy;
 
     public static PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();

@@ -1,14 +1,14 @@
 package de.eydamos.backpack.network.message;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import de.eydamos.backpack.handler.EventHandlerRenderPlayer;
+import de.eydamos.backpack.handler.EventHandlerClientOnly;
 import de.eydamos.backpack.saves.PlayerSave;
 import de.eydamos.backpack.util.BackpackUtil;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.item.ItemStack;
 
 public class MessagePersonalBackpack implements IMessage, IMessageHandler<MessagePersonalBackpack, IMessage> {
     protected String playerUUID = "";
@@ -49,7 +49,7 @@ public class MessagePersonalBackpack implements IMessage, IMessageHandler<Messag
                 returnMessage = new MessagePersonalBackpack(message.playerUUID);
             }
         } else {
-            EventHandlerRenderPlayer.backpackDamage.put(message.playerUUID, message.backpackDamage);
+            EventHandlerClientOnly.backpackDamage.put(message.playerUUID, message.backpackDamage);
         }
         return returnMessage;
     }

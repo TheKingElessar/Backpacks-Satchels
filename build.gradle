@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.0.0-1.7.x"
+version = "2.1.0-1.7.x"
 group= "de.eydamos.backpack" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "backpack"
 
 minecraft {
-    version = "1.7.2-10.12.2.1121"
+    version = "1.7.2-10.12.2.1147"
     assetDir = "eclipse/assets"
 }
 

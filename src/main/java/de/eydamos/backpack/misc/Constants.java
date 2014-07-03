@@ -7,11 +7,15 @@ import de.eydamos.backpack.model.ModelBackpack;
 public class Constants {
     public static final String MOD_ID = "Backpack";
     public static final String MOD_NAME = "Backpack";
-    public static final String MOD_VERSION = "2.0.0";
+    public static final String MOD_VERSION = "2.1.0";
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
     public static final String DOMAIN = "backpack";
     public static final String CHANNEL = "BackpackChannel";
+
+    public static final String CLASS_PROXY_CLIENT = "de.eydamos.backpack.proxy.ClientProxy";
+    public static final String CLASS_PROXY_SERVER = "de.eydamos.backpack.proxy.ServerProxy";
+    public static final String CLASS_GUI_FACTORY = "de.eydamos.backpack.factory.FactoryConfigurationGui";
 
     public static final String UPDATE_FILE = "http://www.eydamos.de/minecraft/backpack/version.json";
 

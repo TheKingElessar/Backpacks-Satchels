@@ -10,7 +10,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import de.eydamos.backpack.gui.GuiWorkbenchBackpack;
-import de.eydamos.backpack.handler.EventHandlerRenderPlayer;
+import de.eydamos.backpack.handler.EventHandlerClientOnly;
 import de.eydamos.backpack.handler.KeyInputHandler;
 import de.eydamos.backpack.misc.ConfigurationBackpack;
 import de.eydamos.backpack.misc.Constants;
@@ -23,7 +23,7 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance().bus().register(new KeyInputHandler());
 
         if(ConfigurationBackpack.RENDER_BACKPACK_MODEL) {
-            MinecraftForge.EVENT_BUS.register(new EventHandlerRenderPlayer());
+            MinecraftForge.EVENT_BUS.register(new EventHandlerClientOnly());
         }
     }
 

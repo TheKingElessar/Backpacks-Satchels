@@ -140,12 +140,12 @@ public class BackpackUtil {
         for(int a = 0; a < oreIdFirst.length; a++) {
             for(int b = 0; b < oreIdSecond.length; b++) {
                 if(oreIdFirst[a] != oreIdSecond[b]) {
-                    return false;
+                    return true;
                 }
             }
         }
 
-        return oreIdFirst.length != 0;
+        return false;
     }
 
     /**

@@ -23,7 +23,9 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance().bus().register(new KeyInputHandler());
 
         if(ConfigurationBackpack.RENDER_BACKPACK_MODEL) {
-            MinecraftForge.EVENT_BUS.register(new EventHandlerClientOnly());
+            EventHandlerClientOnly eventHandlerClient = new EventHandlerClientOnly();
+            MinecraftForge.EVENT_BUS.register(eventHandlerClient);
+            FMLCommonHandler.instance().bus().register(eventHandlerClient);
         }
     }
 

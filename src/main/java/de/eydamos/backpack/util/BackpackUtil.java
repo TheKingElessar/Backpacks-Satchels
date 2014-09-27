@@ -54,13 +54,17 @@ public class BackpackUtil {
             inventoryPickup.setInventoryContent(backpack);
 
             ContainerPickup container = new ContainerPickup(ItemBackpackBase.getInventory(backpack, entityPlayer), new BackpackSave(backpack));
+            boolean hasPickedUp = false;
             for(int i = 0; i < inventoryPickup.getSizeInventory(); i++) {
                 ItemStack pickupItemStack = inventoryPickup.getStackInSlot(i);
                 if(areStacksEqual(pickupItemStack, itemStack, true)) {
-                    container.pickupItem(itemStack);
+                    hasPickedUp = container.pickupItem(itemStack) || hasPickedUp;
                 }
             }
-            container.onContainerClosed(entityPlayer);
+
+            if(hasPickedUp) {
+                container.onContainerClosed(entityPlayer);
+            }
         }
     }
 

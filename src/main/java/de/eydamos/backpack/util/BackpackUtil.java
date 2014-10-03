@@ -141,9 +141,9 @@ public class BackpackUtil {
         int[] oreIdFirst = OreDictionary.getOreIDs(firstStack);
         int[] oreIdSecond = OreDictionary.getOreIDs(secondStack);
 
-        for(int a = 0; a < oreIdFirst.length; a++) {
-            for(int b = 0; b < oreIdSecond.length; b++) {
-                if(oreIdFirst[a] != oreIdSecond[b]) {
+        for(int a : oreIdFirst) {
+            for(int b : oreIdSecond) {
+                if(a == b) {
                     return true;
                 }
             }

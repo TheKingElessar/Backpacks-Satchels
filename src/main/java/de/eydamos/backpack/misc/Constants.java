@@ -7,7 +7,7 @@ import de.eydamos.backpack.model.ModelBackpack;
 public class Constants {
     public static final String MOD_ID = "Backpack";
     public static final String MOD_NAME = "Backpack";
-    public static final String MOD_VERSION = "2.1.0";
+    public static final String MOD_VERSION = "2.0.1";
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
     public static final String DOMAIN = "backpack";

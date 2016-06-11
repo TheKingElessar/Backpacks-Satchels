@@ -55,10 +55,10 @@ public class Button extends GuiButton implements AbstractGuiPart {
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if(visible) {
-            FontRenderer fontrenderer = mc.fontRenderer;
+            FontRenderer fontrenderer = mc.fontRendererObj;
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            field_146123_n = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
-            int offset = getHoverState(field_146123_n);
+            hovered = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
+            int offset = getHoverState(hovered);
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -115,7 +115,7 @@ public class Button extends GuiButton implements AbstractGuiPart {
                 l = packedFGColour;
             } else if(!enabled) {
                 l = 10526880;
-            } else if(field_146123_n) {
+            } else if(hovered) {
                 l = 16777120;
             }
 

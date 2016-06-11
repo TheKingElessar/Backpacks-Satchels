@@ -3,15 +3,15 @@ package de.eydamos.guiadvanced.form;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import de.eydamos.guiadvanced.misc.AbstractGuiPart;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class Textbox extends GuiTextField implements AbstractGuiPart {
     protected int relativePositionX;
     protected int relativePositionY;
 
     public Textbox(FontRenderer fontRenderer, int posX, int posY, int width, int height) {
-        super(fontRenderer, posX, posY, width, height);
+        super(0, fontRenderer, posX, posY, width, height);
         relativePositionX = posX;
         relativePositionY = posY;
     }

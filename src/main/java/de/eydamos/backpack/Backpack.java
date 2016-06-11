@@ -1,75 +1,49 @@
 package de.eydamos.backpack;
 
-import org.apache.logging.log4j.Level;
-
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import de.eydamos.backpack.handler.SaveFileHandler;
-import de.eydamos.backpack.item.ItemsBackpack;
-import de.eydamos.backpack.misc.ConfigurationBackpack;
 import de.eydamos.backpack.misc.Constants;
-import de.eydamos.backpack.network.PacketHandlerBackpack;
 import de.eydamos.backpack.proxy.CommonProxy;
-import de.eydamos.backpack.recipes.RecipeHelper;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT, guiFactory = Constants.CLASS_GUI_FACTORY)
+@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT/*, guiFactory = Constants.CLASS_GUI_FACTORY*/)
 public class Backpack {
-    @Instance(Constants.MOD_ID)
+    @Mod.Instance(Constants.MOD_ID)
     public static Backpack instance;
 
     @SidedProxy(clientSide = Constants.CLASS_PROXY_CLIENT, serverSide = Constants.CLASS_PROXY_SERVER)
     public static CommonProxy proxy;
 
-    public static PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
-    public static SaveFileHandler saveFileHandler = new SaveFileHandler();
+    //public static PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
+    //public static SaveFileHandler saveFileHandler = new SaveFileHandler();
 
-    public static boolean valid = true;
-
-    @EventHandler
-    public void invalidFingerprint(FMLFingerprintViolationEvent event) {
-        if(!Constants.FINGERPRINT.equals("@FINGERPRINT@")) {
-            valid = false;
-
-            FMLLog.log(Constants.MOD_ID, Level.ERROR, "Invalid fingerprint someone has changed the mod. Please redownload from the forum.");
-        }
-    }
-
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        if(valid) {
-            // get the configuration and let forge guess the filename
-            ConfigurationBackpack.init(event.getSuggestedConfigurationFile());
+        // get the configuration and let forge guess the filename
+        //ConfigurationBackpack.init(event.getSuggestedConfigurationFile());
 
-            // create an instance of the items
-            ItemsBackpack.initItems();
+        // create an instance of the items
+        //ItemsBackpack.initItems();
 
-            // key bindings
-            proxy.registerKeybindings();
+        // key bindings
+        proxy.registerKeybindings();
 
-            FMLInterModComms.sendRuntimeMessage(Constants.MOD_ID, "VersionChecker", "addVersionCheck", Constants.UPDATE_FILE);
-        }
+        FMLInterModComms.sendRuntimeMessage(Constants.MOD_ID, "VersionChecker", "addVersionCheck", Constants.UPDATE_FILE);
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        if(valid) {
-            // register recipes
-            RecipeHelper.registerRecipes();
+        // register recipes
+        //RecipeHelper.registerRecipes();
 
-            // register all Handlers
-            proxy.registerHandlers();
-        }
+        // register all Handlers
+        proxy.registerHandlers();
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.addNeiSupport();
     }

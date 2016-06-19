@@ -1,10 +1,19 @@
 package de.eydamos.backpack.proxy;
 
-import net.minecraftforge.common.MinecraftForge;
-import de.eydamos.backpack.Backpack;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import de.eydamos.backpack.misc.EBackpack;
+import de.eydamos.backpack.misc.EItem;
+import de.eydamos.backpack.recipe.ERecipe;
 
 public abstract class CommonProxy implements IProxy {
+    @Override
+    public void registerItems() {
+        EBackpack.registerItems();
+        EItem.registerItems();
+    }
+
+    @Override
+    public void registerIcons() {}
+
     @Override
     public void registerHandlers() {
         //Backpack.packetHandler.initialise();
@@ -20,4 +29,9 @@ public abstract class CommonProxy implements IProxy {
 
     @Override
     public void addNeiSupport() {}
+
+    @Override
+    public void registerRecipes() {
+        ERecipe.registerRecipes();
+    }
 }

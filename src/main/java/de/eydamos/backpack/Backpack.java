@@ -26,7 +26,7 @@ public class Backpack {
         //ConfigurationBackpack.init(event.getSuggestedConfigurationFile());
 
         // create an instance of the items
-        //ItemsBackpack.initItems();
+        proxy.registerItems();
 
         // key bindings
         proxy.registerKeybindings();
@@ -36,15 +36,17 @@ public class Backpack {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        // register recipes
-        //RecipeHelper.registerRecipes();
+        proxy.registerIcons();
 
-        // register all Handlers
-        proxy.registerHandlers();
+        // registerItems recipes
+        proxy.registerRecipes();
+
+        // registerItems all Handlers
+        //proxy.registerHandlers();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        proxy.addNeiSupport();
+        //proxy.addNeiSupport();
     }
 }

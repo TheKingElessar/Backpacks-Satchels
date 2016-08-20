@@ -2,12 +2,10 @@ package de.eydamos.backpack.item;
 
 import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.misc.Constants;
-import de.eydamos.backpack.misc.EBackpack;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -24,17 +22,18 @@ public class ItemBackpack extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tab, List subItems) {
-        EBackpack.addSubItem(subItems);
+        for (EBackpack backpack : EBackpack.values()) {
+            subItems.add(new ItemStack(item, 1, backpack.getDamage()));
+        }
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        NBTTagCompound nbtTagCompound = stack.getTagCompound();
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("unlocalized")) {
-            return "item." + nbtTagCompound.getString("unlocalized");
-        }
+    public String getUnlocalizedName(ItemStack itemStack) {
+        String name = super.getUnlocalizedName(itemStack);
 
-        return getUnlocalizedName();
+        name += '_' + EBackpack.getIdentifierByDamage(itemStack.getItemDamage());
+
+        return name;
     }
 
     @Override

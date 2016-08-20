@@ -1,40 +1,31 @@
 package de.eydamos.backpack.misc;
 
-import de.eydamos.backpack.item.ItemFunctionless;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import de.eydamos.backpack.helper.HelperNBTData;
+import de.eydamos.backpack.item.EFrame;
+import de.eydamos.backpack.item.EPiece;
+import de.eydamos.backpack.item.EStick;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public enum EItem {
-    STICK_STONE(Constants.Items.STICK, "stick_stone", 64, true, 0),
-    STICK_IRON(Constants.Items.STICK, "stick_iron", 64, true, 1),
-    LEATHER_BOUND(Constants.Items.LEATHER, "leather_bound", 64, true, 0),
-    LEATHER_TANNED(Constants.Items.LEATHER, "leather_tanned", 64, true, 1),
-    FRAME_WOOD(Constants.Items.FRAME, "frame_wood", 1, true, 0, Constants.NBT.FRAME_TIER, "I"),
-    FRAME_STONE(Constants.Items.FRAME, "frame_stone", 1, true, 1, Constants.NBT.FRAME_TIER, "II"),
-    FRAME_IRON(Constants.Items.FRAME, "frame_iron", 1, true, 2, Constants.NBT.FRAME_TIER, "III"),
-    BACKPACK_PICE_TOP(Constants.Items.BACKPACK_PICE, "backpack_piece_top", 1, true, 0),
-    BACKPACK_PICE_MIDDLE(Constants.Items.BACKPACK_PICE, "backpack_piece_middle", 1, true, 1),
-    BACKPACK_PICE_BOTTOM(Constants.Items.BACKPACK_PICE, "backpack_piece_bottom", 1, true, 2);
+    BOUND_LEATHER(BackpackItems.bound_leather, 0),
+    TANNED_LEATHER(BackpackItems.tanned_leather, 0),
+    STICK_STONE(BackpackItems.stick, EStick.STONE.getDamage()),
+    STICK_IRON(BackpackItems.stick, EStick.IRON.getDamage()),
+    FRAME_WOOD(BackpackItems.backpack_frame, EFrame.WOOD.getDamage()),
+    FRAME_STONE(BackpackItems.backpack_frame, EFrame.STONE.getDamage()),
+    FRAME_IRON(BackpackItems.backpack_frame, EFrame.IRON.getDamage()),
+    BACKPACK_PICE_TOP(BackpackItems.backpack_piece, EPiece.TOP.getDamage()),
+    BACKPACK_PICE_MIDDLE(BackpackItems.backpack_piece, EPiece.MIDDLE.getDamage()),
+    BACKPACK_PICE_BOTTOM(BackpackItems.backpack_piece, EPiece.BOTTOM.getDamage());
 
-    protected Constants.Items item;
-    protected String unlocalizedName;
-    protected int stackSize;
-    protected boolean hasSubTypes;
+    protected Item item;
     protected int damage;
     protected NBTTagCompound nbtTagCompound;
 
-    EItem(Constants.Items item, String unlocalizedName, int stackSize, boolean hasSubTypes, int damage, Object... nbtData) {
+    EItem(Item item, int damage, Object... nbtData) {
         this.item = item;
-        this.unlocalizedName = unlocalizedName;
-        this.stackSize = stackSize;
-        this.hasSubTypes = hasSubTypes;
         this.damage = damage;
         this.nbtTagCompound = new NBTTagCompound();
 
@@ -46,43 +37,16 @@ public enum EItem {
         }
     }
 
-    public void registerItem() {
-        if (item.getItem() == null) {
-            GameRegistry.registerItem(item.setItem(stackSize, hasSubTypes), item.getUnlocalizedName());
-            ModelBakery.addVariantName(item.getItem(), Constants.MOD_ID + ':' + unlocalizedName);
-            ((ItemFunctionless) item.getItem()).addSubItem(damage, unlocalizedName);
-        } else {
-            ModelBakery.addVariantName(item.getItem(), Constants.MOD_ID + ':' + unlocalizedName);
-            ((ItemFunctionless) item.getItem()).addSubItem(damage, unlocalizedName);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void registerIcon() {
-        ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-
-        // identifier must be the same as the filename of the json
-        mesher.register(item.getItem(), damage, new ModelResourceLocation(Constants.MOD_ID + ':' + unlocalizedName, "inventory"));
-    }
-
     public ItemStack getItemStack(int amount) {
-        ItemStack itemStack = new ItemStack(item.getItem(), amount, damage);
+        ItemStack itemStack = new ItemStack(item, amount, damage);
 
-        itemStack.setTagCompound(this.nbtTagCompound);
+        HelperNBTData.setFrameTier(itemStack, itemStack);
+        HelperNBTData.setLeatherTier(itemStack, itemStack);
+
+        if (!nbtTagCompound.hasNoTags()) {
+            itemStack.setTagCompound(nbtTagCompound);
+        }
 
         return itemStack;
-    }
-
-    public static void registerItems() {
-        for (EItem item : values()) {
-            item.registerItem();
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void registerIcons() {
-        for (EItem item : values()) {
-            item.registerIcon();
-        }
     }
 }

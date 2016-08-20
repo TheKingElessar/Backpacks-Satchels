@@ -1,6 +1,6 @@
 package de.eydamos.backpack.recipe;
 
-import de.eydamos.backpack.misc.EBackpack;
+import de.eydamos.backpack.item.EBackpack;
 import de.eydamos.backpack.misc.EItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,8 +11,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public enum ERecipe {
     STICK_STONE(EItem.STICK_STONE.getItemStack(4), ECategory.SHAPED_OREDICT, "S", "S", 'S', "stone"),
     STICK_IRON(EItem.STICK_IRON.getItemStack(2), ECategory.SHAPED_OREDICT, "S", "S", 'S', "ingotIron"),
-    LEATHER_BOUND(EItem.LEATHER_BOUND.getItemStack(2), ECategory.SHAPED, "SSS", "LSL", "SSS", 'S', Items.string, 'L', Items.leather),
-    LEATHER_TANNED(EItem.LEATHER_TANNED.getItemStack(1), ECategory.FURNACE, EItem.LEATHER_BOUND.getItemStack(1), 0.1f),
+    LEATHER_BOUND(EItem.BOUND_LEATHER.getItemStack(2), ECategory.SHAPED, "SSS", "LSL", "SSS", 'S', Items.string, 'L', Items.leather),
+    LEATHER_TANNED(EItem.TANNED_LEATHER.getItemStack(1), ECategory.FURNACE, EItem.BOUND_LEATHER.getItemStack(1), 0.1f),
     FRAME_WOOD(EItem.FRAME_WOOD.getItemStack(1), ECategory.SHAPED, "WSW", "S S", "WSW", 'W', Items.stick, 'S', Items.string),
     FRAME_WOOD2(EItem.FRAME_WOOD.getItemStack(1), ECategory.SHAPED, "SWS", "W W", "SWS", 'W', Items.stick, 'S', Items.string),
     FRAME_STONE(EItem.FRAME_STONE.getItemStack(1), ECategory.SHAPED, "WSW", "S S", "WSW", 'W', EItem.STICK_STONE.getItemStack(1), 'S', Items.string),

@@ -1,18 +1,12 @@
-package de.eydamos.backpack.misc;
+package de.eydamos.backpack.item;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import de.eydamos.backpack.misc.EColor;
+import de.eydamos.backpack.misc.ESize;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import java.util.Hashtable;
 
 public enum EBackpack {
     SMALL(ESize.SMALL, EColor.NONE),
@@ -67,19 +61,20 @@ public enum EBackpack {
     BIG_ORANGE(ESize.BIG, EColor.ORANGE),
     BIG_WHITE(ESize.BIG, EColor.WHITE);
 
+    private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
+    private static Item item;
+
     protected ESize size;
     protected EColor color;
     protected String identifier;
     protected int damage;
-    protected Constants.Items item = Constants.Items.BACKPACK;
     protected NBTTagCompound nbtTagCompound;
 
     EBackpack(ESize size, EColor color) {
         this.size = size;
         this.color = color;
 
-        identifier = "backpack_";
-        identifier += size.name().toLowerCase();
+        identifier = size.name().toLowerCase();
         if (color.getName().length() > 0) {
             identifier += '_' + color.getName();
         }
@@ -91,6 +86,10 @@ public enum EBackpack {
         this.nbtTagCompound.setString("unlocalized", identifier);
     }
 
+    public static void setItem(Item item) {
+        EBackpack.item = item;
+    }
+
     public String getIdentifier() {
         return identifier;
     }
@@ -99,50 +98,31 @@ public enum EBackpack {
         return damage;
     }
 
-    public void registerItem() {
-        if (item.getItem() == null) {
-            GameRegistry.registerItem(item.setItem(1, true), item.getUnlocalizedName());
-            ModelBakery.addVariantName(item.getItem(), Constants.MOD_ID + ':' + identifier);
-        } else {
-            ModelBakery.addVariantName(item.getItem(), Constants.MOD_ID + ':' + identifier);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void registerIcon() {
-        ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-
-        // identifier must be the same as the filename of the json
-        mesher.register(item.getItem(), damage, new ModelResourceLocation(Constants.MOD_ID + ':' + identifier, "inventory"));
-    }
-
     public ItemStack getItemStack(int amount) {
-        ItemStack itemStack = new ItemStack(item.getItem(), amount, damage);
+        ItemStack itemStack = new ItemStack(item, amount, damage);
 
         itemStack.setTagCompound(this.nbtTagCompound);
 
         return itemStack;
     }
 
-    public static void registerItems() {
+    public static String getIdentifierByDamage(int damage) {
         for (EBackpack backpack : values()) {
-            backpack.registerItem();
+            if (backpack.getDamage() == damage) {
+                return backpack.identifier;
+            }
         }
+
+        return "";
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void registerIcons() {
-        for (EBackpack backpack : values()) {
-            backpack.registerIcon();
-        }
+    public static Hashtable<Integer, String> getVariants() {
+        return VARIANTS;
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void addSubItem(List<ItemStack> subItems) {
+    static {
         for (EBackpack backpack : values()) {
-            ItemStack itemStack = new ItemStack(backpack.item.getItem(), 1, backpack.getDamage());
-            itemStack.setTagInfo("unlocalized", new NBTTagString(backpack.getIdentifier()));
-            subItems.add(itemStack);
+            VARIANTS.put(backpack.getDamage(), backpack.getIdentifier());
         }
     }
 }

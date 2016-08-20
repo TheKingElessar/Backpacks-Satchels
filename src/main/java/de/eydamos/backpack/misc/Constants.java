@@ -1,10 +1,7 @@
 package de.eydamos.backpack.misc;
 
-import de.eydamos.backpack.item.ItemBackpack;
-import de.eydamos.backpack.item.ItemFunctionless;
 import de.eydamos.backpack.item.TabBackpacks;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 public class Constants {
@@ -70,39 +67,4 @@ public class Constants {
     }
 
     public class NBTTypes extends net.minecraftforge.common.util.Constants.NBT {}
-
-    public enum Items {
-        LEATHER("leather", ItemFunctionless.class),
-        STICK("stick", ItemFunctionless.class),
-        FRAME("frame", ItemFunctionless.class),
-        BACKPACK_PICE("backpackpiece", ItemFunctionless.class),
-        BACKPACK("backpack", ItemBackpack.class);
-
-        protected Item item;
-        protected Class clazz;
-        protected String unlocalizedName;
-
-        Items(String unlocalizedName, Class clazz) {
-            this.unlocalizedName = unlocalizedName;
-            this.clazz = clazz;
-        }
-
-        public Item getItem() {
-            return item;
-        }
-
-        public Item setItem(int stackSize, boolean hasSubTypes) {
-            if(clazz == ItemFunctionless.class) {
-                this.item = new ItemFunctionless(unlocalizedName, stackSize, hasSubTypes);
-            } else if(clazz == ItemBackpack.class) {
-                this.item = new ItemBackpack();
-            }
-
-            return item;
-        }
-
-        public String getUnlocalizedName() {
-            return unlocalizedName;
-        }
-    }
 }

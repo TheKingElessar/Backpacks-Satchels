@@ -2,6 +2,7 @@ package de.eydamos.backpack.recipe;
 
 import de.eydamos.backpack.helper.HelperItems;
 import de.eydamos.backpack.helper.HelperNBTData;
+import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,7 @@ public class RecipeBackpackPieceBottom extends AbstractRecipe {
 
                 break;
             case 1:
-                if (itemStack == null || itemStack.getItem() != Constants.Items.FRAME.getItem()) {
+                if (itemStack == null || itemStack.getItem() != BackpackItems.backpack_frame) {
                     return false;
                 }
 

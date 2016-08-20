@@ -1,5 +1,6 @@
 package de.eydamos.backpack.helper;
 
+import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -23,26 +24,32 @@ public class HelperNBTData {
             return;
         }
 
-        if (!itemStack.hasTagCompound()) {
-            itemStack.setTagCompound(new NBTTagCompound());
+        NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
+
+        if (nbtTagCompound == null) {
+            nbtTagCompound = new NBTTagCompound();
         }
 
-        if (frame.getItem() == Constants.Items.FRAME.getItem()) {
-            switch(frame.getItemDamage()) {
+        if (frame.getItem() == BackpackItems.backpack_frame) {
+            switch (frame.getItemDamage()) {
                 case 0:
-                    itemStack.getTagCompound().setString(Constants.NBT.FRAME_TIER, "I");
+                    nbtTagCompound.setString(Constants.NBT.FRAME_TIER, "I");
                     break;
                 case 1:
-                    itemStack.getTagCompound().setString(Constants.NBT.FRAME_TIER, "II");
+                    nbtTagCompound.setString(Constants.NBT.FRAME_TIER, "II");
                     break;
                 case 2:
-                    itemStack.getTagCompound().setString(Constants.NBT.FRAME_TIER, "III");
+                    nbtTagCompound.setString(Constants.NBT.FRAME_TIER, "III");
                     break;
             }
         }
 
         if (!getFrameTier(frame).isEmpty()) {
-            itemStack.getTagCompound().setString(Constants.NBT.FRAME_TIER, getFrameTier(frame));
+            nbtTagCompound.setString(Constants.NBT.FRAME_TIER, getFrameTier(frame));
+        }
+
+        if (!nbtTagCompound.hasNoTags()) {
+            itemStack.setTagCompound(nbtTagCompound);
         }
     }
 
@@ -61,20 +68,26 @@ public class HelperNBTData {
             return;
         }
 
-        if (!itemStack.hasTagCompound()) {
-            itemStack.setTagCompound(new NBTTagCompound());
+        NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
+
+        if (nbtTagCompound == null) {
+            nbtTagCompound = new NBTTagCompound();
         }
 
         if (leather.getItem() == Items.rabbit_hide) {
-            itemStack.getTagCompound().setString(Constants.NBT.LEATHER_TIER, "I");
+            nbtTagCompound.setString(Constants.NBT.LEATHER_TIER, "I");
         } else if (leather.getItem() == Items.leather) {
-            itemStack.getTagCompound().setString(Constants.NBT.LEATHER_TIER, "II");
-        } else if (leather.getItem() == Constants.Items.LEATHER.getItem() && leather.getItemDamage() == 1) {
-            itemStack.getTagCompound().setString(Constants.NBT.LEATHER_TIER, "III");
+            nbtTagCompound.setString(Constants.NBT.LEATHER_TIER, "II");
+        } else if (leather.getItem() == BackpackItems.tanned_leather) {
+            nbtTagCompound.setString(Constants.NBT.LEATHER_TIER, "III");
         }
 
         if (!getLeatherTier(leather).isEmpty()) {
-            itemStack.getTagCompound().setString(Constants.NBT.LEATHER_TIER, getLeatherTier(leather));
+            nbtTagCompound.setString(Constants.NBT.LEATHER_TIER, getLeatherTier(leather));
+        }
+
+        if (!nbtTagCompound.hasNoTags()) {
+            itemStack.setTagCompound(nbtTagCompound);
         }
     }
 

@@ -1,6 +1,6 @@
 package de.eydamos.backpack.helper;
 
-import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.misc.BackpackItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -18,7 +18,7 @@ public class HelperItems {
             return true;
         }
 
-        if (itemStack.getItem() == Constants.Items.LEATHER.getItem() && itemStack.getItemDamage() == 1) {
+        if (itemStack.getItem() == BackpackItems.tanned_leather) {
             return true;
         }
 
@@ -42,7 +42,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == Constants.Items.BACKPACK_PICE.getItem() && itemStack.getItemDamage() == 0) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == 0) {
             return true;
         }
 
@@ -54,7 +54,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == Constants.Items.BACKPACK_PICE.getItem() && itemStack.getItemDamage() == 1) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == 1) {
             return true;
         }
 
@@ -66,7 +66,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == Constants.Items.BACKPACK_PICE.getItem() && itemStack.getItemDamage() == 2) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == 2) {
             return true;
         }
 

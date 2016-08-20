@@ -1,17 +1,9 @@
 package de.eydamos.backpack.proxy;
 
 import de.eydamos.backpack.handler.KeyInputHandler;
-import de.eydamos.backpack.misc.EBackpack;
-import de.eydamos.backpack.misc.EItem;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
-    @Override
-    public void registerIcons() {
-        EBackpack.registerIcons();
-        EItem.registerIcons();
-    }
-
     @Override
     public void registerHandlers() {
         super.registerHandlers();

@@ -5,5 +5,6 @@ enum ECategory {
     SHAPELESS_OREDICT,
     SHAPED,
     SHAPED_OREDICT,
-    FURNACE
+    FURNACE,
+    CUSTOM
 }

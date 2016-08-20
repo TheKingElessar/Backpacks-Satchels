@@ -1,8 +1,10 @@
 package de.eydamos.backpack.item;
 
+import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.EBackpack;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +23,7 @@ public class ItemBackpack extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item itemIn, CreativeTabs tab, List subItems) {
+    public void getSubItems(Item item, CreativeTabs tab, List subItems) {
         EBackpack.addSubItem(subItems);
     }
 
@@ -33,5 +35,10 @@ public class ItemBackpack extends Item {
         }
 
         return getUnlocalizedName();
+    }
+
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List tooltip, boolean advanced) {
+        HelperNBTData.addTooltip(itemStack, tooltip);
     }
 }

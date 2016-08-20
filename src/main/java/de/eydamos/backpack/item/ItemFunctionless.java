@@ -1,9 +1,13 @@
 package de.eydamos.backpack.item;
 
+import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.TreeMap;
@@ -28,12 +32,16 @@ public class ItemFunctionless extends Item {
     }
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, List subItems) {
-        if (subItems != null) {
-            for (Integer damage : this.subItems.keySet()) {
-                subItems.add(new ItemStack(itemIn, 1, damage));
-            }
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, List subItems) {
+        for (Integer damage : this.subItems.keySet()) {
+            subItems.add(new ItemStack(item, 1, damage));
         }
+    }
+
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List tooltip, boolean advanced) {
+        HelperNBTData.addTooltip(itemStack, tooltip);
     }
 
     public void addSubItem(int damage, String unlocalizedName) {

@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -71,6 +72,7 @@ public enum EBackpack {
     protected String identifier;
     protected int damage;
     protected Constants.Items item = Constants.Items.BACKPACK;
+    protected NBTTagCompound nbtTagCompound;
 
     EBackpack(ESize size, EColor color) {
         this.size = size;
@@ -83,6 +85,10 @@ public enum EBackpack {
         }
 
         damage = size.getDamage() + color.getDamage();
+
+        this.nbtTagCompound = new NBTTagCompound();
+
+        this.nbtTagCompound.setString("unlocalized", identifier);
     }
 
     public String getIdentifier() {
@@ -91,10 +97,6 @@ public enum EBackpack {
 
     public int getDamage() {
         return damage;
-    }
-
-    public EColor getColor() {
-        return color;
     }
 
     public void registerItem() {
@@ -111,7 +113,15 @@ public enum EBackpack {
         ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 
         // identifier must be the same as the filename of the json
-        mesher.register(item.getItem(), damage, new ModelResourceLocation(Constants.MOD_ID + ':' + identifier));
+        mesher.register(item.getItem(), damage, new ModelResourceLocation(Constants.MOD_ID + ':' + identifier, "inventory"));
+    }
+
+    public ItemStack getItemStack(int amount) {
+        ItemStack itemStack = new ItemStack(item.getItem(), amount, damage);
+
+        itemStack.setTagCompound(this.nbtTagCompound);
+
+        return itemStack;
     }
 
     public static void registerItems() {
@@ -128,7 +138,7 @@ public enum EBackpack {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void addSubItem(List subItems) {
+    public static void addSubItem(List<ItemStack> subItems) {
         for (EBackpack backpack : values()) {
             ItemStack itemStack = new ItemStack(backpack.item.getItem(), 1, backpack.getDamage());
             itemStack.setTagInfo("unlocalized", new NBTTagString(backpack.getIdentifier()));

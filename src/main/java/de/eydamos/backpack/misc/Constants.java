@@ -15,9 +15,13 @@ public class Constants {
 
     public static final String DOMAIN = "backpack";
 
-    public static final String RECIPE_ENHANCE = DOMAIN + ":enhanceBackpack";
-    public static final String RECIPE_INTELLIGENT = DOMAIN + ":intelligentWorkbench";
-    public static final String RECIPE_RECOLOR = DOMAIN + ":recolorBackpack";
+    public static final String RECIPE_RECOLOR = DOMAIN + ":recolor_backpack";
+    public static final String RECIPE_BACKPACK_PIECE_TOP = DOMAIN + ":backpack_piece_top";
+    public static final String RECIPE_BACKPACK_PIECE_MIDDLE = DOMAIN + ":backpack_piece_middle";
+    public static final String RECIPE_BACKPACK_PIECE_BOTTOM = DOMAIN + ":backpack_piece_bottom";
+    public static final String RECIPE_BACKPACK_SMALL = DOMAIN + ":backpack_small";
+    public static final String RECIPE_BACKPACK_MEDIUM = DOMAIN + ":backpack_medium";
+    public static final String RECIPE_BACKPACK_BIG = DOMAIN + ":backpack_big";
 
     public static final String CLASS_PROXY_CLIENT = "de.eydamos.backpack.proxy.ClientProxy";
     public static final String CLASS_PROXY_SERVER = "de.eydamos.backpack.proxy.ServerProxy";
@@ -61,6 +65,8 @@ public class Constants {
         public static final String INTELLIGENT = "intelligent";
         public static final String TYPE = "type";
         public static final String PERSONAL_BACKPACK_OPEN = "personalBackpackOpen";
+        public static final String FRAME_TIER = "frame_tier";
+        public static final String LEATHER_TIER = "leather_tier";
     }
 
     public class NBTTypes extends net.minecraftforge.common.util.Constants.NBT {}

@@ -1,9 +1,7 @@
 package de.eydamos.backpack.item;
 
-import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,10 +32,5 @@ public class ItemBackpack extends Item {
         name += '_' + EBackpack.getIdentifierByDamage(itemStack.getItemDamage());
 
         return name;
-    }
-
-    @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List tooltip, boolean advanced) {
-        HelperNBTData.addTooltip(itemStack, tooltip);
     }
 }

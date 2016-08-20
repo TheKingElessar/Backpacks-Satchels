@@ -1,9 +1,10 @@
 package de.eydamos.backpack.misc;
 
-import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.item.EFrame;
 import de.eydamos.backpack.item.EPiece;
 import de.eydamos.backpack.item.EStick;
+import de.eydamos.backpack.tier.TierFrame;
+import de.eydamos.backpack.tier.TierLeather;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,12 +14,12 @@ public enum EItem {
     TANNED_LEATHER(BackpackItems.tanned_leather, 0),
     STICK_STONE(BackpackItems.stick, EStick.STONE.getDamage()),
     STICK_IRON(BackpackItems.stick, EStick.IRON.getDamage()),
-    FRAME_WOOD(BackpackItems.backpack_frame, EFrame.WOOD.getDamage()),
-    FRAME_STONE(BackpackItems.backpack_frame, EFrame.STONE.getDamage()),
-    FRAME_IRON(BackpackItems.backpack_frame, EFrame.IRON.getDamage()),
-    BACKPACK_PICE_TOP(BackpackItems.backpack_piece, EPiece.TOP.getDamage()),
-    BACKPACK_PICE_MIDDLE(BackpackItems.backpack_piece, EPiece.MIDDLE.getDamage()),
-    BACKPACK_PICE_BOTTOM(BackpackItems.backpack_piece, EPiece.BOTTOM.getDamage());
+    FRAME_WOOD(BackpackItems.backpack_frame, EFrame.WOOD.getDamage(), Constants.NBT.FRAME_TIER, TierFrame.I.name()),
+    FRAME_STONE(BackpackItems.backpack_frame, EFrame.STONE.getDamage(), Constants.NBT.FRAME_TIER, TierFrame.II.name()),
+    FRAME_IRON(BackpackItems.backpack_frame, EFrame.IRON.getDamage(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
+    BACKPACK_PICE_TOP(BackpackItems.backpack_piece, EPiece.TOP.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
+    BACKPACK_PICE_MIDDLE(BackpackItems.backpack_piece, EPiece.MIDDLE.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
+    BACKPACK_PICE_BOTTOM(BackpackItems.backpack_piece, EPiece.BOTTOM.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name());
 
     protected Item item;
     protected int damage;
@@ -40,13 +41,20 @@ public enum EItem {
     public ItemStack getItemStack(int amount) {
         ItemStack itemStack = new ItemStack(item, amount, damage);
 
-        HelperNBTData.setFrameTier(itemStack, itemStack);
-        HelperNBTData.setLeatherTier(itemStack, itemStack);
-
         if (!nbtTagCompound.hasNoTags()) {
             itemStack.setTagCompound(nbtTagCompound);
         }
 
         return itemStack;
+    }
+
+    public static ItemStack getItemStack(Item item, int amount, int damage) {
+        for (EItem eItem : values()) {
+            if (eItem.item.equals(item) && eItem.damage == damage) {
+                return eItem.getItemStack(amount);
+            }
+        }
+
+        return new ItemStack(item, amount, damage);
     }
 }

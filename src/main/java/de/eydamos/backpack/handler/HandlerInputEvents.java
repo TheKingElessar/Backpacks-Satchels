@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(value= Side.CLIENT)
-public class KeyInputHandler {
+@SideOnly(value = Side.CLIENT)
+public class HandlerInputEvents {
     // 48 represents the B key
     public static KeyBinding personalBackpack = new KeyBinding("key.personalBackpack", 48, "key.categories.backpack");
 

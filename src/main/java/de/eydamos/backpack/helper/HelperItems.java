@@ -1,7 +1,9 @@
 package de.eydamos.backpack.helper;
 
+import de.eydamos.backpack.item.EPiece;
 import de.eydamos.backpack.misc.BackpackItems;
-import net.minecraft.init.Items;
+import de.eydamos.backpack.tier.TierFrame;
+import de.eydamos.backpack.tier.TierLeather;
 import net.minecraft.item.ItemStack;
 
 public class HelperItems {
@@ -10,15 +12,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == Items.rabbit_hide) {
-            return true;
-        }
-
-        if (itemStack.getItem() == Items.leather) {
-            return true;
-        }
-
-        if (itemStack.getItem() == BackpackItems.tanned_leather) {
+        if (TierLeather.getTierByItemStack(itemStack, true) != null) {
             return true;
         }
 
@@ -30,11 +24,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStackA.getItem() != itemStackB.getItem()) {
-            return false;
-        }
-
-        return itemStackA.getItemDamage() == itemStackB.getItemDamage();
+        return TierLeather.itemStackTierEquals(itemStackA, itemStackB);
     }
 
     public static boolean isTopPiece(ItemStack itemStack) {
@@ -42,7 +32,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == 0) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == EPiece.TOP.getDamage()) {
             return true;
         }
 
@@ -54,7 +44,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == 1) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == EPiece.MIDDLE.getDamage()) {
             return true;
         }
 
@@ -66,7 +56,7 @@ public class HelperItems {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == 2) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == EPiece.BOTTOM.getDamage()) {
             return true;
         }
 
@@ -78,11 +68,11 @@ public class HelperItems {
             return false;
         }
 
-        if (!HelperNBTData.getFrameTier(itemStackA).equals(HelperNBTData.getFrameTier(itemStackB))) {
+        if (!TierFrame.itemStackTierEquals(itemStackA, itemStackB)) {
             return false;
         }
 
-        if (!HelperNBTData.getLeatherTier(itemStackA).equals(HelperNBTData.getLeatherTier(itemStackB))) {
+        if (!TierLeather.itemStackTierEquals(itemStackA, itemStackB)) {
             return false;
         }
 

@@ -80,10 +80,6 @@ public enum EBackpack {
         }
 
         damage = size.getDamage() + color.getDamage();
-
-        this.nbtTagCompound = new NBTTagCompound();
-
-        this.nbtTagCompound.setString("unlocalized", identifier);
     }
 
     public static void setItem(Item item) {

@@ -1,24 +1,27 @@
 package de.eydamos.backpack.proxy;
 
-import de.eydamos.backpack.handler.KeyInputHandler;
+import de.eydamos.backpack.handler.HandlerClientEvents;
+import de.eydamos.backpack.handler.HandlerInputEvents;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
     @Override
     public void registerHandlers() {
         super.registerHandlers();
-        //FMLCommonHandler.instance().bus().registerItems(new KeyInputHandler());
+        //FMLCommonHandler.instance().bus().registerItems(new HandlerInputEvents());
 
+        HandlerClientEvents eventHandler = new HandlerClientEvents();
+        MinecraftForge.EVENT_BUS.register(eventHandler);
         /*if(ConfigurationBackpack.RENDER_BACKPACK_MODEL) {
             EventHandlerClientOnly eventHandlerClient = new EventHandlerClientOnly();
             MinecraftForge.EVENT_BUS.registerItems(eventHandlerClient);
-            FMLCommonHandler.instance().bus().registerItems(eventHandlerClient);
         }*/
     }
 
     @Override
     public void registerKeybindings() {
-        ClientRegistry.registerKeyBinding(KeyInputHandler.personalBackpack);
+        ClientRegistry.registerKeyBinding(HandlerInputEvents.personalBackpack);
     }
 
     @Override

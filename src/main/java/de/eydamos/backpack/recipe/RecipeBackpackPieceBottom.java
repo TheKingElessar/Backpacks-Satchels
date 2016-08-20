@@ -1,9 +1,10 @@
 package de.eydamos.backpack.recipe;
 
 import de.eydamos.backpack.helper.HelperItems;
-import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.tier.TierFrame;
+import de.eydamos.backpack.tier.TierLeather;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
@@ -57,8 +58,8 @@ public class RecipeBackpackPieceBottom extends AbstractRecipe {
         ItemStack leather = craftingGridInventory.getStackInRowAndColumn(0 + colOffset, 0 + rowOffset);
         ItemStack frame = craftingGridInventory.getStackInRowAndColumn(1 + colOffset, 0 + rowOffset);
 
-        HelperNBTData.setLeatherTier(result, leather);
-        HelperNBTData.setFrameTier(result, frame);
+        TierLeather.setTier(result, leather);
+        TierFrame.setTier(result, frame);
 
         return result;
     }

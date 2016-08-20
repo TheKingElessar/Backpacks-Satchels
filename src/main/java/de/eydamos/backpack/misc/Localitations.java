@@ -3,6 +3,9 @@ package de.eydamos.backpack.misc;
 public class Localitations {
     public static final String TAB_BACKPACKS = "tab.backpacks";
 
+    public static final String TOOLTIP_LEATHER_TIER = "tooltip.tier_leather";
+    public static final String TOOLTIP_FRAME_TIER = "tooltip.tier_frame";
+
     public static final String CLEAR_CRAFT_MATRIX = "tooltip.clearCraftMatrix";
     public static final String SAVE_RECIPE = "tooltip.saveRecipe";
     public static final String CLICK_A_SLOT = "tooltip.clickASlot";

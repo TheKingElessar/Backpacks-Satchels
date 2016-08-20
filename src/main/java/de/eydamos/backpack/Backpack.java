@@ -43,7 +43,7 @@ public class Backpack {
         proxy.registerRecipes();
 
         // registerItems all Handlers
-        //proxy.registerHandlers();
+        proxy.registerHandlers();
     }
 
     @Mod.EventHandler

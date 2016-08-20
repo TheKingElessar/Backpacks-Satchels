@@ -1,10 +1,9 @@
 package de.eydamos.backpack.item;
 
-import de.eydamos.backpack.helper.HelperNBTData;
 import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.misc.EItem;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,23 +24,18 @@ public class ItemFunctionless extends Item {
     public void getSubItems(Item item, CreativeTabs tab, List subItems) {
         if (item == BackpackItems.stick) {
             for (EStick stick : EStick.values()) {
-                subItems.add(new ItemStack(item, 1, stick.getDamage()));
+                subItems.add(EItem.getItemStack(item, 1, stick.getDamage()));
             }
-        } else if(item == BackpackItems.backpack_frame) {
+        } else if (item == BackpackItems.backpack_frame) {
             for (EFrame frame : EFrame.values()) {
-                ItemStack itemStack = new ItemStack(item, 1, frame.getDamage());
-                HelperNBTData.setFrameTier(itemStack, itemStack);
-                subItems.add(itemStack);
+                subItems.add(EItem.getItemStack(item, 1, frame.getDamage()));
             }
         } else if (item == BackpackItems.backpack_piece) {
             for (EPiece piece : EPiece.values()) {
-                subItems.add(new ItemStack(item, 1, piece.getDamage()));
+                subItems.add(EItem.getItemStack(item, 1, piece.getDamage()));
             }
         } else {
-            ItemStack itemStack = new ItemStack(item, 1);
-            HelperNBTData.setFrameTier(itemStack, itemStack);
-            HelperNBTData.setLeatherTier(itemStack, itemStack);
-            subItems.add(itemStack);
+            subItems.add(EItem.getItemStack(item, 1, 0));
         }
     }
 
@@ -58,10 +52,5 @@ public class ItemFunctionless extends Item {
         }
 
         return name;
-    }
-
-    @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List tooltip, boolean advanced) {
-        HelperNBTData.addTooltip(itemStack, tooltip);
     }
 }

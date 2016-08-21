@@ -22,9 +22,10 @@ public enum ERecipe {
     BACKPACK_PICE_TOP(null, ECategory.CUSTOM, new RecipeBackpackPieceTop(EItem.BACKPACK_PICE_TOP.getItemStack(1))),
     BACKPACK_PICE_MIDDLE(null, ECategory.CUSTOM, new RecipeBackpackPieceMiddle(EItem.BACKPACK_PICE_MIDDLE.getItemStack(1))),
     BACKPACK_PICE_BOTTOM(null, ECategory.CUSTOM, new RecipeBackpackPieceBottom(EItem.BACKPACK_PICE_BOTTOM.getItemStack(1))),
-    BACKPACK_SMALL(null, ECategory.CUSTOM, new RecipeBackpackSmall(EBackpack.SMALL.getItemStack(1))),
-    BACKPACK_MEDIUM(null, ECategory.CUSTOM, new RecipeBackpackMedium(EBackpack.MEDIUM.getItemStack(1))),
-    BACKPACK_BIG(null, ECategory.CUSTOM, new RecipeBackpackBig(EBackpack.BIG.getItemStack(1)));
+    BACKPACK_SMALL(null, ECategory.CUSTOM, new RecipeBackpackSmall(EBackpack.SMALL.getItemStack())),
+    BACKPACK_MEDIUM(null, ECategory.CUSTOM, new RecipeBackpackMedium(EBackpack.MEDIUM.getItemStack())),
+    BACKPACK_BIG(null, ECategory.CUSTOM, new RecipeBackpackBig(EBackpack.BIG.getItemStack())),
+    RECOLOR_BACKPACK(null, ECategory.CUSTOM, new RecipeRecolorBackpack());
 
     protected ItemStack result;
     protected ECategory category;

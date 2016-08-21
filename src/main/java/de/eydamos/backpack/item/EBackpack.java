@@ -1,7 +1,5 @@
 package de.eydamos.backpack.item;
 
-import de.eydamos.backpack.misc.EColor;
-import de.eydamos.backpack.misc.ESize;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -94,8 +92,8 @@ public enum EBackpack {
         return damage;
     }
 
-    public ItemStack getItemStack(int amount) {
-        ItemStack itemStack = new ItemStack(item, amount, damage);
+    public ItemStack getItemStack() {
+        ItemStack itemStack = new ItemStack(item, 1, damage);
 
         itemStack.setTagCompound(this.nbtTagCompound);
 

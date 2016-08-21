@@ -18,11 +18,11 @@ public abstract class AbstractRecipe implements IRecipe {
     /**
      * The column offset for the recipe.
      */
-    protected int colOffset;
+    protected int colOffset = 0;
     /**
      * The row offset for the recipe.
      */
-    protected int rowOffset;
+    protected int rowOffset = 0;
     /**
      * Is a array of ItemStack that composes the recipe.
      */
@@ -35,39 +35,72 @@ public abstract class AbstractRecipe implements IRecipe {
      * The identifier to be used when registering recipe in recipe sorter.
      */
     private final String recipeSorterIdentifier;
+    /**
+     * The type of the recipe (Shaped / Shapeless)
+     */
+    private final ECategory type;
 
     public AbstractRecipe(int width, int height, ItemStack output, String identifier) {
+        this(width, height, output, identifier, ECategory.SHAPED);
+    }
+
+    public AbstractRecipe(int width, int height, ItemStack output, String identifier, ECategory type) {
         this.recipeWidth = width;
         this.recipeHeight = height;
         this.recipeOutput = output;
         this.recipeSorterIdentifier = identifier;
+        this.type = type;
+
+        if (type == ECategory.CUSTOM || type == ECategory.FURNACE) {
+            throw new IllegalArgumentException("Only shaped and shapeless types are allowed");
+        }
     }
 
     public ItemStack getRecipeOutput() {
         return this.recipeOutput;
     }
 
-    public ItemStack[] getRemainingItems(InventoryCrafting p_179532_1_) {
-        ItemStack[] aitemstack = new ItemStack[p_179532_1_.getSizeInventory()];
+    public ItemStack[] getRemainingItems(InventoryCrafting craftingGridInventory) {
+        ItemStack[] remainingItems = new ItemStack[craftingGridInventory.getSizeInventory()];
 
-        for (int i = 0; i < aitemstack.length; ++i) {
-            ItemStack itemstack = p_179532_1_.getStackInSlot(i);
-            aitemstack[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
+        for (int i = 0; i < remainingItems.length; ++i) {
+            ItemStack itemstack = craftingGridInventory.getStackInSlot(i);
+            remainingItems[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
         }
 
-        return aitemstack;
+        return remainingItems;
     }
 
     /**
      * Used to check if a recipe matches current crafting inventory
      */
     public boolean matches(InventoryCrafting craftingGridInventory, World world) {
-        for (colOffset = 0; colOffset <= craftingGridInventory.getWidth() - recipeWidth; ++colOffset) {
-            for (rowOffset = 0; rowOffset <= craftingGridInventory.getHeight() - recipeHeight; ++rowOffset) {
-                if (this.checkMatch(craftingGridInventory)) {
-                    return true;
+        if (type == ECategory.SHAPED || type == ECategory.SHAPED_OREDICT) {
+            for (colOffset = 0; colOffset <= craftingGridInventory.getWidth() - recipeWidth; ++colOffset) {
+                for (rowOffset = 0; rowOffset <= craftingGridInventory.getHeight() - recipeHeight; ++rowOffset) {
+                    if (this.checkMatch(craftingGridInventory)) {
+                        return true;
+                    }
                 }
             }
+        }
+
+        if (type == ECategory.SHAPELESS || type == ECategory.SHAPELESS_OREDICT) {
+            boolean breakLoop = false;
+            for (int row = 0; row < 3; ++row) {
+                for (int col = 0; col < 3; ++col) {
+                    if (!checkItemAtPosition(craftingGridInventory, col, row, 0, 0)) {
+                        breakLoop = true;
+                        break;
+                    }
+                }
+
+                if (breakLoop) {
+                    break;
+                }
+            }
+
+            return allRecipeItemsFulfilled();
         }
 
         return false;
@@ -120,7 +153,19 @@ public abstract class AbstractRecipe implements IRecipe {
      */
     abstract protected boolean checkItemAtPosition(InventoryCrafting craftingGridInventory, int col, int row, int expectedCol, int expectedRow);
 
+    protected boolean allRecipeItemsFulfilled() {
+        return true;
+    }
+
     public void registerAtRecipeSorter() {
-        RecipeSorter.register(recipeSorterIdentifier, this.getClass(), RecipeSorter.Category.SHAPED, "");
+        switch (type) {
+            case SHAPELESS:
+            case SHAPELESS_OREDICT:
+                RecipeSorter.register(recipeSorterIdentifier, this.getClass(), RecipeSorter.Category.SHAPELESS, "");
+            case SHAPED:
+            case SHAPED_OREDICT:
+            default:
+                RecipeSorter.register(recipeSorterIdentifier, this.getClass(), RecipeSorter.Category.SHAPED, "");
+        }
     }
 }

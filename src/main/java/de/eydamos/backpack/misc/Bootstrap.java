@@ -7,6 +7,8 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Hashtable;
 import java.util.Map.Entry;
@@ -29,6 +31,12 @@ public class Bootstrap {
     private static void registerItems() {
         for (Items item : Items.values()) {
             GameRegistry.registerItem(item.getItem(), item.getUnlocalizedName());
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void registerVariants() {
+        for (Items item : Items.values()) {
             Hashtable<Integer, String> variants = item.getVariants();
 
             if (variants == null) {
@@ -64,12 +72,12 @@ public class Bootstrap {
     }
 
     private enum Items {
+        BACKPACK("backpack", ItemBackpack.class, 1, true, EBackpack.getVariants()),
         BOUND_LEATHER("bound_leather", ItemFunctionless.class, 64, false, null),
         TANNED_LEATHER("tanned_leather", ItemFunctionless.class, 64, false, null),
         STICK("stick", ItemFunctionless.class, 64, true, EStick.getVariants()),
         BACKPACK_FRAME("backpack_frame", ItemFunctionless.class, 1, true, EFrame.getVariants()),
-        BACKPACK_PIECE("backpack_piece", ItemFunctionless.class, 1, true, EPiece.getVariants()),
-        BACKPACK("backpack", ItemBackpack.class, 1, true, EBackpack.getVariants());
+        BACKPACK_PIECE("backpack_piece", ItemFunctionless.class, 1, true, EPiece.getVariants());
 
         private Item item;
         private final Class clazz;

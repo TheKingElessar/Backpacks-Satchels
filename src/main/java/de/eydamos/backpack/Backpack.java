@@ -1,6 +1,5 @@
 package de.eydamos.backpack;
 
-import de.eydamos.backpack.misc.Bootstrap;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +26,7 @@ public class Backpack {
         //ConfigurationBackpack.init(event.getSuggestedConfigurationFile());
 
         // register items and blocks
-        Bootstrap.register();
+        proxy.registerItems();
 
         // key bindings
         proxy.registerKeybindings();
@@ -37,7 +36,7 @@ public class Backpack {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Bootstrap.registerIcons();
+        proxy.registerIcons();
 
         // registerItems recipes
         proxy.registerRecipes();

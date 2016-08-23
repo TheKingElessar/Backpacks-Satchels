@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class HandlerClientEvents {
+public class HandlerClientEvents extends HandlerCommonEvents {
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
         TierFrame.addTooltip(event.itemStack, event.toolTip);

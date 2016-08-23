@@ -4,6 +4,8 @@ import de.eydamos.backpack.item.TabBackpacks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 
+import java.io.File;
+
 public class Constants {
     public static final String MOD_ID = "Backpack";
     public static final String MOD_NAME = "Backpack";
@@ -25,6 +27,9 @@ public class Constants {
     public static final String CLASS_GUI_FACTORY = "de.eydamos.backpack.factory.FactoryConfigurationGui";
 
     public static final String UPDATE_FILE = "http://www.eydamos.de/minecraft/backpack/version.json";
+
+    public static final String INVENTORIES_PATH = DOMAIN + File.separator + "inventory" + File.separator;
+    public static final String PLAYERS_PATH = DOMAIN + File.separator + "player" + File.separator;
 
     public static final ResourceLocation guiCombined = new ResourceLocation(DOMAIN, "textures/gui/guiCombined.png");
     public static final ResourceLocation modelTexture = new ResourceLocation(DOMAIN, "textures/model/backpack.png");

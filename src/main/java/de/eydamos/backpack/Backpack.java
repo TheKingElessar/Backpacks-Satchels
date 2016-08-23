@@ -1,6 +1,7 @@
 package de.eydamos.backpack;
 
 import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.network.PacketHandlerBackpack;
 import de.eydamos.backpack.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,7 +18,7 @@ public class Backpack {
     @SidedProxy(clientSide = Constants.CLASS_PROXY_CLIENT, serverSide = Constants.CLASS_PROXY_SERVER)
     public static CommonProxy proxy;
 
-    //public static PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
+    public static final PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
     //public static SaveFileHandler saveFileHandler = new SaveFileHandler();
 
     @Mod.EventHandler
@@ -43,10 +44,5 @@ public class Backpack {
 
         // registerItems all Handlers
         proxy.registerHandlers();
-    }
-
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        //proxy.addNeiSupport();
     }
 }

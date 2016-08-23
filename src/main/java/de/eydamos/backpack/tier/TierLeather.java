@@ -3,7 +3,7 @@ package de.eydamos.backpack.tier;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
-import de.eydamos.backpack.misc.Localitations;
+import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -79,7 +79,7 @@ public enum TierLeather {
         String tierName = getTextByItemStack(itemStack);
 
         if (!tierName.isEmpty()) {
-            String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localitations.TOOLTIP_LEATHER_TIER);
+            String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localizations.TOOLTIP_LEATHER_TIER);
             tierName = ChatFormatting.YELLOW + tierName + ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + tierName);
         }

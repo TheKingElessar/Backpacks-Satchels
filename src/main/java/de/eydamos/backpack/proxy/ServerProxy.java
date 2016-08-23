@@ -8,7 +8,6 @@ public class ServerProxy extends CommonProxy {
     public void registerHandlers() {
         super.registerHandlers();
 
-        HandlerServerEvents eventHandler = new HandlerServerEvents();
-        MinecraftForge.EVENT_BUS.register(eventHandler);
+        MinecraftForge.EVENT_BUS.register(new HandlerServerEvents());
     }
 }

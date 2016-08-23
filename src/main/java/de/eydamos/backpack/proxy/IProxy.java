@@ -10,6 +10,4 @@ public interface IProxy {
     public void registerKeybindings();
 
     public void registerRecipes();
-
-    public void addNeiSupport();
 }

@@ -1,11 +1,14 @@
 package de.eydamos.backpack.helper;
 
+import de.eydamos.backpack.data.BackpackSave;
 import de.eydamos.backpack.item.ESize;
 import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import de.eydamos.backpack.util.NBTItemStackUtil;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLLog;
 
@@ -38,7 +41,15 @@ public class BackpackHelper {
         NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS, slots);
         NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_USED, 0);
 
-        NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_PER_ROW, 9);
+        if (size.equals(ESize.SMALL) && leather.equals(TierLeather.II)) {
+            NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_PER_ROW, 6);
+        } else if (size.equals(ESize.MEDIUM) && leather.equals(TierLeather.I)) {
+            NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_PER_ROW, 6);
+        } else if (size.equals(ESize.MEDIUM) && leather.equals(TierLeather.II)) {
+            NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_PER_ROW, 8);
+        } else {
+            NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_PER_ROW, 9);
+        }
 
         NBTItemStackUtil.setInteger(backpack, Constants.NBT.MODULE_SLOTS, size.getModuleSlots());
 
@@ -61,7 +72,43 @@ public class BackpackHelper {
         return 0;
     }
 
+    public static int getSlotsPerRow(ItemStack itemStack) {
+        if (isBackpack(itemStack)) {
+            return NBTItemStackUtil.getInteger(itemStack, Constants.NBT.SLOTS_PER_ROW);
+        }
+
+        return 9;
+    }
+
+    public static String getUUID(ItemStack itemStack) {
+        if (isBackpack(itemStack)) {
+            return NBTItemStackUtil.getString(itemStack, Constants.NBT.UID);
+        }
+
+        return "";
+    }
+
+    public static IInventory getInventory(EntityPlayer player) {
+        ItemStack itemStack = getBackpackFromPlayer(player);
+
+        if (isBackpack(itemStack)) {
+            return BackpackSave.loadBackpack(player.worldObj, itemStack);
+        }
+
+        return null;
+    }
+
     public static boolean isBackpack(ItemStack itemStack) {
         return itemStack != null && itemStack.getItem() == BackpackItems.backpack;
+    }
+
+    public static ItemStack getBackpackFromPlayer(EntityPlayer player) {
+        ItemStack backpack = player.getCurrentEquippedItem();
+
+        if (isBackpack(backpack)) {
+            return backpack;
+        }
+
+        return null;
     }
 }

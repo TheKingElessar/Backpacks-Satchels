@@ -9,8 +9,6 @@ import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -38,8 +36,7 @@ public enum TierFrame {
         NBTItemStackUtil.setString(itemStack, Constants.NBT.FRAME_TIER, name());
     }
 
-    @Nullable
-    public static TierFrame getTierByItemStack(@NotNull ItemStack itemStack) {
+    public static TierFrame getTierByItemStack(ItemStack itemStack) {
         String tierName = NBTItemStackUtil.getString(itemStack, Constants.NBT.FRAME_TIER);
         if (!tierName.isEmpty()) {
             return TierFrame.valueOf(tierName);

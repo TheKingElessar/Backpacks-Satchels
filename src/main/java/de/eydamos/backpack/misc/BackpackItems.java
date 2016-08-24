@@ -2,7 +2,6 @@ package de.eydamos.backpack.misc;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 public class BackpackItems {
     public static Item bound_leather;
@@ -12,7 +11,7 @@ public class BackpackItems {
     public static Item backpack_piece;
     public static Item backpack;
 
-    private static Item getRegisteredItem(@NotNull String identifier) {
+    private static Item getRegisteredItem(String identifier) {
         return (Item) Item.itemRegistry.getObject(new ResourceLocation(Constants.DOMAIN, identifier));
     }
 

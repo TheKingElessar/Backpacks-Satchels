@@ -39,6 +39,8 @@ public class Constants {
     //public static final ModelBiped model = new ModelBackpack();
 
     public class Guis {
+        public static final int RENAME_BACKPACK = 0;
+        public static final int BACKPACK = 1;
         public static final byte OPEN_PERSONAL_BACKPACK = 0;
         public static final byte OPEN_PERSONAL_SLOT = 1;
     }
@@ -53,6 +55,7 @@ public class Constants {
     public class NBT {
         public static final String INVENTORY_BACKPACK = "backpack";
         public static final String UID = "backpack-UID";
+        public static final String SLOT = "slot";
         public static final String SLOTS = "slots";
         public static final String SLOTS_USED = "slots_used";
         public static final String SLOTS_PER_ROW = "slots_per_row";

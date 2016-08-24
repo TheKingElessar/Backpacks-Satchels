@@ -3,8 +3,6 @@ package de.eydamos.backpack.item;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public enum EColor {
     NONE(0, "", Items.water_bucket, 0),
@@ -45,8 +43,7 @@ public enum EColor {
         return name;
     }
 
-    @Nullable
-    public static EColor getColor(@NotNull ItemStack itemStack) {
+    public static EColor getColor(ItemStack itemStack) {
         for (EColor color : values()) {
             if (itemStack.getItem() == color.item && itemStack.getItemDamage() == color.itemDamage) {
                 return color;

@@ -65,7 +65,7 @@ public class ItemBackpack extends Item {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         if (!NBTItemStackUtil.hasTag(itemStack, Constants.NBT.UID)) {
             // TODO if OP show gui to configure settings
             // TODO else show warning that data is missing and item should be handed to OP
@@ -74,18 +74,18 @@ public class ItemBackpack extends Item {
 
         if (!GeneralUtil.isServerSide(world)) {
             // display rename GUI if player is sneaking
-            if (entityPlayer.isSneaking()) {
-                GuiHelper.displayRenameGui();
+            if (player.isSneaking()) {
+                GuiHelper.displayRenameGui(player);
             }
 
             return itemStack;
         }
 
         // when the player is not sneaking
-        if (!entityPlayer.isSneaking()) {
-            // TODO open gui for backpack
-            //GuiHelper.displayBackpack(new BackpackSave(itemStack), getInventory(itemStack, entityPlayer), (EntityPlayerMP) entityPlayer);
+        if (!player.isSneaking()) {
+            GuiHelper.displayBackpack(player);
         }
+
         return itemStack;
     }
 }

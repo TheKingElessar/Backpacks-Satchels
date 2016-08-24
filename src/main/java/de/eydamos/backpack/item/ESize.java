@@ -1,9 +1,6 @@
 package de.eydamos.backpack.item;
 
 import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
 
 public enum ESize {
     SMALL(0, 1, 1),
@@ -32,8 +29,7 @@ public enum ESize {
         return moduleSlots;
     }
 
-    @Nullable
-    public static ESize getSizeByBackpack(@NotNull ItemStack itemStack) {
+    public static ESize getSizeByBackpack(ItemStack itemStack) {
         int sizeDamage = itemStack.getItemDamage() / 100 * 100;
 
         for (ESize size : values()) {

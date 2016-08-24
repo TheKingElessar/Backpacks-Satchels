@@ -1,5 +1,6 @@
 package de.eydamos.backpack.handler;
 
+import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -11,7 +12,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class HandlerClientEvents extends HandlerCommonEvents {
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
-        TierFrame.addTooltip(event.itemStack, event.toolTip);
-        TierLeather.addTooltip(event.itemStack, event.toolTip);
+        if (!BackpackHelper.isBackpack(event.itemStack)) {
+            TierFrame.addTooltip(event.itemStack, event.toolTip);
+            TierLeather.addTooltip(event.itemStack, event.toolTip);
+        }
     }
 }

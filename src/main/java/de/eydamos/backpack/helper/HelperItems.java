@@ -12,7 +12,7 @@ public class HelperItems {
             return false;
         }
 
-        if (TierLeather.getTierByItemStack(itemStack, true) != null) {
+        if (TierLeather.getTierByItemStack(itemStack) != null) {
             return true;
         }
 

@@ -5,14 +5,13 @@ public class Localizations {
 
     public static final String TOOLTIP_LEATHER_TIER = "tooltip.tier_leather";
     public static final String TOOLTIP_FRAME_TIER = "tooltip.tier_frame";
+    public static final String TOOLTIP_MORE_INFORMATION = "tooltip.more_information";
+    public static final String TOOLTIP_SLOTS_USED = "tooltip.slots_used";
 
     public static final String CLEAR_CRAFT_MATRIX = "tooltip.clearCraftMatrix";
     public static final String SAVE_RECIPE = "tooltip.saveRecipe";
     public static final String CLICK_A_SLOT = "tooltip.clickASlot";
-    public static final String SLOTS_USED = "tooltip.slots_used";
     public static final String TIER = "tooltip.tier";
-    public static final String MORE_INFORMATION = "tooltip.more_information";
-    public static final String INTELLIGENT = "tooltip.intelligent";
 
     public static final String KEY_CATEGORY = "key.categories.backpack";
     public static final String KEY_PERSONAL = "key.personalBackpack";

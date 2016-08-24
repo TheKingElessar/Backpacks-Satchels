@@ -6,18 +6,30 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public enum ESize {
-    SMALL(0),
-    MEDIUM(100),
-    BIG(200);
+    SMALL(0, 1, 1),
+    MEDIUM(100, 2, 3),
+    BIG(200, 3, 6);
 
-    protected int damage;
+    protected final int damage;
+    protected final int slotMultiplier;
+    protected final int moduleSlots;
 
-    ESize(int damage) {
+    ESize(int damage, int slotMultiplier, int moduleSlots) {
         this.damage = damage;
+        this.slotMultiplier = slotMultiplier;
+        this.moduleSlots = moduleSlots;
     }
 
     public int getDamage() {
         return damage;
+    }
+
+    public int getSlotMultiplier() {
+        return slotMultiplier;
+    }
+
+    public int getModuleSlots() {
+        return moduleSlots;
     }
 
     @Nullable

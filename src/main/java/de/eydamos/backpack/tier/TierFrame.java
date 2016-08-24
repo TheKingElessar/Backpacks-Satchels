@@ -34,8 +34,17 @@ public enum TierFrame {
         return damage;
     }
 
+    public void setTier(ItemStack itemStack) {
+        NBTItemStackUtil.setString(itemStack, Constants.NBT.FRAME_TIER, name());
+    }
+
     @Nullable
     public static TierFrame getTierByItemStack(@NotNull ItemStack itemStack) {
+        String tierName = NBTItemStackUtil.getString(itemStack, Constants.NBT.FRAME_TIER);
+        if (!tierName.isEmpty()) {
+            return TierFrame.valueOf(tierName);
+        }
+
         Item item = itemStack.getItem();
 
         for (TierFrame tier : values()) {
@@ -44,28 +53,13 @@ public enum TierFrame {
             }
         }
 
-        String tierName = NBTItemStackUtil.getString(itemStack, Constants.NBT.FRAME_TIER);
-        if (!tierName.isEmpty()) {
-            return TierFrame.valueOf(tierName);
-        }
-
         return null;
-    }
-
-    public static String getTextByItemStack(@NotNull ItemStack itemStack) {
-        TierFrame tier = getTierByItemStack(itemStack);
-
-        if (tier != null) {
-            return tier.name();
-        }
-
-        return "";
     }
 
     public static void setTier(ItemStack target, ItemStack source) {
         TierFrame tier = getTierByItemStack(source);
         if (tier != null) {
-            NBTItemStackUtil.setString(target, Constants.NBT.FRAME_TIER, tier.name());
+            tier.setTier(target);
         }
     }
 
@@ -77,11 +71,11 @@ public enum TierFrame {
     }
 
     public static void addTooltip(ItemStack itemStack, List<String> tooltip) {
-        String tierName = getTextByItemStack(itemStack);
+        TierFrame tier = getTierByItemStack(itemStack);
 
-        if (!tierName.isEmpty()) {
+        if (tier != null) {
             String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localizations.TOOLTIP_FRAME_TIER);
-            tierName = ChatFormatting.YELLOW + tierName + ChatFormatting.RESET;
+            String tierName = ChatFormatting.YELLOW + tier.name() + ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + tierName);
         }
     }

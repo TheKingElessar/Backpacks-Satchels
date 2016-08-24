@@ -1,15 +1,23 @@
 package de.eydamos.backpack.item;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.helper.GuiHelper;
 import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.misc.Localizations;
+import de.eydamos.backpack.tier.TierFrame;
+import de.eydamos.backpack.tier.TierLeather;
 import de.eydamos.backpack.util.GeneralUtil;
+import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
@@ -39,15 +47,34 @@ public class ItemBackpack extends Item {
     }
 
     @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List tooltip, boolean advanced) {
+        TierFrame.addTooltip(itemStack, tooltip);
+        TierLeather.addTooltip(itemStack, tooltip);
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+            String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localizations.TOOLTIP_SLOTS_USED);
+            String value = ChatFormatting.YELLOW.toString();
+            value += BackpackHelper.getSlotsUsed(itemStack);
+            value += " / ";
+            value += BackpackHelper.getSlots(itemStack);
+            value += ChatFormatting.RESET;
+            tooltip.add(label.trim() + ' ' + value);
+        } else {
+            tooltip.add(StatCollector.translateToLocal(Localizations.TOOLTIP_MORE_INFORMATION));
+        }
+    }
+
+    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-        if(null == itemStack.getTagCompound()) {
+        if (!NBTItemStackUtil.hasTag(itemStack, Constants.NBT.UID)) {
             // TODO if OP show gui to configure settings
             // TODO else show warning that data is missing and item should be handed to OP
+            return itemStack;
         }
 
-        if(!GeneralUtil.isServerSide(world)) {
+        if (!GeneralUtil.isServerSide(world)) {
             // display rename GUI if player is sneaking
-            if(entityPlayer.isSneaking()) {
+            if (entityPlayer.isSneaking()) {
                 GuiHelper.displayRenameGui();
             }
 
@@ -55,7 +82,7 @@ public class ItemBackpack extends Item {
         }
 
         // when the player is not sneaking
-        if(!entityPlayer.isSneaking()) {
+        if (!entityPlayer.isSneaking()) {
             // TODO open gui for backpack
             //GuiHelper.displayBackpack(new BackpackSave(itemStack), getInventory(itemStack, entityPlayer), (EntityPlayerMP) entityPlayer);
         }

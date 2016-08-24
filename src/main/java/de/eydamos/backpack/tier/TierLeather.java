@@ -15,26 +15,43 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public enum TierLeather {
-    I(Items.rabbit_hide),
-    II(Items.leather),
-    III(BackpackItems.tanned_leather);
+    I(Items.rabbit_hide, 6, 3),
+    II(Items.leather, 12, 6),
+    III(BackpackItems.tanned_leather, 18, 9);
 
     private final Item item;
+    private final int baseSlots;
+    private final int upgradeSlots;
 
-    TierLeather(Item item) {
+    TierLeather(Item item, int baseSlots, int upgradeSlots) {
         this.item = item;
+        this.baseSlots = baseSlots;
+        this.upgradeSlots = upgradeSlots;
     }
 
     public Item getItem() {
         return item;
     }
 
-    public static TierLeather getTierByItemStack(@NotNull ItemStack itemStack) {
-        return getTierByItemStack(itemStack, false);
+    public int getBaseSlots() {
+        return baseSlots;
+    }
+
+    public int getUpgradeSlots() {
+        return upgradeSlots;
+    }
+
+    public void setTier(ItemStack itemStack) {
+        NBTItemStackUtil.setString(itemStack, Constants.NBT.LEATHER_TIER, name());
     }
 
     @Nullable
-    public static TierLeather getTierByItemStack(@NotNull ItemStack itemStack, boolean strict) {
+    public static TierLeather getTierByItemStack(@NotNull ItemStack itemStack) {
+        String tierName = NBTItemStackUtil.getString(itemStack, Constants.NBT.LEATHER_TIER);
+        if (!tierName.isEmpty()) {
+            return TierLeather.valueOf(tierName);
+        }
+
         Item item = itemStack.getItem();
 
         for (TierLeather tier : values()) {
@@ -43,28 +60,14 @@ public enum TierLeather {
             }
         }
 
-        String tierName = NBTItemStackUtil.getString(itemStack, Constants.NBT.LEATHER_TIER);
-        if (!strict && !tierName.isEmpty()) {
-            return TierLeather.valueOf(tierName);
-        }
-
         return null;
-    }
-
-    public static String getTextByItemStack(@NotNull ItemStack itemStack) {
-        TierLeather tier = getTierByItemStack(itemStack);
-
-        if (tier != null) {
-            return tier.name();
-        }
-
-        return "";
     }
 
     public static void setTier(ItemStack target, ItemStack source) {
         TierLeather tier = getTierByItemStack(source);
+
         if (tier != null) {
-            NBTItemStackUtil.setString(target, Constants.NBT.LEATHER_TIER, tier.name());
+            tier.setTier(target);
         }
     }
 
@@ -76,11 +79,11 @@ public enum TierLeather {
     }
 
     public static void addTooltip(ItemStack itemStack, List<String> tooltip) {
-        String tierName = getTextByItemStack(itemStack);
+        TierLeather tier = getTierByItemStack(itemStack);
 
-        if (!tierName.isEmpty()) {
+        if (tier != null) {
             String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localizations.TOOLTIP_LEATHER_TIER);
-            tierName = ChatFormatting.YELLOW + tierName + ChatFormatting.RESET;
+            String tierName = ChatFormatting.YELLOW + tier.name() + ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + tierName);
         }
     }

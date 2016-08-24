@@ -51,25 +51,16 @@ public class Constants {
     }
 
     public class NBT {
-        public static final String INVENTORIES = "backpackInventories";
         public static final String INVENTORY_BACKPACK = "backpack";
-        public static final String INVENTORY_PERSONAL_BACKPACK = "personalBackpack";
-        public static final String INVENTORY_PICKUP_ITEMS = "pickupItems";
-        public static final String INVENTORY_CRAFTING_GRID = "craftingGrid";
-        public static final String INVENTORY_RECIPES = "recipes";
-        public static final String INVENTORY_RECIPE = "recipe-";
         public static final String UID = "backpack-UID";
-        public static final String NAME = "name";
-        public static final String CUSTOM_NAME = "customName";
-        public static final String SIZE = "size";
-        public static final String SLOT = "slot";
-        public static final String SLOTS_PER_ROW = "slotsPerRow";
-        public static final String INTELLIGENT = "intelligent";
-        public static final String TYPE = "type";
-        public static final String PERSONAL_BACKPACK_OPEN = "personalBackpackOpen";
+        public static final String SLOTS = "slots";
+        public static final String SLOTS_USED = "slots_used";
+        public static final String SLOTS_PER_ROW = "slots_per_row";
         public static final String FRAME_TIER = "frame_tier";
         public static final String LEATHER_TIER = "leather_tier";
+        public static final String MODULE_SLOTS = "module_slots";
     }
 
-    public class NBTTypes extends net.minecraftforge.common.util.Constants.NBT {}
+    public class NBTTypes extends net.minecraftforge.common.util.Constants.NBT {
+    }
 }

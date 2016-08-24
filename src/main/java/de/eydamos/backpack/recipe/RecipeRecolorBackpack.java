@@ -1,9 +1,9 @@
 package de.eydamos.backpack.recipe;
 
+import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.item.EBackpack;
 import de.eydamos.backpack.item.EColor;
 import de.eydamos.backpack.item.ESize;
-import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -41,7 +41,7 @@ public class RecipeRecolorBackpack extends AbstractRecipe {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack) {
+        if (BackpackHelper.isBackpack(itemStack)) {
             if (!backpackFound) {
                 backpackCol = col;
                 backpackRow = row;

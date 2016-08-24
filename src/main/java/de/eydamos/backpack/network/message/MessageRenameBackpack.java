@@ -1,8 +1,6 @@
 package de.eydamos.backpack.network.message;
 
-import de.eydamos.backpack.misc.BackpackItems;
-import de.eydamos.backpack.misc.Constants;
-import de.eydamos.backpack.util.NBTItemStackUtil;
+import de.eydamos.backpack.helper.BackpackHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -17,7 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 public class MessageRenameBackpack implements IMessage, IMessageHandler<MessageRenameBackpack, IMessage> {
     protected String name;
 
-    public MessageRenameBackpack() {}
+    public MessageRenameBackpack() {
+    }
 
     public MessageRenameBackpack(String name) {
         this.name = name;
@@ -35,7 +34,7 @@ public class MessageRenameBackpack implements IMessage, IMessageHandler<MessageR
 
     @Override
     public IMessage onMessage(MessageRenameBackpack message, MessageContext ctx) {
-        if(ctx.side == Side.SERVER) {
+        if (ctx.side == Side.SERVER) {
             EntityPlayerMP entityPlayer = ctx.getServerHandler().playerEntity;
             setName(entityPlayer, message.name);
         }
@@ -44,13 +43,12 @@ public class MessageRenameBackpack implements IMessage, IMessageHandler<MessageR
     }
 
     public void setName(EntityPlayer entityPlayer, String name) {
-        if(entityPlayer.getCurrentEquippedItem() != null) {
+        if (entityPlayer.getCurrentEquippedItem() != null) {
             ItemStack itemStack = entityPlayer.getCurrentEquippedItem();
 
-            if(itemStack.getItem() == BackpackItems.backpack) {
+            if (BackpackHelper.isBackpack(itemStack)) {
                 itemStack.setStackDisplayName(EnumChatFormatting.RESET + name);
             }
         }
     }
-
 }

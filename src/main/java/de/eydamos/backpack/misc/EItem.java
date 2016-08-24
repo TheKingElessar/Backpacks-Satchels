@@ -14,9 +14,9 @@ public enum EItem {
     TANNED_LEATHER(BackpackItems.tanned_leather, 0),
     STICK_STONE(BackpackItems.stick, EStick.STONE.getDamage()),
     STICK_IRON(BackpackItems.stick, EStick.IRON.getDamage()),
-    FRAME_WOOD(BackpackItems.backpack_frame, EFrame.WOOD.getDamage(), Constants.NBT.FRAME_TIER, TierFrame.I.name()),
-    FRAME_STONE(BackpackItems.backpack_frame, EFrame.STONE.getDamage(), Constants.NBT.FRAME_TIER, TierFrame.II.name()),
-    FRAME_IRON(BackpackItems.backpack_frame, EFrame.IRON.getDamage(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
+    FRAME_WOOD(BackpackItems.backpack_frame, EFrame.WOOD.getDamage()),
+    FRAME_STONE(BackpackItems.backpack_frame, EFrame.STONE.getDamage()),
+    FRAME_IRON(BackpackItems.backpack_frame, EFrame.IRON.getDamage()),
     BACKPACK_PICE_TOP(BackpackItems.backpack_piece, EPiece.TOP.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
     BACKPACK_PICE_MIDDLE(BackpackItems.backpack_piece, EPiece.MIDDLE.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
     BACKPACK_PICE_BOTTOM(BackpackItems.backpack_piece, EPiece.BOTTOM.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name());

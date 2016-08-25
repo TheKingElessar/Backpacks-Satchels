@@ -1,15 +1,14 @@
 package de.eydamos.guiadvanced.util;
 
+import de.eydamos.backpack.misc.Constants;
+import de.eydamos.guiadvanced.util.RenderHelper.BackgroundRepeat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
-
-import de.eydamos.backpack.misc.Constants;
-import de.eydamos.guiadvanced.util.RenderHelper.BackgroundRepeat;
 
 public class Rectangle {
     protected int width;
@@ -66,11 +65,11 @@ public class Rectangle {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldRenderer = tessellator.getWorldRenderer();
         if(repeat == BackgroundRepeat.NONE) {
-            worldRenderer.startDrawingQuads();
-            worldRenderer.addVertexWithUV(x, y + height, z, u * f, (v + height) * f1);
-            worldRenderer.addVertexWithUV(x + width, y + height, z, (u + width) * f, (v + height) * f1);
-            worldRenderer.addVertexWithUV(x + width, y, z, (u + width) * f, v * f1);
-            worldRenderer.addVertexWithUV(x, y, z, u * f, v * f1);
+            worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+            addVertexWithUV(worldRenderer, x, y + height, z, u * f, (v + height) * f1);
+            addVertexWithUV(worldRenderer, x + width, y + height, z, (u + width) * f, (v + height) * f1);
+            addVertexWithUV(worldRenderer, x + width, y, z, (u + width) * f, v * f1);
+            addVertexWithUV(worldRenderer, x, y, z, u * f, v * f1);
             tessellator.draw();
         } else if(repeat == BackgroundRepeat.REPEAT) {
             int drawHeight = vMax = Math.min(height, vMax);
@@ -79,11 +78,11 @@ public class Rectangle {
                 for(int j = 0; j <= height; j += vMax) {
                     drawWidth = i + uMax > width ? width : i + uMax;
                     drawHeight = j + vMax > height ? height : j + vMax;
-                    worldRenderer.startDrawingQuads();
-                    worldRenderer.addVertexWithUV(x + i, y + drawHeight, z, u * f, (v + vMax) * f1);
-                    worldRenderer.addVertexWithUV(x + drawWidth, y + drawHeight, z, (u + uMax) * f, (v + vMax) * f1);
-                    worldRenderer.addVertexWithUV(x + drawWidth, y, z, (u + uMax) * f, v * f1);
-                    worldRenderer.addVertexWithUV(x + i, y, z, u * f, v * f1);
+                    worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                    addVertexWithUV(worldRenderer, x + i, y + drawHeight, z, u * f, (v + vMax) * f1);
+                    addVertexWithUV(worldRenderer, x + drawWidth, y + drawHeight, z, (u + uMax) * f, (v + vMax) * f1);
+                    addVertexWithUV(worldRenderer, x + drawWidth, y, z, (u + uMax) * f, v * f1);
+                    addVertexWithUV(worldRenderer, x + i, y, z, u * f, v * f1);
                     tessellator.draw();
                 }
             }
@@ -92,11 +91,11 @@ public class Rectangle {
             int drawWidth;
             for(int i = 0; i <= width; i += uMax) {
                 drawWidth = i + uMax > width ? width : i + uMax;
-                worldRenderer.startDrawingQuads();
-                worldRenderer.addVertexWithUV(x + i, y + drawHeight, z, u * f, (v + drawHeight) * f1);
-                worldRenderer.addVertexWithUV(x + drawWidth, y + drawHeight, z, (u + uMax) * f, (v + drawHeight) * f1);
-                worldRenderer.addVertexWithUV(x + drawWidth, y, z, (u + uMax) * f, v * f1);
-                worldRenderer.addVertexWithUV(x + i, y, z, u * f, v * f1);
+                worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                addVertexWithUV(worldRenderer, x + i, y + drawHeight, z, u * f, (v + drawHeight) * f1);
+                addVertexWithUV(worldRenderer, x + drawWidth, y + drawHeight, z, (u + uMax) * f, (v + drawHeight) * f1);
+                addVertexWithUV(worldRenderer, x + drawWidth, y, z, (u + uMax) * f, v * f1);
+                addVertexWithUV(worldRenderer, x + i, y, z, u * f, v * f1);
                 tessellator.draw();
             }
         } else if(repeat == BackgroundRepeat.REPEAT_Y) {
@@ -104,20 +103,24 @@ public class Rectangle {
             int drawHeight;
             for(int i = 0; i <= height; i += vMax) {
                 drawHeight = i + vMax > height ? height : i + vMax;
-                worldRenderer.startDrawingQuads();
-                worldRenderer.addVertexWithUV(x, y + drawHeight, z, u * f, (v + vMax) * f1);
-                worldRenderer.addVertexWithUV(x + drawWidth, y + drawHeight, z, (u + drawWidth) * f, (v + vMax) * f1);
-                worldRenderer.addVertexWithUV(x + drawWidth, y + i, z, (u + drawWidth) * f, v * f1);
-                worldRenderer.addVertexWithUV(x, y + i, z, u * f, v * f1);
+                worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                addVertexWithUV(worldRenderer, x, y + drawHeight, z, u * f, (v + vMax) * f1);
+                addVertexWithUV(worldRenderer, x + drawWidth, y + drawHeight, z, (u + drawWidth) * f, (v + vMax) * f1);
+                addVertexWithUV(worldRenderer, x + drawWidth, y + i, z, (u + drawWidth) * f, v * f1);
+                addVertexWithUV(worldRenderer, x, y + i, z, u * f, v * f1);
                 tessellator.draw();
             }
         } else {
-            worldRenderer.startDrawingQuads();
-            worldRenderer.addVertexWithUV(x, y + height, z, u * f, vMax * f1);
-            worldRenderer.addVertexWithUV(x + width, y + height, z, uMax * f, vMax * f1);
-            worldRenderer.addVertexWithUV(x + width, y, z, uMax * f, v * f1);
-            worldRenderer.addVertexWithUV(x, y, z, u * f, v * f1);
+            worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+            addVertexWithUV(worldRenderer, x, y + height, z, u * f, vMax * f1);
+            addVertexWithUV(worldRenderer, x + width, y + height, z, uMax * f, vMax * f1);
+            addVertexWithUV(worldRenderer, x + width, y, z, uMax * f, v * f1);
+            addVertexWithUV(worldRenderer, x, y, z, u * f, v * f1);
             tessellator.draw();
         }
+    }
+
+    private void addVertexWithUV(WorldRenderer worldRenderer, int x, int y, int z, float u, float v) {
+        worldRenderer.pos(x, y, z).tex(u, v).endVertex();
     }
 }

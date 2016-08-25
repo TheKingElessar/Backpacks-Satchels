@@ -46,7 +46,8 @@ public class Bootstrap {
             for (String variant : variants.values()) {
                 String identifier = Constants.MOD_ID + ':' + item.getUnlocalizedName() + '_' + variant;
                 if (variant.contains("medium") || identifier.contains("frame")) { continue; }
-                ModelBakery.addVariantName(item.getItem(), identifier);
+                ModelResourceLocation resource = new ModelResourceLocation(identifier, "inventory");
+                ModelBakery.registerItemVariants(item.getItem(), resource);
             }
         }
     }
@@ -66,7 +67,8 @@ public class Bootstrap {
             for (Entry<Integer, String> variant : variants.entrySet()) {
                 String variantIdentifier = identifier + '_' + variant.getValue();
                 if (variantIdentifier.contains("medium") || variantIdentifier.contains("frame")) { continue; }
-                mesher.register(item.getItem(), variant.getKey(), new ModelResourceLocation(variantIdentifier, "inventory"));
+                ModelResourceLocation resource = new ModelResourceLocation(variantIdentifier, "inventory");
+                mesher.register(item.getItem(), variant.getKey(), resource);
             }
         }
     }

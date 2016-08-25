@@ -1,10 +1,26 @@
-# folder
-/.gradle/
-/eclipse/
-/out/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
-# project files
-*.iml
+# idea
+out
 *.ipr
 *.iws
+*.iml
 .idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# project
+notices.txt
+todo.txt

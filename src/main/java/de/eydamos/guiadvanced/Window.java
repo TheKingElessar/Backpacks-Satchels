@@ -43,7 +43,7 @@ public class Window extends GuiScreen implements AbstractGui {
         for(AbstractGuiPart guiPart : subParts) {
             guiPart.setAbsolutePosition(guiLeft, guiTop);
             if(guiPart instanceof GuiButton) {
-                buttonList.add(guiPart);
+                buttonList.add((GuiButton)guiPart);
             }
         }
     }

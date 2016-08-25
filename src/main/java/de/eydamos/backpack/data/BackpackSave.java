@@ -32,8 +32,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        for (Object identifierObj : nbt.getKeySet()) {
-            String identifier = (String) identifierObj;
+        for (String identifier : nbt.getKeySet()) {
             NBTTagList inventoryList = nbt.getTagList(identifier, Constants.NBTTypes.TAG_COMPOUND);
             ItemStack[] inventory = new ItemStack[inventoryList.tagCount()];
             for (int i = 0; i < inventoryList.tagCount(); i++) {
@@ -141,7 +140,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int index) {
+    public ItemStack removeStackFromSlot(int index) {
         ItemStack itemstack = null;
 
         if (getStackInSlot(index) != null) {

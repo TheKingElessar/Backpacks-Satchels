@@ -20,7 +20,7 @@ public class Localizations {
     public static final String MESSAGE_DROPPED_BACKPACKS = "text.backpack.dropped_backpacks";
 
     public static final String INVENTORY_RENAME = "text.backpack.gui.title.rename";
-    public static final String INVENTORY_PERSONAL = "text.backpack.backpack_slot";
+    public static final String INVENTORY_SPECIAL_SLOTS = "text.backpack.gui.title.special_slots";
     public static final String INVENTORY_PICKUP = "text.backpack.autopickup";
     public static final String INVENTORY_RECIPES = "text.backpack.recipes";
 

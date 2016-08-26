@@ -1,8 +1,8 @@
 package de.eydamos.backpack.helper;
 
 import de.eydamos.backpack.Backpack;
-import de.eydamos.backpack.gui.GuiBackpackRename;
 import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.network.message.MessageOpenGui;
 import de.eydamos.backpack.network.message.MessageRenameBackpack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,5 +26,19 @@ public class GuiHelper {
 
     public static void displayBackpack(EntityPlayer player) {
         player.openGui(Backpack.instance, Constants.Guis.BACKPACK, player.worldObj, 0, 0, 0);
+    }
+
+    public static void displaySpecialSlots(EntityPlayer player) {
+        player.openGui(Backpack.instance, Constants.Guis.SPECIAL_SLOTS, player.worldObj, 0, 0, 0);
+    }
+
+    public static void displayCarriedBackpack(EntityPlayer player) {
+        player.openGui(Backpack.instance, Constants.Guis.CARRIED_BACKPACK, player.worldObj, 0, 0, 0);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void sendOpenGui(byte gui) {
+        MessageOpenGui message = new MessageOpenGui(gui);
+        Backpack.packetHandler.networkWrapper.sendToServer(message);
     }
 }

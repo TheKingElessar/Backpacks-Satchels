@@ -1,6 +1,7 @@
 package de.eydamos.backpack.handler;
 
 import de.eydamos.backpack.factory.FactoryBackpack;
+import de.eydamos.backpack.factory.FactorySpecialSlots;
 import de.eydamos.backpack.gui.GuiBackpackRename;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,11 @@ public class HandlerGui implements IGuiHandler {
             case Constants.Guis.RENAME_BACKPACK:
                 return new GuiBackpackRename();
             case Constants.Guis.BACKPACK:
-                return FactoryBackpack.getGuiContainer(player);
+                return FactoryBackpack.getGuiContainer(player, true);
+            case Constants.Guis.SPECIAL_SLOTS:
+                return FactorySpecialSlots.getGuiContainer(player);
+            case Constants.Guis.CARRIED_BACKPACK:
+                return FactoryBackpack.getGuiContainer(player, false);
         }
 
         return null;
@@ -26,7 +31,11 @@ public class HandlerGui implements IGuiHandler {
             case Constants.Guis.RENAME_BACKPACK:
                 return null;
             case Constants.Guis.BACKPACK:
-                return FactoryBackpack.getContainer(player);
+                return FactoryBackpack.getContainer(player, true);
+            case Constants.Guis.SPECIAL_SLOTS:
+                return FactorySpecialSlots.getContainer(player);
+            case Constants.Guis.CARRIED_BACKPACK:
+                return FactoryBackpack.getContainer(player, false);
         }
 
         return null;

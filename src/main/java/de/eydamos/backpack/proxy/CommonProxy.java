@@ -4,6 +4,7 @@ import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.handler.HandlerGui;
 import de.eydamos.backpack.misc.Bootstrap;
 import de.eydamos.backpack.recipe.ERecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public abstract class CommonProxy implements IProxy {
@@ -28,5 +29,15 @@ public abstract class CommonProxy implements IProxy {
     @Override
     public void registerRecipes() {
         ERecipe.registerRecipes();
+    }
+
+    @Override
+    public void setClientBackpack(ItemStack backpack) {
+
+    }
+
+    @Override
+    public ItemStack getClientBackpack() {
+        return null;
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import java.io.File;
 
 public class Constants {
-    public static final String MOD_ID = "Backpack";
+    public static final String MOD_ID = "backpack";
     public static final String MOD_NAME = "Backpack";
     public static final String MOD_VERSION = "3.0.0";
     public static final String FINGERPRINT = "@FINGERPRINT@";
@@ -41,8 +41,8 @@ public class Constants {
     public class Guis {
         public static final int RENAME_BACKPACK = 0;
         public static final int BACKPACK = 1;
-        public static final byte OPEN_PERSONAL_BACKPACK = 0;
-        public static final byte OPEN_PERSONAL_SLOT = 1;
+        public static final byte SPECIAL_SLOTS = 2;
+        public static final byte CARRIED_BACKPACK = 3;
     }
 
     public class GuiCommands {
@@ -53,7 +53,7 @@ public class Constants {
     }
 
     public class NBT {
-        public static final String INVENTORY_BACKPACK = "backpack";
+        public static final String BACKPACK = "backpack";
         public static final String UID = "backpack-UID";
         public static final String SLOT = "slot";
         public static final String SLOTS = "slots";

@@ -1,11 +1,14 @@
 package de.eydamos.backpack.helper;
 
+import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.data.BackpackSave;
+import de.eydamos.backpack.data.PlayerSave;
 import de.eydamos.backpack.item.ESize;
 import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
+import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -88,8 +91,8 @@ public class BackpackHelper {
         return "";
     }
 
-    public static IInventory getInventory(EntityPlayer player) {
-        ItemStack itemStack = getBackpackFromPlayer(player);
+    public static IInventory getInventory(EntityPlayer player, boolean heldItem) {
+        ItemStack itemStack = getBackpackFromPlayer(player, heldItem);
 
         if (isBackpack(itemStack)) {
             return BackpackSave.loadBackpack(player.worldObj, itemStack);
@@ -102,8 +105,18 @@ public class BackpackHelper {
         return itemStack != null && itemStack.getItem() == BackpackItems.backpack;
     }
 
-    public static ItemStack getBackpackFromPlayer(EntityPlayer player) {
-        ItemStack backpack = player.getCurrentEquippedItem();
+    public static ItemStack getBackpackFromPlayer(EntityPlayer player, boolean heldItem) {
+        ItemStack backpack;
+        if (heldItem) {
+            backpack = player.getCurrentEquippedItem();
+        } else {
+            if (GeneralUtil.isServerSide(player.worldObj)) {
+                PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);
+                backpack = playerSave.getBackpack();
+            } else {
+                backpack = Backpack.proxy.getClientBackpack();
+            }
+        }
 
         if (isBackpack(backpack)) {
             return backpack;

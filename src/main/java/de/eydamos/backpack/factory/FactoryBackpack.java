@@ -15,19 +15,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FactoryBackpack {
-    private static final int X_SPACING = 8;
-    private static final int SLOT = 18;
-
-    public static ContainerAdvanced getContainer(EntityPlayer player) {
-        ItemStack backpack = BackpackHelper.getBackpackFromPlayer(player);
+public class FactoryBackpack implements IFactory {
+    public static ContainerAdvanced getContainer(EntityPlayer player, boolean heldItem) {
+        ItemStack backpack = BackpackHelper.getBackpackFromPlayer(player, heldItem);
 
         if (backpack == null) {
             return null;
         }
 
         ContainerAdvanced container;
-        IInventory backpackInventory = BackpackHelper.getInventory(player);
+        IInventory backpackInventory = BackpackHelper.getInventory(player, heldItem);
         container = new ContainerAdvanced(backpackInventory, player);
 
         int slotsPerRow = BackpackHelper.getSlotsPerRow(backpack);
@@ -96,14 +93,14 @@ public class FactoryBackpack {
     }
 
     @SideOnly(Side.CLIENT)
-    public static GuiContainer getGuiContainer(EntityPlayer player) {
-        ItemStack backpack = BackpackHelper.getBackpackFromPlayer(player);
+    public static GuiContainer getGuiContainer(EntityPlayer player, boolean heldItem) {
+        ItemStack backpack = BackpackHelper.getBackpackFromPlayer(player, heldItem);
 
         if (backpack == null) {
             return null;
         }
 
-        ContainerAdvanced container = getContainer(player);
+        ContainerAdvanced container = getContainer(player, heldItem);
         GuiBackpack guiBackpack = new GuiBackpack(container);
 
         int slotsPerRow = BackpackHelper.getSlotsPerRow(backpack);

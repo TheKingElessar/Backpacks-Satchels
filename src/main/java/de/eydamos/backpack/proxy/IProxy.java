@@ -1,5 +1,7 @@
 package de.eydamos.backpack.proxy;
 
+import net.minecraft.item.ItemStack;
+
 public interface IProxy {
     public void registerItems();
 
@@ -10,4 +12,8 @@ public interface IProxy {
     public void registerKeybindings();
 
     public void registerRecipes();
+
+    public void setClientBackpack(ItemStack backpack);
+
+    public ItemStack getClientBackpack();
 }

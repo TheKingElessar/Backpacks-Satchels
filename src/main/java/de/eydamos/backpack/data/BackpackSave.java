@@ -72,20 +72,16 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         }
     }
 
-    private void setBackpack(ItemStack backpack) {
+    private void initialize(ItemStack backpack) {
         this.backpack = backpack;
 
         if (currentInventory == null) {
-            initializeInventories();
+            int slots = BackpackHelper.getSlots(backpack);
+
+            ItemStack[] inventory = new ItemStack[slots];
+            inventories.put(Constants.NBT.BACKPACK, inventory);
+            currentInventory = inventory;
         }
-    }
-
-    private void initializeInventories() {
-        int slots = BackpackHelper.getSlots(backpack);
-
-        ItemStack[] inventory = new ItemStack[slots];
-        inventories.put(Constants.NBT.INVENTORY_BACKPACK, inventory);
-        currentInventory = inventory;
     }
 
     public static BackpackSave loadBackpack(World world, ItemStack backpack) {
@@ -99,7 +95,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
             storage.setData(Constants.INVENTORIES_PATH + UUID, instance);
         }
 
-        instance.setBackpack(backpack);
+        instance.initialize(backpack);
 
         return instance;
     }

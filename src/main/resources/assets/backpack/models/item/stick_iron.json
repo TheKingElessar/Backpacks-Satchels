@@ -1,5 +1,5 @@
 {
-    "parent": "backpack:item/backpack_basic",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "backpack:items/stick_iron"
     }

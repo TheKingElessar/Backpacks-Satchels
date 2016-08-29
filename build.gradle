@@ -24,6 +24,11 @@ version = "3.0.0-1.8.9"
 group= "de.eydamos.backpack" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "backpack"
 
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
 minecraft {
     version = "1.8.9-11.15.1.1902-1.8.9"
     runDir = "run"

@@ -17,7 +17,7 @@ public class GuiBackpackBase extends ContainerWindow {
     protected void keyTyped(char charTyped, int keyCode) throws IOException {
         super.keyTyped(charTyped, keyCode);
 
-        if(HandlerInputEvents.personalBackpack.getKeyCode() == keyCode) {
+        if (HandlerInputEvents.personalBackpack.getKeyCode() == keyCode) {
             mc.thePlayer.closeScreen();
         }
     }

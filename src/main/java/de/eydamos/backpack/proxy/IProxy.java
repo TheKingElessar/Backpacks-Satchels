@@ -1,5 +1,6 @@
 package de.eydamos.backpack.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public interface IProxy {
@@ -13,7 +14,9 @@ public interface IProxy {
 
     public void registerRecipes();
 
-    public void setClientBackpack(ItemStack backpack);
+    public void setBackpackData(String playerUUId, ItemStack backpack);
 
-    public ItemStack getClientBackpack();
+    public ItemStack getClientBackpack(String playerUUID);
+
+    public ItemStack getClientBackpack(EntityPlayer player);
 }

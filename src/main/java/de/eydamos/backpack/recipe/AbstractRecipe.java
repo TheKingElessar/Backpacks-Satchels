@@ -149,6 +149,7 @@ public abstract class AbstractRecipe implements IRecipe {
      * @param row                   The current row in the crafting grid.
      * @param expectedCol           The expected column in the recipe.
      * @param expectedRow           The expected row in the recipe.
+     *
      * @return True if the ItemStack should be at this position, false otherwise.
      */
     abstract protected boolean checkItemAtPosition(InventoryCrafting craftingGridInventory, int col, int row, int expectedCol, int expectedRow);

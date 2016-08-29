@@ -7,8 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
+import java.util.HashMap;
+
 public class ClientProxy extends CommonProxy {
-    private ItemStack backpack;
+    private HashMap<String, ItemStack> backpacks = new HashMap<>();
 
     @Override
     public void registerItems() {
@@ -35,12 +37,12 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void setClientBackpack(ItemStack backpack) {
-        this.backpack = backpack;
+    public void setBackpackData(String playerUUID, ItemStack backpack) {
+        backpacks.put(playerUUID, backpack);
     }
 
     @Override
-    public ItemStack getClientBackpack() {
-        return backpack;
+    public ItemStack getClientBackpack(String playerUUID) {
+        return backpacks.get(playerUUID);
     }
 }

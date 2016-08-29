@@ -114,7 +114,7 @@ public class BackpackHelper {
                 PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);
                 backpack = playerSave.getBackpack();
             } else {
-                backpack = Backpack.proxy.getClientBackpack();
+                backpack = Backpack.proxy.getClientBackpack(player);
             }
         }
 

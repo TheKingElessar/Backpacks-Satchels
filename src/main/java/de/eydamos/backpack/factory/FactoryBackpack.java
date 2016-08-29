@@ -41,13 +41,13 @@ public class FactoryBackpack implements IFactory {
 
         int remainingSlots = backpackInventory.getSizeInventory();
         // backpack inventory
-        for(int row = 0; row < inventoryRows; row++) {
+        for (int row = 0; row < inventoryRows; row++) {
             int cols = remainingSlots >= slotsPerRow ? slotsPerRow : remainingSlots;
             remainingSlots -= cols;
-            if(cols * SLOT < maxWidth/* && !hasScrollbar */) {
+            if (cols * SLOT < maxWidth/* && !hasScrollbar */) {
                 x += (int) Math.round(maxWidth / 2. - cols * SLOT / 2.) + 1;
             }
-            for(int col = 0; col < cols; ++col) {
+            for (int col = 0; col < cols; ++col) {
                 container.addSlot(new SlotBackpack(backpackInventory, col + row * 9, x, y));
                 x += SLOT;
             }
@@ -61,8 +61,8 @@ public class FactoryBackpack implements IFactory {
         y += 14; // space for label
 
         // player inventory
-        for(int row = 0; row < 3; row++) {
-            for(int col = 0; col < 9; col++) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 9; col++) {
                 container.addSlot(new Slot(player.inventory, col + row * 9 + 9, x, y));
                 x += SLOT;
             }
@@ -76,7 +76,7 @@ public class FactoryBackpack implements IFactory {
         y += 6;
 
         // hotbar
-        for(int col = 0; col < 9; col++) {
+        for (int col = 0; col < 9; col++) {
             container.addSlot(new Slot(player.inventory, col, x, y));
             x += SLOT;
         }
@@ -108,7 +108,7 @@ public class FactoryBackpack implements IFactory {
         int textPositionY = 17 + inventoryRows * SLOT + 2;
 
         GuiSlot guiSlot;
-        for(int i = 0; i < container.inventorySlots.size(); i++) {
+        for (int i = 0; i < container.inventorySlots.size(); i++) {
             Slot slot = (Slot) container.inventorySlots.get(i);
             guiSlot = new GuiSlot(slot.xDisplayPosition - 1, slot.yDisplayPosition - 1);
             guiBackpack.addSubPart(guiSlot);

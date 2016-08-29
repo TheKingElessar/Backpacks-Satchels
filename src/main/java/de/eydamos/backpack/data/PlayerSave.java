@@ -1,7 +1,9 @@
 package de.eydamos.backpack.data;
 
+import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.Localizations;
+import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,6 +16,7 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
 
 public class PlayerSave extends WorldSavedData implements IInventory {
+    private EntityPlayer player;
     private ItemStack[] inventory;
 
     public PlayerSave() {
@@ -45,6 +48,8 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     private void initialize(EntityPlayer player) {
+        this.player = player;
+
         if (inventory == null) {
             inventory = new ItemStack[2];
         }
@@ -59,7 +64,7 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     public static PlayerSave loadPlayer(World world, EntityPlayer player) {
-        String UUID = EntityPlayer.getUUID(player.getGameProfile()).toString();
+        String UUID = GeneralUtil.getPlayerUUID(player);
         MapStorage storage = world.getMapStorage();
 
         PlayerSave instance = (PlayerSave) storage.loadData(PlayerSave.class, Constants.PLAYERS_PATH + UUID);
@@ -131,6 +136,10 @@ public class PlayerSave extends WorldSavedData implements IInventory {
             }
 
             markDirty();
+
+            if (index == 0 && GeneralUtil.isServerSide(player.worldObj)) {
+                Backpack.packetHandler.propagateCarriedBackpack(player);
+            }
         }
     }
 

@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT/*, guiFactory = Constants.CLASS_GUI_FACTORY*/)
@@ -19,7 +18,6 @@ public class Backpack {
     public static CommonProxy proxy;
 
     public static final PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
-    //public static SaveFileHandler saveFileHandler = new SaveFileHandler();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

@@ -2,7 +2,6 @@ package de.eydamos.backpack.factory;
 
 import de.eydamos.backpack.data.PlayerSave;
 import de.eydamos.backpack.gui.GuiBackpack;
-import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.storage.container.Boundaries;
 import de.eydamos.backpack.storage.container.ContainerAdvanced;
 import de.eydamos.backpack.storage.container.ContainerSpecialSlots;

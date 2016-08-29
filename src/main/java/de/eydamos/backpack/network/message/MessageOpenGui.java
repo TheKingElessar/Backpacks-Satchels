@@ -1,6 +1,5 @@
 package de.eydamos.backpack.network.message;
 
-import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.helper.GuiHelper;
 import de.eydamos.backpack.misc.Constants;
 import io.netty.buffer.ByteBuf;
@@ -38,7 +37,7 @@ public class MessageOpenGui implements IMessage, IMessageHandler<MessageOpenGui,
                 break;
             case Constants.Guis.CARRIED_BACKPACK:
                 GuiHelper.displayCarriedBackpack(player);
-                return new MessageBackpackData(BackpackHelper.getBackpackFromPlayer(player, false));
+                break;
         }
 
         return null;

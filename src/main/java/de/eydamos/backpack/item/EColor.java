@@ -53,6 +53,18 @@ public enum EColor {
         return null;
     }
 
+    public static EColor getColorByBackpack(ItemStack itemStack) {
+        int colorDamage = itemStack.getItemDamage() % 100;
+
+        for (EColor color : values()) {
+            if (colorDamage == color.itemDamage) {
+                return color;
+            }
+        }
+
+        return null;
+    }
+
     public static boolean isColor(ItemStack itemStack) {
         for (EColor color : values()) {
             if (getColor(itemStack) != null) {

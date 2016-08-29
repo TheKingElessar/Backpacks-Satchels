@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 public class HandlerGui implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        switch(id) {
+        switch (id) {
             case Constants.Guis.RENAME_BACKPACK:
                 return new GuiBackpackRename();
             case Constants.Guis.BACKPACK:
@@ -27,7 +27,7 @@ public class HandlerGui implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        switch(id) {
+        switch (id) {
             case Constants.Guis.RENAME_BACKPACK:
                 return null;
             case Constants.Guis.BACKPACK:

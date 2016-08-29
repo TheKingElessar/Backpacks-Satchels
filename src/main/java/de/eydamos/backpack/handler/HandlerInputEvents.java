@@ -1,6 +1,6 @@
 package de.eydamos.backpack.handler;
 
-import de.eydamos.backpack.helper.GuiHelper;
+import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -23,9 +23,9 @@ public class HandlerInputEvents {
             Minecraft mc = FMLClientHandler.instance().getClient();
             if (mc.inGameHasFocus && (player = mc.thePlayer) != null) {
                 if (player.isSneaking()) {
-                    GuiHelper.sendOpenGui(Constants.Guis.SPECIAL_SLOTS);
+                    Backpack.packetHandler.sendOpenGui(Constants.Guis.SPECIAL_SLOTS);
                 } else {
-                    GuiHelper.sendOpenGui(Constants.Guis.CARRIED_BACKPACK);
+                    Backpack.packetHandler.sendOpenGui(Constants.Guis.CARRIED_BACKPACK);
                 }
             }
         }

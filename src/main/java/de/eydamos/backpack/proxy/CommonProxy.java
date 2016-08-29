@@ -4,6 +4,8 @@ import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.handler.HandlerGui;
 import de.eydamos.backpack.misc.Bootstrap;
 import de.eydamos.backpack.recipe.ERecipe;
+import de.eydamos.backpack.util.GeneralUtil;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -14,7 +16,8 @@ public abstract class CommonProxy implements IProxy {
     }
 
     @Override
-    public void registerIcons() {}
+    public void registerIcons() {
+    }
 
     @Override
     public void registerHandlers() {
@@ -24,7 +27,8 @@ public abstract class CommonProxy implements IProxy {
     }
 
     @Override
-    public void registerKeybindings() {}
+    public void registerKeybindings() {
+    }
 
     @Override
     public void registerRecipes() {
@@ -32,12 +36,17 @@ public abstract class CommonProxy implements IProxy {
     }
 
     @Override
-    public void setClientBackpack(ItemStack backpack) {
+    public void setBackpackData(String playerUUID, ItemStack backpack) {
 
     }
 
     @Override
-    public ItemStack getClientBackpack() {
+    public ItemStack getClientBackpack(String playerUUID) {
         return null;
+    }
+
+    @Override
+    public ItemStack getClientBackpack(EntityPlayer player) {
+        return getClientBackpack(GeneralUtil.getPlayerUUID(player));
     }
 }

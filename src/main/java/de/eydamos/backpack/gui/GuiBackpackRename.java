@@ -1,17 +1,15 @@
 package de.eydamos.backpack.gui;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-
-import net.minecraftforge.fml.client.FMLClientHandler;
-import org.lwjgl.input.Keyboard;
-
-import de.eydamos.backpack.helper.GuiHelper;
+import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.guiadvanced.Window;
 import de.eydamos.guiadvanced.form.Button;
 import de.eydamos.guiadvanced.form.Label;
 import de.eydamos.guiadvanced.form.Textbox;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
 
@@ -72,16 +70,16 @@ public class GuiBackpackRename extends Window {
     @Override
     protected void actionPerformed(GuiButton guibutton) {
         // if button is disabled ignore click
-        if(!guibutton.enabled) {
+        if (!guibutton.enabled) {
             return;
         }
 
         // id 0 = ok; id 1 = cancel
-        switch(guibutton.id) {
+        switch (guibutton.id) {
             case 0:
                 String name = txt_backpackName.getText().trim();
 
-                GuiHelper.renameBackpack(name);
+                Backpack.packetHandler.renameBackpack(name);
             case 1:
                 // remove the GUI
                 mc.setIngameFocus();
@@ -101,11 +99,11 @@ public class GuiBackpackRename extends Window {
         // enable ok button when GuiTextField content is greater than 0 chars
         ((GuiButton) buttonList.get(0)).enabled = txt_backpackName.getText().trim().length() > 0;
         // perform click event on ok button when Enter is pressed
-        if(c == '\n' || c == '\r') {
+        if (c == '\n' || c == '\r') {
             actionPerformed((GuiButton) buttonList.get(0));
         }
         // perform click event on cancel button when Esc is pressed
-        if(Integer.valueOf(c) == 27) {
+        if (Integer.valueOf(c) == 27) {
             actionPerformed((GuiButton) buttonList.get(1));
         }
     }

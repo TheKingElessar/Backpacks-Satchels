@@ -36,8 +36,6 @@ public class Constants {
 
     public static final CreativeTabs tabBackpacks = new TabBackpacks();
 
-    //public static final ModelBiped model = new ModelBackpack();
-
     public class Guis {
         public static final int RENAME_BACKPACK = 0;
         public static final int BACKPACK = 1;

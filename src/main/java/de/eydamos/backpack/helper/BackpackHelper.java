@@ -108,7 +108,7 @@ public class BackpackHelper {
     public static ItemStack getBackpackFromPlayer(EntityPlayer player, boolean heldItem) {
         ItemStack backpack;
         if (heldItem) {
-            backpack = player.getCurrentEquippedItem();
+            backpack = player.getHeldItemMainhand();
         } else {
             if (GeneralUtil.isServerSide(player.worldObj)) {
                 PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);

@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 public class TabBackpacks extends CreativeTabs {
 
     public TabBackpacks() {
-        super(CreativeTabs.creativeTabArray.length, Localizations.TAB_BACKPACKS);
+        super(CreativeTabs.CREATIVE_TAB_ARRAY.length, Localizations.TAB_BACKPACKS);
     }
 
     @Override

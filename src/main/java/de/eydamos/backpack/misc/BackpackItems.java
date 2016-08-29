@@ -12,7 +12,7 @@ public class BackpackItems {
     public static Item backpack;
 
     private static Item getRegisteredItem(String identifier) {
-        return (Item) Item.itemRegistry.getObject(new ResourceLocation(Constants.DOMAIN, identifier));
+        return Item.REGISTRY.getObject(new ResourceLocation(Constants.DOMAIN, identifier));
     }
 
     static {

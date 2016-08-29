@@ -64,7 +64,7 @@ public class Button extends GuiButton implements AbstractGuiPart {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
             Rectangle rectangle = new Rectangle(2, 2);
-            rectangle.setBackground(buttonTextures);
+            rectangle.setBackground(BUTTON_TEXTURES);
             rectangle.setBackgroundSize(2, 2);
             // draw upper left corner
             rectangle.setBackgroundPosition(0, 46 + offset * 20);

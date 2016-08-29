@@ -5,6 +5,7 @@ import invtweaks.api.container.ChestContainer;
 import invtweaks.api.container.ContainerSection;
 import invtweaks.api.container.ContainerSectionCallback;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -183,28 +184,30 @@ public class ContainerAdvanced extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int slotIndex, int mouseButton, int modifier, EntityPlayer entityPlayer) {
-        Slot slot = slotIndex < 0 || slotIndex >= inventorySlots.size() ? null : (Slot) inventorySlots.get(slotIndex);
+    public ItemStack slotClick(int slotIndex, int dragType, ClickType clickType, EntityPlayer player) {
+        Slot slot = slotIndex < 0 || slotIndex >= inventorySlots.size() ? null : inventorySlots.get(slotIndex);
         if (slot instanceof SlotPhantom) {
-            slotPhantomClick(slot, mouseButton, modifier, entityPlayer.inventory.getItemStack());
+            slotPhantomClick(slot, dragType, clickType, player.inventory.getItemStack());
             return null;
         }
-        return super.slotClick(slotIndex, mouseButton, modifier, entityPlayer);
+        return super.slotClick(slotIndex, dragType, clickType, player);
     }
 
     /**
      * Handles clicking on a phantom slot.
      *
      * @param slot        The slot that has been clicked.
-     * @param mouseButton The mouse button identifier: 0: left click 1: right click &
+     * @param dragType    The mouse button identifier: 0: left click 1: right click &
      *                    left click during drag and drop 2: middle click (scrollwheel)
-     * @param modifier    The mouse modifier: 0: normal click 3: drag and drop middle
+     * @param clickType   The mouse modifier: 0: normal click 3: drag and drop middle
      *                    click 5: drag and drop left or right click
      * @param stackHeld   The stack that the player holds on his mouse.
      */
-    protected void slotPhantomClick(Slot slot, int mouseButton, int modifier, ItemStack stackHeld) {
+    protected void slotPhantomClick(Slot slot, int dragType, ClickType clickType, ItemStack stackHeld) {
         if (((SlotPhantom) slot).canChangeStack()) {
-            if (mouseButton == 2) {
+            // TODO find out how to reimplement this
+            /*
+            if (mouseButton == 2) { // middle click scrollwheel
                 slot.putStack(null);
             } else {
                 ItemStack phantomStack = null;
@@ -217,6 +220,7 @@ public class ContainerAdvanced extends Container {
                 slot.putStack(phantomStack);
             }
             slot.onSlotChanged();
+            */
         }
     }
 

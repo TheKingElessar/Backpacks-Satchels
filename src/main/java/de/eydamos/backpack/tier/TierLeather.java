@@ -8,13 +8,13 @@ import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import java.util.List;
 
 public enum TierLeather {
-    I(Items.rabbit_hide, 6, 3),
-    II(Items.leather, 12, 6),
+    I(Items.RABBIT_HIDE, 6, 3),
+    II(Items.LEATHER, 12, 6),
     III(BackpackItems.tanned_leather, 18, 9);
 
     private final Item item;
@@ -79,7 +79,7 @@ public enum TierLeather {
         TierLeather tier = getTierByItemStack(itemStack);
 
         if (tier != null) {
-            String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localizations.TOOLTIP_LEATHER_TIER);
+            String label = ChatFormatting.BLUE + I18n.translateToLocal(Localizations.TOOLTIP_LEATHER_TIER);
             String tierName = ChatFormatting.YELLOW + tier.name() + ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + tierName);
         }

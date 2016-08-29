@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -43,11 +43,11 @@ public class MessageRenameBackpack implements IMessage, IMessageHandler<MessageR
     }
 
     public void setName(EntityPlayer entityPlayer, String name) {
-        if (entityPlayer.getCurrentEquippedItem() != null) {
-            ItemStack itemStack = entityPlayer.getCurrentEquippedItem();
+        if (entityPlayer.getHeldItemMainhand() != null) {
+            ItemStack itemStack = entityPlayer.getHeldItemMainhand();
 
             if (BackpackHelper.isBackpack(itemStack)) {
-                itemStack.setStackDisplayName(EnumChatFormatting.RESET + name);
+                itemStack.setStackDisplayName(TextFormatting.RESET + name);
             }
         }
     }

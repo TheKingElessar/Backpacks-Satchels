@@ -7,9 +7,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
@@ -53,7 +53,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         for (Map.Entry<String, ItemStack[]> inventoryEntry : inventories.entrySet()) {
             String identifier = inventoryEntry.getKey();
             ItemStack[] inventory = inventoryEntry.getValue();
@@ -70,6 +70,8 @@ public class BackpackSave extends WorldSavedData implements IInventory {
 
             nbt.setTag(identifier, inventoryList);
         }
+
+        return nbt;
     }
 
     private void initialize(ItemStack backpack) {
@@ -88,7 +90,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         String UUID = BackpackHelper.getUUID(backpack);
         MapStorage storage = world.getMapStorage();
 
-        BackpackSave instance = (BackpackSave) storage.loadData(BackpackSave.class, Constants.INVENTORIES_PATH + UUID);
+        BackpackSave instance = (BackpackSave) storage.getOrLoadData(BackpackSave.class, Constants.INVENTORIES_PATH + UUID);
 
         if (instance == null) {
             instance = new BackpackSave(Constants.INVENTORIES_PATH + UUID);
@@ -218,12 +220,12 @@ public class BackpackSave extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        IChatComponent component;
+    public ITextComponent getDisplayName() {
+        ITextComponent component;
         if (hasCustomName()) {
-            component = new ChatComponentText(backpack.getDisplayName());
+            component = new TextComponentString(backpack.getDisplayName());
         } else {
-            component = new ChatComponentTranslation(backpack.getUnlocalizedName());
+            component = new TextComponentTranslation(backpack.getUnlocalizedName());
         }
 
         return component;

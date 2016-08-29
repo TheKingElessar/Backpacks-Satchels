@@ -13,7 +13,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -52,7 +55,7 @@ public class ItemBackpack extends Item {
         TierLeather.addTooltip(itemStack, tooltip);
 
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-            String label = ChatFormatting.BLUE + StatCollector.translateToLocal(Localizations.TOOLTIP_SLOTS_USED);
+            String label = ChatFormatting.BLUE + I18n.translateToLocal(Localizations.TOOLTIP_SLOTS_USED);
             String value = ChatFormatting.YELLOW.toString();
             value += BackpackHelper.getSlotsUsed(itemStack);
             value += " / ";
@@ -60,16 +63,16 @@ public class ItemBackpack extends Item {
             value += ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + value);
         } else {
-            tooltip.add(StatCollector.translateToLocal(Localizations.TOOLTIP_MORE_INFORMATION));
+            tooltip.add(I18n.translateToLocal(Localizations.TOOLTIP_MORE_INFORMATION));
         }
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
         if (!NBTItemStackUtil.hasTag(itemStack, Constants.NBT.UID)) {
             // TODO if OP show gui to configure settings
             // TODO else show warning that data is missing and item should be handed to OP
-            return itemStack;
+            return new ActionResult(EnumActionResult.PASS, itemStack);
         }
 
         if (!GeneralUtil.isServerSide(world)) {
@@ -78,7 +81,7 @@ public class ItemBackpack extends Item {
                 GuiHelper.displayRenameGui(player);
             }
 
-            return itemStack;
+            return new ActionResult(EnumActionResult.PASS, itemStack);
         }
 
         // when the player is not sneaking
@@ -86,6 +89,6 @@ public class ItemBackpack extends Item {
             GuiHelper.displayBackpack(player);
         }
 
-        return itemStack;
+        return new ActionResult(EnumActionResult.PASS, itemStack);
     }
 }

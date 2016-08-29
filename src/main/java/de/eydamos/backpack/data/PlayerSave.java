@@ -9,8 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
@@ -38,13 +38,15 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         if (inventory != null && inventory[0] != null) {
             NBTTagCompound backpack = new NBTTagCompound();
             inventory[0].writeToNBT(backpack);
 
             NBTUtil.setCompoundTag(nbt, Constants.NBT.BACKPACK, backpack);
         }
+
+        return nbt;
     }
 
     private void initialize(EntityPlayer player) {
@@ -67,7 +69,7 @@ public class PlayerSave extends WorldSavedData implements IInventory {
         String UUID = GeneralUtil.getPlayerUUID(player);
         MapStorage storage = world.getMapStorage();
 
-        PlayerSave instance = (PlayerSave) storage.loadData(PlayerSave.class, Constants.PLAYERS_PATH + UUID);
+        PlayerSave instance = (PlayerSave) storage.getOrLoadData(PlayerSave.class, Constants.PLAYERS_PATH + UUID);
 
         if (instance == null) {
             instance = new PlayerSave(Constants.PLAYERS_PATH + UUID);
@@ -201,8 +203,8 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        return new ChatComponentTranslation(getName());
+    public ITextComponent getDisplayName() {
+        return new TextComponentTranslation(getName());
     }
 
     @Override

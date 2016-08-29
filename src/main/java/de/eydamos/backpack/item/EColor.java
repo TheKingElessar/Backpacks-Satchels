@@ -5,23 +5,23 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public enum EColor {
-    NONE(0, "", Items.water_bucket, 0),
-    BLACK(1, "black", Items.dye, 0),
-    RED(2, "red", Items.dye, 1),
-    GREEN(3, "green", Items.dye, 2),
-    BROWN(4, "brown", Items.dye, 3),
-    BLUE(5, "blue", Items.dye, 4),
-    PURPLE(6, "purple", Items.dye, 5),
-    CYAN(7, "cyan", Items.dye, 6),
-    LIGHT_GRAY(8, "lightGray", Items.dye, 7),
-    GRAY(9, "gray", Items.dye, 8),
-    PINK(10, "pink", Items.dye, 9),
-    LIME(11, "lime", Items.dye, 10),
-    YELLOW(12, "yellow", Items.dye, 11),
-    LIGHT_BLUE(13, "lightBlue", Items.dye, 12),
-    MAGENTA(14, "magenta", Items.dye, 13),
-    ORANGE(15, "orange", Items.dye, 14),
-    WHITE(16, "white", Items.dye, 15);
+    NONE(0, "", Items.WATER_BUCKET, 0),
+    BLACK(1, "black", Items.DYE, 0),
+    RED(2, "red", Items.DYE, 1),
+    GREEN(3, "green", Items.DYE, 2),
+    BROWN(4, "brown", Items.DYE, 3),
+    BLUE(5, "blue", Items.DYE, 4),
+    PURPLE(6, "purple", Items.DYE, 5),
+    CYAN(7, "cyan", Items.DYE, 6),
+    LIGHT_GRAY(8, "lightGray", Items.DYE, 7),
+    GRAY(9, "gray", Items.DYE, 8),
+    PINK(10, "pink", Items.DYE, 9),
+    LIME(11, "lime", Items.DYE, 10),
+    YELLOW(12, "yellow", Items.DYE, 11),
+    LIGHT_BLUE(13, "lightBlue", Items.DYE, 12),
+    MAGENTA(14, "magenta", Items.DYE, 13),
+    ORANGE(15, "orange", Items.DYE, 14),
+    WHITE(16, "white", Items.DYE, 15);
 
     protected final int damage;
     protected final String name;

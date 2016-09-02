@@ -37,6 +37,7 @@ public class HandlerCommonEvents {
         }
     }
 
+    @SubscribeEvent
     public void playerDies(PlayerDropsEvent event) {
         EntityPlayer player = event.entityPlayer;
         PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);

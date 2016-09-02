@@ -12,6 +12,7 @@ import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLLog;
 
@@ -95,7 +96,7 @@ public class BackpackHelper {
         ItemStack itemStack = getBackpackFromPlayer(player, heldItem);
 
         if (isBackpack(itemStack)) {
-            return BackpackSave.loadBackpack(player.worldObj, itemStack);
+            return BackpackSave.loadBackpack(player.worldObj, itemStack, player, heldItem);
         }
 
         return null;
@@ -123,5 +124,9 @@ public class BackpackHelper {
         }
 
         return null;
+    }
+
+    public static void setSlotsUsed(ItemStack backpack, int slotsUsed) {
+        NBTItemStackUtil.setInteger(backpack, Constants.NBT.SLOTS_USED, slotsUsed);
     }
 }

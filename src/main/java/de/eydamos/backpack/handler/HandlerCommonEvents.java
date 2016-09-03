@@ -39,11 +39,11 @@ public class HandlerCommonEvents {
 
     @SubscribeEvent
     public void playerDies(PlayerDropsEvent event) {
-        EntityPlayer player = event.entityPlayer;
+        EntityPlayer player = event.getEntityPlayer();
         PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);
         ItemStack backpack = playerSave.getBackpack();
         if (backpack != null) {
-            event.drops.add(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, backpack));
+            event.getDrops().add(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, backpack));
             playerSave.setInventorySlotContents(0, null);
         }
     }

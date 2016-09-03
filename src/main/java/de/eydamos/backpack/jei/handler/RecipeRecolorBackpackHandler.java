@@ -24,6 +24,12 @@ public class RecipeRecolorBackpackHandler implements IRecipeHandler<RecipeRecolo
 
     @Nonnull
     @Override
+    public String getRecipeCategoryUid(@Nonnull RecipeRecolorBackpack recipe) {
+        return getRecipeCategoryUid();
+    }
+
+    @Nonnull
+    @Override
     public IRecipeWrapper getRecipeWrapper(@Nonnull RecipeRecolorBackpack recipe) {
         return new RecipeRecolorBackpackWrapper();
     }

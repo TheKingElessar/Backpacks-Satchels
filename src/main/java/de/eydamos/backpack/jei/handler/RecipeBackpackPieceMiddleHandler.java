@@ -23,6 +23,12 @@ public class RecipeBackpackPieceMiddleHandler implements IRecipeHandler<RecipeBa
 
     @Nonnull
     @Override
+    public String getRecipeCategoryUid(@Nonnull RecipeBackpackPieceMiddle recipe) {
+        return getRecipeCategoryUid();
+    }
+
+    @Nonnull
+    @Override
     public IRecipeWrapper getRecipeWrapper(@Nonnull RecipeBackpackPieceMiddle recipe) {
         return new RecipeBackpackPieceMiddleWrapper();
     }

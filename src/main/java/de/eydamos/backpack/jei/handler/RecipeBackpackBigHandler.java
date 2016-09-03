@@ -23,6 +23,12 @@ public class RecipeBackpackBigHandler implements IRecipeHandler<RecipeBackpackBi
 
     @Nonnull
     @Override
+    public String getRecipeCategoryUid(@Nonnull RecipeBackpackBig recipe) {
+        return getRecipeCategoryUid();
+    }
+
+    @Nonnull
+    @Override
     public IRecipeWrapper getRecipeWrapper(@Nonnull RecipeBackpackBig recipe) {
         return new RecipeBackpackBigWrapper();
     }

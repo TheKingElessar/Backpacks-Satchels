@@ -9,6 +9,7 @@ import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTItemStackUtil;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,6 +29,7 @@ public class ItemBackpack extends Item {
         setMaxStackSize(1);
         setHasSubtypes(true);
         setCreativeTab(Constants.tabBackpacks);
+        setRegistryName(Constants.DOMAIN);
         setUnlocalizedName(Constants.DOMAIN);
     }
 
@@ -55,7 +56,7 @@ public class ItemBackpack extends Item {
         TierLeather.addTooltip(itemStack, tooltip);
 
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-            String label = ChatFormatting.BLUE + I18n.translateToLocal(Localizations.TOOLTIP_SLOTS_USED);
+            String label = ChatFormatting.BLUE + I18n.format(Localizations.TOOLTIP_SLOTS_USED);
             String value = ChatFormatting.YELLOW.toString();
             value += BackpackHelper.getSlotsUsed(itemStack);
             value += " / ";
@@ -63,7 +64,7 @@ public class ItemBackpack extends Item {
             value += ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + value);
         } else {
-            tooltip.add(I18n.translateToLocal(Localizations.TOOLTIP_MORE_INFORMATION));
+            tooltip.add(I18n.format(Localizations.TOOLTIP_MORE_INFORMATION));
         }
     }
 

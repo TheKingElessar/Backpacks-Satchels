@@ -31,8 +31,8 @@ public class RecipeBackpackPieceMiddleWrapper extends BlankRecipeWrapper impleme
         ArrayList<Object> inputs = new ArrayList<>();
 
         ArrayList<ItemStack> leather = new ArrayList<>();
-        leather.add(new ItemStack(Items.rabbit_hide, 1, 0));
-        leather.add(new ItemStack(Items.leather, 1, 0));
+        leather.add(new ItemStack(Items.RABBIT_HIDE, 1, 0));
+        leather.add(new ItemStack(Items.LEATHER, 1, 0));
         leather.add(EItem.getItemStack(BackpackItems.tanned_leather, 1, 0));
 
         // top row

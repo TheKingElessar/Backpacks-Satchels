@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ItemFunctionless extends Item {
     public ItemFunctionless(String unlocalizedName, int maxStackSize, boolean hasSubTypes) {
+        setRegistryName(unlocalizedName);
         setUnlocalizedName(unlocalizedName);
         setMaxStackSize(maxStackSize);
         setHasSubtypes(hasSubTypes);

@@ -17,8 +17,8 @@ public class RecipeRecolorBackpackWrapper extends BlankRecipeWrapper implements 
         ArrayList<Object> inputs = new ArrayList<>();
 
         ArrayList<ItemStack> dyes = new ArrayList<>();
-        dyes.add(new ItemStack(Items.dye, 1, OreDictionary.WILDCARD_VALUE));
-        dyes.add(new ItemStack(Items.water_bucket, 1));
+        dyes.add(new ItemStack(Items.DYE, 1, OreDictionary.WILDCARD_VALUE));
+        dyes.add(new ItemStack(Items.WATER_BUCKET, 1));
 
         inputs.add(dyes);
         inputs.add(new ItemStack(BackpackItems.backpack, 1, OreDictionary.WILDCARD_VALUE));

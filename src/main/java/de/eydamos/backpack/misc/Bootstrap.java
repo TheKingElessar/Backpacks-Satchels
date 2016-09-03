@@ -30,7 +30,7 @@ public class Bootstrap {
 
     private static void registerItems() {
         for (Items item : Items.values()) {
-            GameRegistry.registerItem(item.getItem(), item.getUnlocalizedName());
+            GameRegistry.register(item.getItem());
         }
     }
 
@@ -45,8 +45,7 @@ public class Bootstrap {
 
             for (String variant : variants.values()) {
                 String identifier = Constants.MOD_ID + ':' + item.getUnlocalizedName() + '_' + variant;
-                ModelResourceLocation resource = new ModelResourceLocation(identifier, "inventory");
-                ModelBakery.registerItemVariants(item.getItem(), resource);
+                ModelBakery.registerItemVariants(item.getItem(), item.getResource(identifier));
             }
         }
     }
@@ -59,14 +58,13 @@ public class Bootstrap {
             Hashtable<Integer, String> variants = item.getVariants();
 
             if (variants == null) {
-                mesher.register(item.getItem(), 0, new ModelResourceLocation(identifier, "inventory"));
+                mesher.register(item.getItem(), 0, item.getResource(identifier));
                 continue;
             }
 
             for (Entry<Integer, String> variant : variants.entrySet()) {
                 String variantIdentifier = identifier + '_' + variant.getValue();
-                ModelResourceLocation resource = new ModelResourceLocation(variantIdentifier, "inventory");
-                mesher.register(item.getItem(), variant.getKey(), resource);
+                mesher.register(item.getItem(), variant.getKey(), item.getResource(variantIdentifier));
             }
         }
     }
@@ -113,6 +111,10 @@ public class Bootstrap {
 
         public Hashtable<Integer, String> getVariants() {
             return variants;
+        }
+
+        public ModelResourceLocation getResource(String identifier) {
+            return new ModelResourceLocation(identifier, "inventory");
         }
     }
 }

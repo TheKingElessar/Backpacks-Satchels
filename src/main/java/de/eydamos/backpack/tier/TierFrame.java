@@ -6,9 +6,9 @@ import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.backpack.util.NBTItemStackUtil;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public enum TierFrame {
         TierFrame tier = getTierByItemStack(itemStack);
 
         if (tier != null) {
-            String label = ChatFormatting.BLUE + I18n.translateToLocal(Localizations.TOOLTIP_FRAME_TIER);
+            String label = ChatFormatting.BLUE + I18n.format(Localizations.TOOLTIP_FRAME_TIER);
             String tierName = ChatFormatting.YELLOW + tier.name() + ChatFormatting.RESET;
             tooltip.add(label.trim() + ' ' + tierName);
         }

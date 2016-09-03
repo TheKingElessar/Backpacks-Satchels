@@ -1,19 +1,15 @@
 [
 {
-  "modid": "Backpack",
+  "modid": "backpack",
   "name": "Backpack",
   "description": "Provides the player with multiple, colored backpacks, in different sizes.",
-  "version": "${version}",
   "credits": "(Backpacks *-1.2.5)MightyPork, (Icons)Simsala123 and SentientXIII, (Model)Ivanovsky",
-  "logoFile": "",
-  "mcversion": "1.8.x",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
   "url": "http://www.minecraftforum.net/topic/1492661-",
   "updateUrl": "",
-  "authors": ["Eydamos"],
-  "parent": "",
+  "authorList": ["Eydamos"],
   "screenshots": [],
-  "dependencies": [
-     "mod_MinecraftForge"
-  ]
+  "dependencies": []
 }
 ]

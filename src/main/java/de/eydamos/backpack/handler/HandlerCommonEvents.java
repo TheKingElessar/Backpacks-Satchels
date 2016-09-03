@@ -1,7 +1,12 @@
 package de.eydamos.backpack.handler;
 
+import de.eydamos.backpack.data.PlayerSave;
 import de.eydamos.backpack.misc.Constants;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,6 +34,17 @@ public class HandlerCommonEvents {
             }
         } catch (Exception e) {
             FMLLog.info("Unable to check if backpack folders are present. If you are a client connecting to a server ignore this info.");
+        }
+    }
+
+    @SubscribeEvent
+    public void playerDies(PlayerDropsEvent event) {
+        EntityPlayer player = event.entityPlayer;
+        PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);
+        ItemStack backpack = playerSave.getBackpack();
+        if (backpack != null) {
+            event.drops.add(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, backpack));
+            playerSave.setInventorySlotContents(0, null);
         }
     }
 }

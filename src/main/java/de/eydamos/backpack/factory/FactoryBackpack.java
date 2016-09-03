@@ -48,7 +48,7 @@ public class FactoryBackpack implements IFactory {
                 x += (int) Math.round(maxWidth / 2. - cols * SLOT / 2.) + 1;
             }
             for (int col = 0; col < cols; ++col) {
-                container.addSlot(new SlotBackpack(backpackInventory, col + row * 9, x, y));
+                container.addSlot(new SlotBackpack(backpackInventory, col + row * slotsPerRow, x, y));
                 x += SLOT;
             }
             y += SLOT;

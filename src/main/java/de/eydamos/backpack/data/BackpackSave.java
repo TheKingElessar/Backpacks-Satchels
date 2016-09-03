@@ -19,8 +19,10 @@ import java.util.Map;
 
 public class BackpackSave extends WorldSavedData implements IInventory {
     private ItemStack[] currentInventory;
-    private Hashtable<String, ItemStack[]> inventories = new Hashtable<String, ItemStack[]>();
+    private Hashtable<String, ItemStack[]> inventories = new Hashtable<>();
     private ItemStack backpack;
+    private boolean heldItem;
+    private EntityPlayer player;
 
     public BackpackSave() {
         super(Constants.INVENTORIES_PATH + "DUMMY");
@@ -74,8 +76,10 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         return nbt;
     }
 
-    private void initialize(ItemStack backpack) {
+    private void initialize(ItemStack backpack, EntityPlayer player, boolean heldItem) {
         this.backpack = backpack;
+        this.player = player;
+        this.heldItem = heldItem;
 
         if (currentInventory == null) {
             int slots = BackpackHelper.getSlots(backpack);
@@ -86,7 +90,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         }
     }
 
-    public static BackpackSave loadBackpack(World world, ItemStack backpack) {
+    public static BackpackSave loadBackpack(World world, ItemStack backpack, EntityPlayer player, boolean heldItem) {
         String UUID = BackpackHelper.getUUID(backpack);
         MapStorage storage = world.getMapStorage();
 
@@ -97,7 +101,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
             storage.setData(Constants.INVENTORIES_PATH + UUID, instance);
         }
 
-        instance.initialize(backpack);
+        instance.initialize(backpack, player, heldItem);
 
         return instance;
     }
@@ -158,6 +162,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
                 newContent.stackSize = getInventoryStackLimit();
             }
 
+            updateUsedSlots();
             markDirty();
         }
     }
@@ -234,5 +239,16 @@ public class BackpackSave extends WorldSavedData implements IInventory {
     @Override
     public void markDirty() {
         super.markDirty();
+    }
+
+    private void updateUsedSlots() {
+        int slotsUsed = 0;
+        for (ItemStack itemStack : currentInventory) {
+            if (itemStack != null) {
+                slotsUsed++;
+            }
+        }
+
+        BackpackHelper.setSlotsUsed(BackpackHelper.getBackpackFromPlayer(player, heldItem), slotsUsed);
     }
 }

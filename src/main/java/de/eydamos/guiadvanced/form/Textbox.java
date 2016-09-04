@@ -18,17 +18,17 @@ public class Textbox extends GuiTextField implements AbstractGuiPart {
 
     @Override
     public void setWidth(int value) {
-        ObfuscationReflectionHelper.setPrivateValue(GuiTextField.class, this, value, "width", "h");
+        width = value;
     }
 
     @Override
     public int getHeight() {
-        return ObfuscationReflectionHelper.getPrivateValue(GuiTextField.class, this, "height", "i");
+        return height;
     }
 
     @Override
     public void setHeight(int value) {
-        ObfuscationReflectionHelper.setPrivateValue(GuiTextField.class, this, value, "height", "i");
+        height = value;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class Textbox extends GuiTextField implements AbstractGuiPart {
 
     @Override
     public void setAbsolutePosition(int guiLeft, int guiTop) {
-        ObfuscationReflectionHelper.setPrivateValue(GuiTextField.class, this, guiLeft + relativePositionX, "xPosition", "f");
-        ObfuscationReflectionHelper.setPrivateValue(GuiTextField.class, this, guiTop + relativePositionY, "yPosition", "g");
+        xPosition = guiLeft + relativePositionX;
+        yPosition = guiTop + relativePositionY;
     }
 
 }

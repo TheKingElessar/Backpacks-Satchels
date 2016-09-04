@@ -9,7 +9,7 @@ import java.io.File;
 public class Constants {
     public static final String MOD_ID = "backpack";
     public static final String MOD_NAME = "Backpack";
-    public static final String MOD_VERSION = "3.0.0";
+    public static final String MOD_VERSION = "3.0.1";
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
     public static final String DOMAIN = "backpack";

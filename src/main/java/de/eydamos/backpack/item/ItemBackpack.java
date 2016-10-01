@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 public class ItemBackpack extends Item {
@@ -35,7 +36,8 @@ public class ItemBackpack extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tab, List subItems) {
+    @ParametersAreNonnullByDefault
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
         for (EBackpack backpack : EBackpack.values()) {
             subItems.add(new ItemStack(item, 1, backpack.getDamage()));
         }
@@ -51,7 +53,7 @@ public class ItemBackpack extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List tooltip, boolean advanced) {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> tooltip, boolean advanced) {
         TierFrame.addTooltip(itemStack, tooltip);
         TierLeather.addTooltip(itemStack, tooltip);
 
@@ -69,11 +71,16 @@ public class ItemBackpack extends Item {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
         if (!NBTItemStackUtil.hasTag(itemStack, Constants.NBT.UID)) {
-            // TODO if OP show gui to configure settings
-            // TODO else show warning that data is missing and item should be handed to OP
-            return new ActionResult(EnumActionResult.PASS, itemStack);
+            // other idea send package to server to open gui. Server checks if op and opens gui or sends back chat message
+
+            if (player.capabilities.isCreativeMode) {
+                // TODO if OP show gui to configure settings
+                // TODO else show warning that data is missing and item should be handed to OP
+            }
+            return new ActionResult<>(EnumActionResult.PASS, itemStack);
         }
 
         if (!GeneralUtil.isServerSide(world)) {
@@ -82,7 +89,7 @@ public class ItemBackpack extends Item {
                 GuiHelper.displayRenameGui(player);
             }
 
-            return new ActionResult(EnumActionResult.PASS, itemStack);
+            return new ActionResult<>(EnumActionResult.PASS, itemStack);
         }
 
         // when the player is not sneaking
@@ -90,6 +97,6 @@ public class ItemBackpack extends Item {
             GuiHelper.displayBackpack(player);
         }
 
-        return new ActionResult(EnumActionResult.PASS, itemStack);
+        return new ActionResult<>(EnumActionResult.PASS, itemStack);
     }
 }

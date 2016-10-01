@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 public class ItemFunctionless extends Item {
@@ -22,7 +23,8 @@ public class ItemFunctionless extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tab, List subItems) {
+    @ParametersAreNonnullByDefault
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
         if (item == BackpackItems.stick) {
             for (EStick stick : EStick.values()) {
                 subItems.add(EItem.getItemStack(item, 1, stick.getDamage()));

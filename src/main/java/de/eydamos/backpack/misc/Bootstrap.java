@@ -6,9 +6,11 @@ import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Hashtable;
 import java.util.Map.Entry;
@@ -24,6 +26,8 @@ public class Bootstrap {
         if (!alreadyRegistered) {
             registerItems();
 
+            registerOreDictNames();
+
             alreadyRegistered = true;
         }
     }
@@ -32,6 +36,11 @@ public class Bootstrap {
         for (Items item : Items.values()) {
             GameRegistry.register(item.getItem());
         }
+    }
+
+    private static void registerOreDictNames() {
+        OreDictionary.registerOre("stickStone", new ItemStack(Items.STICK.getItem(), 1, EStick.STONE.getDamage()));
+        OreDictionary.registerOre("stickIron", new ItemStack(Items.STICK.getItem(), 1, EStick.IRON.getDamage()));
     }
 
     @SideOnly(Side.CLIENT)
@@ -50,6 +59,7 @@ public class Bootstrap {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public static void registerIcons() {
         ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 

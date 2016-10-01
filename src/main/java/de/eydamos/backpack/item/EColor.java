@@ -57,12 +57,12 @@ public enum EColor {
         int colorDamage = itemStack.getItemDamage() % 100;
 
         for (EColor color : values()) {
-            if (colorDamage == color.itemDamage) {
+            if (colorDamage == color.damage) {
                 return color;
             }
         }
 
-        return null;
+        return EColor.NONE;
     }
 
     public static boolean isColor(ItemStack itemStack) {

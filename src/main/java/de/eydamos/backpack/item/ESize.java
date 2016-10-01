@@ -38,6 +38,6 @@ public enum ESize {
             }
         }
 
-        return null;
+        return ESize.SMALL;
     }
 }

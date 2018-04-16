@@ -27,13 +27,13 @@ public class BackpackHelper {
 
     public static void initialize(ItemStack backpack, TierLeather leather, TierFrame frame) {
         if (!isBackpack(backpack)) {
-            FMLLog.warning("ItemStack is null or not a backpack.");
+            Backpack.logger.error("ItemStack is null or not a backpack.");
             return;
         }
 
         ESize size = ESize.getSizeByBackpack(backpack);
         if (size == null || leather == null || frame == null) {
-            FMLLog.warning("Mandatory data missing can't initialize backpack.");
+            Backpack.logger.error("Mandatory data missing can't initialize backpack.");
             return;
         }
 

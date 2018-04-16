@@ -130,47 +130,47 @@ public enum Features {
 
     @SubscribeEvent
     public static void loadItems(RegistryEvent.Register<Item> event) {
-        //Backpack.logger.info("Loading items...");
-        //int num = 0;
-        for (Features f : values()) {
-            if (f.enabled()) {
-                f.addItems(event.getRegistry());
-                //++num;
+        Backpack.logger.info("Loading items...");
+        int num = 0;
+        for (Features feature : values()) {
+            if (feature.enabled()) {
+                feature.addItems(event.getRegistry());
+                ++num;
             } else {
-                //Backpack.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(f));
+                Backpack.logger.info("Skipping feature {} as it was disabled in the config.", feature.name());
             }
         }
-        //Backpack.logger.info(num + " Feature's items loaded.");
+        Backpack.logger.info(num + " items loaded.");
     }
 
     @SubscribeEvent
     public static void loadRecipes(RegistryEvent.Register<IRecipe> event) {
-        //Backpack.logger.info("Loading recipes...");
+        Backpack.logger.info("Loading recipes...");
         int num = 0;
-        for (Features f : values()) {
-            if (f.enabled()) {
-                f.addRecipes(event.getRegistry());
+        for (Features feature : values()) {
+            if (feature.enabled()) {
+                feature.addRecipes(event.getRegistry());
                 ++num;
             } else {
-                //Backpack.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(f));
+                Backpack.logger.info("Skipping feature {} as it was disabled in the config.", feature.name());
             }
         }
-        //Backpack.logger.info(num + " Feature's recipes loaded.");
+        Backpack.logger.info(num + " recipes loaded.");
     }
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        //Backpack.logger.info("Registering models...");
+        Backpack.logger.info("Registering models...");
         int num = 0;
-        for (Features f : values()) {
-            if (f.enabled()) {
-                f.addModel();
+        for (Features feature : values()) {
+            if (feature.enabled()) {
+                feature.addModel();
                 ++num;
             } else {
-                //Backpack.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(f));
+                Backpack.logger.info("Skipping feature {} as it was disabled in the config.", feature.name());
             }
         }
-        //Backpack.logger.info(num + " Feature's recipes loaded.");
+        Backpack.logger.info(num + " models loaded.");
     }
 
     private static final ResourceLocation RECIPE_GROUP = new ResourceLocation("", "");

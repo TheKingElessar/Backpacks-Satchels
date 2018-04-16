@@ -8,6 +8,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT/*, guiFactory = Constants.CLASS_GUI_FACTORY*/)
 public class Backpack {
@@ -17,13 +19,15 @@ public class Backpack {
     @SidedProxy(clientSide = Constants.CLASS_PROXY_CLIENT, serverSide = Constants.CLASS_PROXY_SERVER)
     public static CommonProxy proxy;
 
+    public static final Logger logger = LogManager.getLogger(Constants.MOD_NAME);
+
     public static final PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         // get the configuration and let forge guess the filename
         //ConfigurationBackpack.init(event.getSuggestedConfigurationFile());
-        
+
         // key bindings
         proxy.registerKeybindings();
 

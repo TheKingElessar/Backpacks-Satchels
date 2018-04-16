@@ -1,5 +1,6 @@
 package de.eydamos.backpack.handler;
 
+import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.data.PlayerSave;
 import de.eydamos.backpack.misc.Constants;
 import net.minecraft.entity.item.EntityItem;
@@ -8,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
@@ -22,18 +22,18 @@ public class HandlerCommonEvents {
             File backpackDir = new File(dataDir, Constants.INVENTORIES_PATH);
             if (!backpackDir.exists()) {
                 if (!backpackDir.mkdirs()) {
-                    FMLLog.warning("Unable to create backpack/inventory folder. Saving backpack inventory will fail!");
+                    Backpack.logger.warn("Unable to create backpack/inventory folder. Saving backpack inventory will fail!");
                 }
             }
 
             File playersDir = new File(dataDir, Constants.PLAYERS_PATH);
             if (!playersDir.exists()) {
                 if (!playersDir.mkdirs()) {
-                    FMLLog.warning("Unable to create backpack/player folder. Saving player specific backpack data will fail!");
+                    Backpack.logger.warn("Unable to create backpack/player folder. Saving player specific backpack data will fail!");
                 }
             }
         } catch (Exception e) {
-            FMLLog.info("Unable to check if backpack folders are present. If you are a client connecting to a server ignore this info.");
+            Backpack.logger.info("Unable to check if backpack folders are present. If you are a client connecting to a server ignore this info.");
         }
     }
 

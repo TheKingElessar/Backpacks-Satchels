@@ -2,7 +2,6 @@ package de.eydamos.backpack.jei.wrapper;
 
 import de.eydamos.backpack.init.BackpackItems;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,7 +10,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 
-public class RecipeRecolorBackpackWrapper extends BlankRecipeWrapper implements IRecipeWrapper {
+public class RecipeRecolorBackpackWrapper implements IRecipeWrapper {
     @Override
     @ParametersAreNonnullByDefault
     public void getIngredients(IIngredients ingredients) {

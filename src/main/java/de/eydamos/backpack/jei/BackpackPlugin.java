@@ -1,24 +1,21 @@
 package de.eydamos.backpack.jei;
 
-import de.eydamos.backpack.jei.handler.*;
-import mezz.jei.api.BlankModPlugin;
+import de.eydamos.backpack.recipe.AbstractRecipe;
+import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
+import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
-
-import javax.annotation.Nonnull;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 
 @JEIPlugin
-public class BackpackPlugin extends BlankModPlugin {
+public class BackpackPlugin implements IModPlugin {
     @Override
-    public void register(@Nonnull IModRegistry registry) {
-        registry.addRecipeHandlers(
-            new RecipeBackpackSmallHandler(),
-            new RecipeBackpackMediumHandler(),
-            new RecipeBackpackBigHandler(),
-            new RecipeBackpackPieceTopHandler(),
-            new RecipeBackpackPieceMiddleHandler(),
-            new RecipeBackpackPieceBottomHandler(),
-            new RecipeRecolorBackpackHandler()
-        );
+    public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
+
+    }
+
+    @Override
+    public void register(IModRegistry registry) {
+        registry.handleRecipes(AbstractRecipe.class, new RecipeWrapperFactory(), VanillaRecipeCategoryUid.CRAFTING);
     }
 }

@@ -4,7 +4,6 @@ import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.item.EPiece;
 import de.eydamos.backpack.misc.EItemStack;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
 import mezz.jei.api.recipe.wrapper.IShapedCraftingRecipeWrapper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,7 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeBackpackPieceMiddleWrapper extends BlankRecipeWrapper implements IShapedCraftingRecipeWrapper {
+public class RecipeBackpackPieceMiddleWrapper implements IShapedCraftingRecipeWrapper {
     @Override
     public int getWidth() {
         return 3;

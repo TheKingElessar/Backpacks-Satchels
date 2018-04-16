@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.helper.GuiHelper;
 import de.eydamos.backpack.init.BackpackItems;
+import de.eydamos.backpack.init.Configurations;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.backpack.tier.TierFrame;
@@ -48,7 +49,9 @@ public class ItemBackpack extends Item {
         }
 
         for (EBackpack backpack : EBackpack.values()) {
-            subItems.add(new ItemStack(BackpackItems.backpack, 1, backpack.getDamage()));
+            if (backpack.isEnabled()) {
+                subItems.add(new ItemStack(BackpackItems.backpack, 1, backpack.getDamage()));
+            }
         }
     }
 
@@ -107,7 +110,7 @@ public class ItemBackpack extends Item {
         }
 
         // when the player is not sneaking
-        if (!player.isSneaking()) {
+        if (!player.isSneaking() && !Configurations.OPEN_ONLY_PERSONAL_BACKPACK) {
             GuiHelper.displayBackpack(player);
         }
 

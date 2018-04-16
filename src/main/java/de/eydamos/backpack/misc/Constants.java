@@ -18,6 +18,8 @@ public class Constants {
     public static final String CLASS_PROXY_SERVER = "de.eydamos.backpack.proxy.ServerProxy";
     public static final String CLASS_GUI_FACTORY = "de.eydamos.backpack.factory.FactoryConfigurationGui";
 
+    public static final String CONFIG_CATEGORY_FEATURES = "features";
+
     public static final String UPDATE_FILE = "http://www.eydamos.de/minecraft/backpack/version.json";
 
     public static final String INVENTORIES_PATH = DOMAIN + File.separator + "inventory" + File.separator;

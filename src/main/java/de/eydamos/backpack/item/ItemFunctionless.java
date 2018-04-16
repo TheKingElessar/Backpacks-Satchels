@@ -1,5 +1,6 @@
 package de.eydamos.backpack.item;
 
+import de.eydamos.backpack.Features;
 import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.EItemStack;
@@ -41,24 +42,34 @@ public class ItemFunctionless extends Item {
         switch (getUnlocalizedName()) {
             case "item.stick":
                 for (EStick stick : EStick.values()) {
-                    subItems.add(EItemStack.getItemStack(BackpackItems.stick, 1, stick.getDamage()));
+                    if (stick.isEnabled()) {
+                        subItems.add(EItemStack.getItemStack(BackpackItems.stick, 1, stick.getDamage()));
+                    }
                 }
                 break;
             case "item.backpack_frame":
                 for (EFrame frame : EFrame.values()) {
-                    subItems.add(EItemStack.getItemStack(BackpackItems.backpack_frame, 1, frame.getDamage()));
+                    if (Features.BACKPACK_FRAME.isEnabled() && frame.isEnabled()) {
+                        subItems.add(EItemStack.getItemStack(BackpackItems.backpack_frame, 1, frame.getDamage()));
+                    }
                 }
                 break;
             case "item.backpack_piece":
                 for (EPiece piece : EPiece.values()) {
-                    subItems.add(EItemStack.getItemStack(BackpackItems.backpack_piece, 1, piece.getDamage()));
+                    if (Features.BACKPACK_PIECE.isEnabled()) {
+                        subItems.add(EItemStack.getItemStack(BackpackItems.backpack_piece, 1, piece.getDamage()));
+                    }
                 }
                 break;
             case "item.bound_leather":
-                subItems.add(EItemStack.BOUND_LEATHER.getItemStack(1));
+                if (Features.LEATHER_BOUND.isEnabled()) {
+                    subItems.add(EItemStack.BOUND_LEATHER.getItemStack(1));
+                }
                 break;
             case "item.tanned_leather":
-                subItems.add(EItemStack.TANNED_LEATHER.getItemStack(1));
+                if (Features.LEATHER_TANNED.isEnabled()) {
+                    subItems.add(EItemStack.TANNED_LEATHER.getItemStack(1));
+                }
                 break;
         }
     }

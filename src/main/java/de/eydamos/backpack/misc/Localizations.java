@@ -16,8 +16,8 @@ public class Localizations {
     public static final String KEY_CATEGORY = "key.categories.backpack";
     public static final String KEY_PERSONAL = "key.personalBackpack";
 
-    public static final String MESSAGE_ALLOWED_BACKPACKS = "text.backpack.allowed_backpacks";
-    public static final String MESSAGE_DROPPED_BACKPACKS = "text.backpack.dropped_backpacks";
+    public static final String MESSAGE_ALLOWED_BACKPACKS = "text.backpack_allowed_backpacks";
+    public static final String MESSAGE_DROPPED_BACKPACKS = "text.backpack_dropped_backpacks";
 
     public static final String INVENTORY_RENAME = "text.backpack.gui.title.rename";
     public static final String INVENTORY_SPECIAL_SLOTS = "text.backpack.gui.title.special_slots";
@@ -25,7 +25,7 @@ public class Localizations {
     public static final String INVENTORY_RECIPES = "text.backpack.recipes";
 
     public static final String LABEL_NEW_NAME = "text.backpack.gui.label.new_name";
-    public static final String LABEL_BACKPACK_CONFIG = "text.backpack.configuration";
+    public static final String LABEL_BACKPACK_CONFIG = "text.backpack_configuration";
 
     public static final String BUTTON_OK = "text.backpack.gui.button.ok";
     public static final String BUTTON_CANCEL = "text.backpack.gui.button.cancel";

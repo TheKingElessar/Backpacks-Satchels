@@ -2,6 +2,7 @@ package de.eydamos.backpack.handler;
 
 import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.helper.BackpackHelper;
+import de.eydamos.backpack.init.Configurations;
 import de.eydamos.backpack.model.LayerBackpack;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
@@ -33,6 +34,10 @@ public class HandlerClientEvents extends HandlerCommonEvents {
 
     @SubscribeEvent
     public void renderStart(RenderLivingEvent.Pre event) {
+        if (!Configurations.RENDER_BACKPACK_MODEL) {
+            return;
+        }
+
         if (!seenPlayers.contains(event.getRenderer()) && event.getRenderer() instanceof RenderPlayer) {
             seenPlayers.add(event.getRenderer());
             toInit.add(event.getRenderer());

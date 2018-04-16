@@ -1,19 +1,23 @@
 package de.eydamos.backpack.item;
 
+import de.eydamos.backpack.Features;
+
 import java.util.Hashtable;
 
 public enum EStick {
-    STONE(0, "stone"),
-    IRON(1, "iron");
+    STONE(0, "stone", Features.STICK_STONE),
+    IRON(1, "iron", Features.STICK_IRON);
 
     private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
 
     private final int damage;
     private final String identifier;
+    private final Features feature;
 
-    EStick(int damage, String identifier) {
+    EStick(int damage, String identifier, Features feature) {
         this.damage = damage;
         this.identifier = identifier;
+        this.feature = feature;
     }
 
     public String getIdentifier() {
@@ -22,6 +26,10 @@ public enum EStick {
 
     public int getDamage() {
         return damage;
+    }
+
+    public boolean isEnabled() {
+        return feature.isEnabled();
     }
 
     public static String getIdentifierByDamage(int damage) {

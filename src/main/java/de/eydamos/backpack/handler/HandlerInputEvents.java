@@ -2,6 +2,7 @@ package de.eydamos.backpack.handler;
 
 import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.misc.Localizations;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(value = Side.CLIENT)
 public class HandlerInputEvents {
     // 48 represents the B key
-    public static KeyBinding personalBackpack = new KeyBinding("key.personalBackpack", 48, "key.categories.backpack");
+    public static KeyBinding personalBackpack = new KeyBinding(Localizations.KEY_PERSONAL, 48, Localizations.KEY_CATEGORY);
 
     @SubscribeEvent
     public void handleKeyInput(InputEvent.KeyInputEvent event) {

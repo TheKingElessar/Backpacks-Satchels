@@ -17,14 +17,8 @@ public class RecipeBackpackSmallHandler implements IRecipeHandler<RecipeBackpack
 
     @Nonnull
     @Override
-    public String getRecipeCategoryUid() {
-        return VanillaRecipeCategoryUid.CRAFTING;
-    }
-
-    @Nonnull
-    @Override
     public String getRecipeCategoryUid(@Nonnull RecipeBackpackSmall recipe) {
-        return getRecipeCategoryUid();
+        return VanillaRecipeCategoryUid.CRAFTING;
     }
 
     @Nonnull

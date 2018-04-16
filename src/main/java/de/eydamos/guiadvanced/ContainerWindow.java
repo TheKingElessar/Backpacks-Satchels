@@ -1,14 +1,17 @@
 package de.eydamos.guiadvanced;
 
-import java.util.ArrayList;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
 import de.eydamos.guiadvanced.misc.AbstractGui;
 import de.eydamos.guiadvanced.misc.AbstractGuiPart;
 import de.eydamos.guiadvanced.util.RenderHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+
+@SideOnly(Side.CLIENT)
 public class ContainerWindow extends GuiContainer implements AbstractGui {
     protected ArrayList<AbstractGuiPart> subParts = new ArrayList<AbstractGuiPart>();
 
@@ -83,4 +86,10 @@ public class ContainerWindow extends GuiContainer implements AbstractGui {
         }
     }
 
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        renderHoveredToolTip(mouseX, mouseY);
+    }
 }

@@ -1,12 +1,12 @@
 package de.eydamos.guiadvanced;
 
-import java.util.ArrayList;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import de.eydamos.guiadvanced.misc.AbstractGui;
 import de.eydamos.guiadvanced.misc.AbstractGuiPart;
 import de.eydamos.guiadvanced.util.RenderHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+
+import java.util.ArrayList;
 
 public class Window extends GuiScreen implements AbstractGui {
     protected ArrayList<AbstractGuiPart> subParts = new ArrayList<AbstractGuiPart>();
@@ -66,6 +66,7 @@ public class Window extends GuiScreen implements AbstractGui {
     /* ========== overrides from GuiScreen ========== */
     @Override
     public void drawScreen(int mouseX, int mouseY, float something) {
+        drawDefaultBackground();
         // draw background
         RenderHelper.drawOuterCornerTopLeft(guiLeft, guiTop);
         RenderHelper.drawBorderTop(guiLeft + 4, guiTop, xSize - 8, 4);

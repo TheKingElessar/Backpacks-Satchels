@@ -1,8 +1,7 @@
 package de.eydamos.backpack.recipe;
 
-import de.eydamos.backpack.helper.HelperItems;
-import de.eydamos.backpack.misc.BackpackItems;
-import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.helper.ItemStackHelper;
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import net.minecraft.inventory.InventoryCrafting;
@@ -10,9 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public class RecipeBackpackPieceTop extends AbstractRecipe {
     public RecipeBackpackPieceTop(ItemStack result) {
-        super(3, 2, result, Constants.RECIPE_BACKPACK_PIECE_TOP);
-
-        this.recipeItems = new ItemStack[recipeWidth * recipeHeight];
+        super(3, 2, result);
     }
 
     @Override
@@ -26,27 +23,27 @@ public class RecipeBackpackPieceTop extends AbstractRecipe {
             case 2:
             case 3:
             case 5:
-                if (!HelperItems.isLeather(itemStack)) {
+                if (!ItemStackHelper.isLeather(itemStack)) {
                     return false;
                 }
 
                 if (iteratorPosition != 0) {
                     int firstLeatherPosition = col + row * craftingGridInventory.getWidth() - iteratorPosition;
                     ItemStack firstLeather = craftingGridInventory.getStackInSlot(firstLeatherPosition);
-                    if (!HelperItems.isSameLeatherType(itemStack, firstLeather)) {
+                    if (!ItemStackHelper.isSameLeatherType(itemStack, firstLeather)) {
                         return false;
                     }
                 }
 
                 break;
             case 4:
-                if (itemStack == null || itemStack.getItem() != BackpackItems.backpack_frame) {
+                if (itemStack.getItem() != BackpackItems.backpack_frame) {
                     return false;
                 }
 
                 break;
             default:
-                if (itemStack != null) {
+                if (!itemStack.isEmpty()) {
                     return false;
                 }
         }

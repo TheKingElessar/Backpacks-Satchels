@@ -1,14 +1,14 @@
 package de.eydamos.backpack.helper;
 
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.item.EPiece;
-import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import net.minecraft.item.ItemStack;
 
-public class HelperItems {
+public class ItemStackHelper {
     public static boolean isLeather(ItemStack itemStack) {
-        if (itemStack == null) {
+        if (itemStack.isEmpty()) {
             return false;
         }
 
@@ -20,7 +20,7 @@ public class HelperItems {
     }
 
     public static boolean isSameLeatherType(ItemStack itemStackA, ItemStack itemStackB) {
-        if (itemStackA == null || itemStackB == null) {
+        if (itemStackA.isEmpty() || itemStackB.isEmpty()) {
             return false;
         }
 
@@ -28,7 +28,7 @@ public class HelperItems {
     }
 
     public static boolean isTopPiece(ItemStack itemStack) {
-        if (itemStack == null) {
+        if (itemStack.isEmpty()) {
             return false;
         }
 
@@ -40,7 +40,7 @@ public class HelperItems {
     }
 
     public static boolean isMiddlePiece(ItemStack itemStack) {
-        if (itemStack == null) {
+        if (itemStack.isEmpty()) {
             return false;
         }
 
@@ -52,7 +52,7 @@ public class HelperItems {
     }
 
     public static boolean isBottomPiece(ItemStack itemStack) {
-        if (itemStack == null) {
+        if (itemStack == null || itemStack.isEmpty()) {
             return false;
         }
 
@@ -64,7 +64,7 @@ public class HelperItems {
     }
 
     public static boolean sameTier(ItemStack itemStackA, ItemStack itemStackB) {
-        if (itemStackA == null || itemStackB == null) {
+        if (itemStackA.isEmpty() || itemStackB.isEmpty()) {
             return false;
         }
 
@@ -77,5 +77,15 @@ public class HelperItems {
         }
 
         return true;
+    }
+
+    public static ItemStack[] createInventory(int size) {
+        ItemStack[] inventory = new ItemStack[size];
+
+        for (int i = 0; i < inventory.length; i++) {
+            inventory[i] = ItemStack.EMPTY;
+        }
+
+        return inventory;
     }
 }

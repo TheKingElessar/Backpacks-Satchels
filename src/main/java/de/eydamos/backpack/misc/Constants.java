@@ -14,14 +14,6 @@ public class Constants {
 
     public static final String DOMAIN = "backpack";
 
-    public static final String RECIPE_RECOLOR = DOMAIN + ":recolor_backpack";
-    public static final String RECIPE_BACKPACK_PIECE_TOP = DOMAIN + ":backpack_piece_top";
-    public static final String RECIPE_BACKPACK_PIECE_MIDDLE = DOMAIN + ":backpack_piece_middle";
-    public static final String RECIPE_BACKPACK_PIECE_BOTTOM = DOMAIN + ":backpack_piece_bottom";
-    public static final String RECIPE_BACKPACK_SMALL = DOMAIN + ":backpack_small";
-    public static final String RECIPE_BACKPACK_MEDIUM = DOMAIN + ":backpack_medium";
-    public static final String RECIPE_BACKPACK_BIG = DOMAIN + ":backpack_big";
-
     public static final String CLASS_PROXY_CLIENT = "de.eydamos.backpack.proxy.ClientProxy";
     public static final String CLASS_PROXY_SERVER = "de.eydamos.backpack.proxy.ServerProxy";
     public static final String CLASS_GUI_FACTORY = "de.eydamos.backpack.factory.FactoryConfigurationGui";
@@ -31,7 +23,7 @@ public class Constants {
     public static final String INVENTORIES_PATH = DOMAIN + File.separator + "inventory" + File.separator;
     public static final String PLAYERS_PATH = DOMAIN + File.separator + "player" + File.separator;
 
-    public static final ResourceLocation guiCombined = new ResourceLocation(DOMAIN, "textures/gui/guiCombined.png");
+    public static final ResourceLocation guiCombined = new ResourceLocation(DOMAIN, "textures/gui/gui_combined.png");
     public static final ResourceLocation modelTexture = new ResourceLocation(DOMAIN, "textures/model/backpack.png");
 
     public static final CreativeTabs tabBackpacks = new TabBackpacks();

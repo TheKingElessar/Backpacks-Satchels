@@ -1,8 +1,7 @@
 package de.eydamos.backpack.recipe;
 
-import de.eydamos.backpack.helper.HelperItems;
-import de.eydamos.backpack.misc.BackpackItems;
-import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.helper.ItemStackHelper;
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import net.minecraft.inventory.InventoryCrafting;
@@ -10,7 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public class RecipeBackpackPieceBottom extends AbstractRecipe {
     public RecipeBackpackPieceBottom(ItemStack result) {
-        super(3, 2, result, Constants.RECIPE_BACKPACK_PIECE_BOTTOM);
+        super(3, 2, result);
     }
 
     @Override
@@ -24,27 +23,27 @@ public class RecipeBackpackPieceBottom extends AbstractRecipe {
             case 3:
             case 4:
             case 5:
-                if (!HelperItems.isLeather(itemStack)) {
+                if (!ItemStackHelper.isLeather(itemStack)) {
                     return false;
                 }
 
                 if (iteratorPosition != 0) {
                     int firstLeatherPosition = col + row * craftingGridInventory.getWidth() - iteratorPosition;
                     ItemStack firstLeather = craftingGridInventory.getStackInSlot(firstLeatherPosition);
-                    if (!HelperItems.isSameLeatherType(itemStack, firstLeather)) {
+                    if (!ItemStackHelper.isSameLeatherType(itemStack, firstLeather)) {
                         return false;
                     }
                 }
 
                 break;
             case 1:
-                if (itemStack == null || itemStack.getItem() != BackpackItems.backpack_frame) {
+                if (itemStack.getItem() != BackpackItems.backpack_frame) {
                     return false;
                 }
 
                 break;
             default:
-                if (itemStack != null) {
+                if (!itemStack.isEmpty()) {
                     return false;
                 }
         }

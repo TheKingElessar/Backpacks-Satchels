@@ -1,6 +1,5 @@
 package de.eydamos.backpack.jei.handler;
 
-import de.eydamos.backpack.item.ESize;
 import de.eydamos.backpack.jei.wrapper.RecipeRecolorBackpackWrapper;
 import de.eydamos.backpack.recipe.RecipeRecolorBackpack;
 import mezz.jei.api.recipe.IRecipeHandler;
@@ -18,14 +17,8 @@ public class RecipeRecolorBackpackHandler implements IRecipeHandler<RecipeRecolo
 
     @Nonnull
     @Override
-    public String getRecipeCategoryUid() {
-        return VanillaRecipeCategoryUid.CRAFTING;
-    }
-
-    @Nonnull
-    @Override
     public String getRecipeCategoryUid(@Nonnull RecipeRecolorBackpack recipe) {
-        return getRecipeCategoryUid();
+        return VanillaRecipeCategoryUid.CRAFTING;
     }
 
     @Nonnull

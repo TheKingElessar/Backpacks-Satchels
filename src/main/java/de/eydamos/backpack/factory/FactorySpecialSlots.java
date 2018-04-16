@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class FactorySpecialSlots implements IFactory {
     public static ContainerAdvanced getContainer(EntityPlayer player) {
         ContainerAdvanced container;
-        IInventory specialSlotInventory = PlayerSave.loadPlayer(player.worldObj, player);
+        IInventory specialSlotInventory = PlayerSave.loadPlayer(player.world, player);
         container = new ContainerSpecialSlots(specialSlotInventory, player);
 
         int maxWidth = 160;
@@ -80,7 +80,7 @@ public class FactorySpecialSlots implements IFactory {
         GuiSlot guiSlot;
         for (int i = 0; i < container.inventorySlots.size(); i++) {
             Slot slot = (Slot) container.inventorySlots.get(i);
-            guiSlot = new GuiSlot(slot.xDisplayPosition - 1, slot.yDisplayPosition - 1);
+            guiSlot = new GuiSlot(slot.xPos - 1, slot.yPos - 1);
             guiBackpack.addSubPart(guiSlot);
         }
 

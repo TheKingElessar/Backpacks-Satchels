@@ -48,7 +48,7 @@ public class ContainerAdvanced extends Container {
      */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotPos) {
-        ItemStack returnStack = null;
+        ItemStack returnStack = ItemStack.EMPTY;
         Slot slot = (Slot) inventorySlots.get(slotPos);
 
         if (slot != null && slot.getHasStack()) {
@@ -59,7 +59,7 @@ public class ContainerAdvanced extends Container {
                 if (!mergeItemStack(itemStack, boundaries.get(Boundaries.BACKPACK), boundaries.get(Boundaries.BACKPACK_END), false)) { // to backpack
                     if (!mergeItemStack(itemStack, boundaries.get(Boundaries.HOTBAR), boundaries.get(Boundaries.HOTBAR_END), true)) { // to hotbar
                         if (!mergeItemStack(itemStack, boundaries.get(Boundaries.INVENTORY), boundaries.get(Boundaries.INVENTORY_END), false)) { // to inventory
-                            return null;
+                            return ItemStack.EMPTY;
                         }
                     }
                 }
@@ -68,36 +68,36 @@ public class ContainerAdvanced extends Container {
             } else if (slotPos >= boundaries.get(Boundaries.BACKPACK) && slotPos < boundaries.get(Boundaries.BACKPACK_END)) { // from backpack
                 if (!mergeItemStack(itemStack, boundaries.get(Boundaries.HOTBAR), boundaries.get(Boundaries.HOTBAR_END), true)) { // to hotbar
                     if (!mergeItemStack(itemStack, boundaries.get(Boundaries.INVENTORY), boundaries.get(Boundaries.INVENTORY_END), false)) { // to inventory
-                        return null;
+                        return ItemStack.EMPTY;
                     }
                 }
             } else if (slotPos >= boundaries.get(Boundaries.INVENTORY) && slotPos < boundaries.get(Boundaries.INVENTORY_END)) { // from inventory
                 if (!mergeItemStack(itemStack, boundaries.get(Boundaries.BACKPACK), boundaries.get(Boundaries.BACKPACK_END), false)) { // to backpack
                     if (!mergeItemStack(itemStack, boundaries.get(Boundaries.HOTBAR), boundaries.get(Boundaries.HOTBAR_END), true)) { // to hotbar
-                        return null;
+                        return ItemStack.EMPTY;
                     }
                 }
             } else if (slotPos >= boundaries.get(Boundaries.HOTBAR) && slotPos < boundaries.get(Boundaries.HOTBAR_END)) { // from hotbar
                 if (!mergeItemStack(itemStack, boundaries.get(Boundaries.BACKPACK), boundaries.get(Boundaries.BACKPACK_END), false)) { // to backpack
                     if (!mergeItemStack(itemStack, boundaries.get(Boundaries.INVENTORY), boundaries.get(Boundaries.INVENTORY_END), false)) { // to inventory
-                        return null;
+                        return ItemStack.EMPTY;
                     }
                 }
             } else {
-                return null;
+                return ItemStack.EMPTY;
             }
 
-            if (itemStack.stackSize == 0) {
-                slot.putStack(null);
+            if (itemStack.getCount() == 0) {
+                slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
 
-            if (itemStack.stackSize == returnStack.stackSize) {
-                return null;
+            if (itemStack.getCount() == returnStack.getCount()) {
+                return ItemStack.EMPTY;
             }
 
-            slot.onPickupFromSlot(entityPlayer, itemStack);
+            slot.onTake(entityPlayer, itemStack);
         }
 
         return returnStack;
@@ -120,23 +120,23 @@ public class ContainerAdvanced extends Container {
         ItemStack slotStack;
 
         if (sourceStack.isStackable()) {
-            while (sourceStack.stackSize > 0 && (!backwards && currentSlotIndex < lastSlot || backwards && currentSlotIndex >= firstSlot)) {
+            while (sourceStack.getCount() > 0 && (!backwards && currentSlotIndex < lastSlot || backwards && currentSlotIndex >= firstSlot)) {
                 slot = (Slot) inventorySlots.get(currentSlotIndex);
                 if (/*!(slot instanceof SlotScrolling && ((SlotScrolling) slot).isDisabled()) && */slot.isItemValid(sourceStack)) {
                     slotStack = slot.getStack();
 
-                    if (slotStack != null && slotStack.getItem() == sourceStack.getItem() && (!sourceStack.getHasSubtypes() || sourceStack.getItemDamage() == slotStack.getItemDamage())
+                    if (!slotStack.isEmpty() && slotStack.getItem() == sourceStack.getItem() && (!sourceStack.getHasSubtypes() || sourceStack.getItemDamage() == slotStack.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(sourceStack, slotStack)) {
-                        int l = slotStack.stackSize + sourceStack.stackSize;
+                        int l = slotStack.getCount() + sourceStack.getCount();
 
                         if (l <= sourceStack.getMaxStackSize()) {
-                            sourceStack.stackSize = 0;
-                            slotStack.stackSize = l;
+                            sourceStack.setCount(0);
+                            slotStack.setCount(l);
                             slot.onSlotChanged();
                             result = true;
-                        } else if (slotStack.stackSize < sourceStack.getMaxStackSize()) {
-                            sourceStack.stackSize -= sourceStack.getMaxStackSize() - slotStack.stackSize;
-                            slotStack.stackSize = sourceStack.getMaxStackSize();
+                        } else if (slotStack.getCount() < sourceStack.getMaxStackSize()) {
+                            sourceStack.shrink(sourceStack.getMaxStackSize() - slotStack.getCount());
+                            slotStack.setCount(sourceStack.getMaxStackSize());
                             slot.onSlotChanged();
                             result = true;
                         }
@@ -151,7 +151,7 @@ public class ContainerAdvanced extends Container {
             }
         }
 
-        if (sourceStack.stackSize > 0) {
+        if (sourceStack.getCount() > 0) {
             if (backwards) {
                 currentSlotIndex = lastSlot - 1;
             } else {
@@ -163,10 +163,10 @@ public class ContainerAdvanced extends Container {
                 if (/*!(slot instanceof SlotScrolling && ((SlotScrolling) slot).isDisabled()) && */slot.isItemValid(sourceStack)) {
                     slotStack = slot.getStack();
 
-                    if (slotStack == null) {
+                    if (slotStack.isEmpty()) {
                         slot.putStack(sourceStack.copy());
                         slot.onSlotChanged();
-                        sourceStack.stackSize = 0;
+                        sourceStack.setCount(0);
                         result = true;
                         break;
                     }
@@ -188,7 +188,7 @@ public class ContainerAdvanced extends Container {
         Slot slot = slotIndex < 0 || slotIndex >= inventorySlots.size() ? null : inventorySlots.get(slotIndex);
         if (slot instanceof SlotPhantom) {
             slotPhantomClick(slot, dragType, clickType, player.inventory.getItemStack());
-            return null;
+            return ItemStack.EMPTY;
         }
         return super.slotClick(slotIndex, dragType, clickType, player);
     }

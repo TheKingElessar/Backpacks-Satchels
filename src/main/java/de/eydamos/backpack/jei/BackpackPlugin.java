@@ -1,10 +1,7 @@
 package de.eydamos.backpack.jei;
 
 import de.eydamos.backpack.jei.handler.*;
-import de.eydamos.backpack.misc.BackpackItems;
-import de.eydamos.backpack.misc.Constants;
 import mezz.jei.api.BlankModPlugin;
-import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 
@@ -23,10 +20,5 @@ public class BackpackPlugin extends BlankModPlugin {
             new RecipeBackpackPieceBottomHandler(),
             new RecipeRecolorBackpackHandler()
         );
-
-        IJeiHelpers jeiHelper = registry.getJeiHelpers();
-
-        jeiHelper.getNbtIgnoreList().ignoreNbtTagNames(BackpackItems.backpack_piece, Constants.NBT.FRAME_TIER);
-        jeiHelper.getNbtIgnoreList().ignoreNbtTagNames(BackpackItems.backpack_piece, Constants.NBT.LEATHER_TIER);
     }
 }

@@ -1,12 +1,16 @@
 package de.eydamos.backpack.recipe;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
-public abstract class AbstractRecipe implements IRecipe {
+import javax.annotation.ParametersAreNonnullByDefault;
+
+public abstract class AbstractRecipe extends Impl<IRecipe> implements IRecipe {
     /**
      * How many horizontal slots this recipe is wide.
      */
@@ -32,23 +36,18 @@ public abstract class AbstractRecipe implements IRecipe {
      */
     private final ItemStack recipeOutput;
     /**
-     * The identifier to be used when registering recipe in recipe sorter.
-     */
-    private final String recipeSorterIdentifier;
-    /**
      * The type of the recipe (Shaped / Shapeless)
      */
     private final ECategory type;
 
-    public AbstractRecipe(int width, int height, ItemStack output, String identifier) {
-        this(width, height, output, identifier, ECategory.SHAPED);
+    public AbstractRecipe(int width, int height, ItemStack output) {
+        this(width, height, output, ECategory.SHAPED);
     }
 
-    public AbstractRecipe(int width, int height, ItemStack output, String identifier, ECategory type) {
+    public AbstractRecipe(int width, int height, ItemStack output, ECategory type) {
         this.recipeWidth = width;
         this.recipeHeight = height;
         this.recipeOutput = output;
-        this.recipeSorterIdentifier = identifier;
         this.type = type;
 
         if (type == ECategory.CUSTOM || type == ECategory.FURNACE) {
@@ -56,16 +55,25 @@ public abstract class AbstractRecipe implements IRecipe {
         }
     }
 
+    @Override
+    public boolean canFit(int width, int height) {
+        return width >= this.recipeWidth && height >= this.recipeHeight;
+    }
+
+    @Override
+    @MethodsReturnNonnullByDefault
     public ItemStack getRecipeOutput() {
         return this.recipeOutput;
     }
 
-    public ItemStack[] getRemainingItems(InventoryCrafting craftingGridInventory) {
-        ItemStack[] remainingItems = new ItemStack[craftingGridInventory.getSizeInventory()];
+    @Override
+    @MethodsReturnNonnullByDefault
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting craftingGridInventory) {
+        NonNullList<ItemStack> remainingItems = NonNullList.create();
 
-        for (int i = 0; i < remainingItems.length; ++i) {
+        for (int i = 0; i < craftingGridInventory.getSizeInventory(); ++i) {
             ItemStack itemstack = craftingGridInventory.getStackInSlot(i);
-            remainingItems[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
+            remainingItems.add(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
         }
 
         return remainingItems;
@@ -74,6 +82,7 @@ public abstract class AbstractRecipe implements IRecipe {
     /**
      * Used to check if a recipe matches current crafting inventory
      */
+    @ParametersAreNonnullByDefault
     public boolean matches(InventoryCrafting craftingGridInventory, World world) {
         if (type == ECategory.SHAPED || type == ECategory.SHAPED_OREDICT) {
             for (colOffset = 0; colOffset <= craftingGridInventory.getWidth() - recipeWidth; ++colOffset) {
@@ -117,7 +126,7 @@ public abstract class AbstractRecipe implements IRecipe {
                 ItemStack itemStack = craftingGridInventory.getStackInRowAndColumn(col, row);
 
                 if (expectedCol < 0 || expectedCol >= recipeWidth || expectedRow < 0 || expectedRow >= recipeHeight) {
-                    if (itemStack == null) {
+                    if (itemStack.isEmpty()) {
                         continue;
                     }
 
@@ -156,17 +165,5 @@ public abstract class AbstractRecipe implements IRecipe {
 
     protected boolean allRecipeItemsFulfilled() {
         return true;
-    }
-
-    public void registerAtRecipeSorter() {
-        switch (type) {
-            case SHAPELESS:
-            case SHAPELESS_OREDICT:
-                RecipeSorter.register(recipeSorterIdentifier, this.getClass(), RecipeSorter.Category.SHAPELESS, "");
-            case SHAPED:
-            case SHAPED_OREDICT:
-            default:
-                RecipeSorter.register(recipeSorterIdentifier, this.getClass(), RecipeSorter.Category.SHAPED, "");
-        }
     }
 }

@@ -30,7 +30,7 @@ public class MessageOpenGui implements IMessage, IMessageHandler<MessageOpenGui,
 
     @Override
     public IMessage onMessage(MessageOpenGui message, MessageContext ctx) {
-        EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+        EntityPlayerMP player = ctx.getServerHandler().player;
         switch (message.guiToOpen) {
             case Constants.Guis.SPECIAL_SLOTS:
                 GuiHelper.displaySpecialSlots(player);

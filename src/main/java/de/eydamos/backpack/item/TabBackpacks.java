@@ -1,18 +1,22 @@
 package de.eydamos.backpack.item;
 
-import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Localizations;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class TabBackpacks extends CreativeTabs {
-
     public TabBackpacks() {
         super(CreativeTabs.CREATIVE_TAB_ARRAY.length, Localizations.TAB_BACKPACKS);
+        setBackgroundImageName("item_search.png");
     }
 
     @Override
-    public Item getTabIconItem() {
-        return BackpackItems.backpack;
+    public ItemStack getTabIconItem() {
+        return EBackpack.SMALL.getItemStack();
+    }
+
+    @Override
+    public boolean hasSearchBar() {
+        return true;
     }
 }

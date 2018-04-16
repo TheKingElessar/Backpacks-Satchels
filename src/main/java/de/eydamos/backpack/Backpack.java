@@ -23,10 +23,7 @@ public class Backpack {
     public void preInit(FMLPreInitializationEvent event) {
         // get the configuration and let forge guess the filename
         //ConfigurationBackpack.init(event.getSuggestedConfigurationFile());
-
-        // register items and blocks
-        proxy.registerItems();
-
+        
         // key bindings
         proxy.registerKeybindings();
 
@@ -35,11 +32,6 @@ public class Backpack {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        proxy.registerIcons();
-
-        // registerItems recipes
-        proxy.registerRecipes();
-
         // registerItems all Handlers
         proxy.registerHandlers();
     }

@@ -1,5 +1,6 @@
 package de.eydamos.backpack.misc;
 
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.item.EFrame;
 import de.eydamos.backpack.item.EPiece;
 import de.eydamos.backpack.item.EStick;
@@ -9,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public enum EItem {
+public enum EItemStack {
     BOUND_LEATHER(BackpackItems.bound_leather, 0),
     TANNED_LEATHER(BackpackItems.tanned_leather, 0),
     STICK_STONE(BackpackItems.stick, EStick.STONE.getDamage()),
@@ -25,7 +26,7 @@ public enum EItem {
     protected int damage;
     protected NBTTagCompound nbtTagCompound;
 
-    EItem(Item item, int damage, Object... nbtData) {
+    EItemStack(Item item, int damage, Object... nbtData) {
         this.item = item;
         this.damage = damage;
         this.nbtTagCompound = new NBTTagCompound();
@@ -49,7 +50,7 @@ public enum EItem {
     }
 
     public static ItemStack getItemStack(Item item, int amount, int damage) {
-        for (EItem eItem : values()) {
+        for (EItemStack eItem : values()) {
             if (eItem.item.equals(item) && eItem.damage == damage) {
                 return eItem.getItemStack(amount);
             }

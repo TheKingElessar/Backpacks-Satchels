@@ -1,17 +1,17 @@
 package de.eydamos.backpack.jei.wrapper;
 
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.item.EPiece;
-import de.eydamos.backpack.misc.BackpackItems;
-import de.eydamos.backpack.misc.EItem;
+import de.eydamos.backpack.misc.EItemStack;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import mezz.jei.api.recipe.wrapper.IShapedCraftingRecipeWrapper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RecipeBackpackPieceMiddleWrapper extends BlankRecipeWrapper implements IShapedCraftingRecipeWrapper {
@@ -25,35 +25,33 @@ public class RecipeBackpackPieceMiddleWrapper extends BlankRecipeWrapper impleme
         return 3;
     }
 
-    @Nonnull
     @Override
-    public List getInputs() {
-        ArrayList<Object> inputs = new ArrayList<>();
+    @ParametersAreNonnullByDefault
+    public void getIngredients(IIngredients ingredients) {
+        List<List<ItemStack>> recipeList = new ArrayList<>();
 
         ArrayList<ItemStack> leather = new ArrayList<>();
         leather.add(new ItemStack(Items.RABBIT_HIDE, 1, 0));
         leather.add(new ItemStack(Items.LEATHER, 1, 0));
-        leather.add(EItem.getItemStack(BackpackItems.tanned_leather, 1, 0));
+        leather.add(EItemStack.getItemStack(BackpackItems.tanned_leather, 1, 0));
+
+        ArrayList<ItemStack> backpack = new ArrayList<>();
+        backpack.add(EItemStack.getItemStack(BackpackItems.backpack_frame, 1, OreDictionary.WILDCARD_VALUE));
 
         // top row
-        inputs.add(null);
-        inputs.add(leather);
-        inputs.add(null);
+        recipeList.add(null);
+        recipeList.add(leather);
+        recipeList.add(null);
         // middle row
-        inputs.add(leather);
-        inputs.add(EItem.getItemStack(BackpackItems.backpack_frame, 1, OreDictionary.WILDCARD_VALUE));
-        inputs.add(leather);
+        recipeList.add(leather);
+        recipeList.add(backpack);
+        recipeList.add(leather);
         // bottom row
-        inputs.add(null);
-        inputs.add(leather);
-        inputs.add(null);
+        recipeList.add(null);
+        recipeList.add(leather);
+        recipeList.add(null);
 
-        return inputs;
-    }
-
-    @Nonnull
-    @Override
-    public List<ItemStack> getOutputs() {
-        return Collections.singletonList(EItem.getItemStack(BackpackItems.backpack_piece, 1, EPiece.MIDDLE.getDamage()));
+        ingredients.setInputLists(ItemStack.class, recipeList);
+        ingredients.setOutput(ItemStack.class, EItemStack.getItemStack(BackpackItems.backpack_piece, 1, EPiece.MIDDLE.getDamage()));
     }
 }

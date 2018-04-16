@@ -1,10 +1,9 @@
 package de.eydamos.guiadvanced.form;
 
+import de.eydamos.guiadvanced.misc.AbstractGuiPart;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
-import de.eydamos.guiadvanced.misc.AbstractGuiPart;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class Textbox extends GuiTextField implements AbstractGuiPart {
     protected int relativePositionX;
@@ -38,8 +37,8 @@ public class Textbox extends GuiTextField implements AbstractGuiPart {
 
     @Override
     public void setAbsolutePosition(int guiLeft, int guiTop) {
-        xPosition = guiLeft + relativePositionX;
-        yPosition = guiTop + relativePositionY;
+        x = guiLeft + relativePositionX;
+        y = guiTop + relativePositionY;
     }
 
 }

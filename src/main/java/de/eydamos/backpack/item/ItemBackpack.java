@@ -3,13 +3,16 @@ package de.eydamos.backpack.item;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.helper.GuiHelper;
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
 import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTItemStackUtil;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -17,11 +20,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
@@ -30,20 +35,25 @@ public class ItemBackpack extends Item {
         setMaxStackSize(1);
         setHasSubtypes(true);
         setCreativeTab(Constants.tabBackpacks);
-        setRegistryName(Constants.DOMAIN);
-        setUnlocalizedName(Constants.DOMAIN);
+        setRegistryName("backpack");
+        setUnlocalizedName("backpack");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     @ParametersAreNonnullByDefault
-    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
+
         for (EBackpack backpack : EBackpack.values()) {
-            subItems.add(new ItemStack(item, 1, backpack.getDamage()));
+            subItems.add(new ItemStack(BackpackItems.backpack, 1, backpack.getDamage()));
         }
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public String getUnlocalizedName(ItemStack itemStack) {
         String name = super.getUnlocalizedName(itemStack);
 
@@ -53,7 +63,8 @@ public class ItemBackpack extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
         TierFrame.addTooltip(itemStack, tooltip);
         TierLeather.addTooltip(itemStack, tooltip);
 
@@ -72,7 +83,10 @@ public class ItemBackpack extends Item {
 
     @Override
     @ParametersAreNonnullByDefault
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
+    @MethodsReturnNonnullByDefault
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack itemStack = player.getHeldItem(hand);
+
         if (!NBTItemStackUtil.hasTag(itemStack, Constants.NBT.UID)) {
             // other idea send package to server to open gui. Server checks if op and opens gui or sends back chat message
 

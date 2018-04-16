@@ -19,7 +19,7 @@ public class FactoryBackpack implements IFactory {
     public static ContainerAdvanced getContainer(EntityPlayer player, boolean heldItem) {
         ItemStack backpack = BackpackHelper.getBackpackFromPlayer(player, heldItem);
 
-        if (backpack == null) {
+        if (backpack.isEmpty()) {
             return null;
         }
 
@@ -96,7 +96,7 @@ public class FactoryBackpack implements IFactory {
     public static GuiContainer getGuiContainer(EntityPlayer player, boolean heldItem) {
         ItemStack backpack = BackpackHelper.getBackpackFromPlayer(player, heldItem);
 
-        if (backpack == null) {
+        if (backpack.isEmpty()) {
             return null;
         }
 
@@ -110,7 +110,7 @@ public class FactoryBackpack implements IFactory {
         GuiSlot guiSlot;
         for (int i = 0; i < container.inventorySlots.size(); i++) {
             Slot slot = (Slot) container.inventorySlots.get(i);
-            guiSlot = new GuiSlot(slot.xDisplayPosition - 1, slot.yDisplayPosition - 1);
+            guiSlot = new GuiSlot(slot.xPos - 1, slot.yPos - 1);
             guiBackpack.addSubPart(guiSlot);
         }
 

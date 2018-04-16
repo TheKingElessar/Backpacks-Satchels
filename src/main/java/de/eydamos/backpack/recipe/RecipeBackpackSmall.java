@@ -1,15 +1,14 @@
 package de.eydamos.backpack.recipe;
 
 import de.eydamos.backpack.helper.BackpackHelper;
-import de.eydamos.backpack.helper.HelperItems;
-import de.eydamos.backpack.misc.BackpackItems;
-import de.eydamos.backpack.misc.Constants;
+import de.eydamos.backpack.helper.ItemStackHelper;
+import de.eydamos.backpack.init.BackpackItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
 public class RecipeBackpackSmall extends AbstractRecipe {
     public RecipeBackpackSmall(ItemStack result) {
-        super(3, 3, result, Constants.RECIPE_BACKPACK_SMALL);
+        super(3, 3, result);
     }
 
     @Override
@@ -19,20 +18,20 @@ public class RecipeBackpackSmall extends AbstractRecipe {
         int iteratorPosition = expectedCol + expectedRow * recipeWidth;
         switch (iteratorPosition) {
             case 4:
-                if (itemStack == null || itemStack.getItem() != BackpackItems.backpack_frame) {
+                if (itemStack.getItem() != BackpackItems.backpack_frame) {
                     return false;
                 }
 
                 break;
             default:
-                if (!HelperItems.isLeather(itemStack)) {
+                if (!ItemStackHelper.isLeather(itemStack)) {
                     return false;
                 }
 
                 if (iteratorPosition != 0) {
                     int firstLeatherPosition = col + row * craftingGridInventory.getWidth() - iteratorPosition;
                     ItemStack firstLeather = craftingGridInventory.getStackInSlot(firstLeatherPosition);
-                    if (!HelperItems.isSameLeatherType(itemStack, firstLeather)) {
+                    if (!ItemStackHelper.isSameLeatherType(itemStack, firstLeather)) {
                         return false;
                     }
                 }

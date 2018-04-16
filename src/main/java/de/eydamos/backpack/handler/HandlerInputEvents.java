@@ -21,7 +21,7 @@ public class HandlerInputEvents {
         if (personalBackpack.isPressed()) {
             EntityPlayerSP player;
             Minecraft mc = FMLClientHandler.instance().getClient();
-            if (mc.inGameHasFocus && (player = mc.thePlayer) != null) {
+            if (mc.inGameHasFocus && (player = mc.player) != null) {
                 if (player.isSneaking()) {
                     Backpack.packetHandler.sendOpenGui(Constants.Guis.SPECIAL_SLOTS);
                 } else {

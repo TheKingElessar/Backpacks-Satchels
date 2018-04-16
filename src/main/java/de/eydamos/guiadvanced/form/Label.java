@@ -1,9 +1,9 @@
 package de.eydamos.guiadvanced.form;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import de.eydamos.guiadvanced.misc.AbstractGuiPart;
 import de.eydamos.guiadvanced.util.Alignment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 
 public class Label implements AbstractGuiPart {
     protected int xPosition;
@@ -66,15 +66,15 @@ public class Label implements AbstractGuiPart {
         int offset = 0;
         switch(textAlignment) {
             case RIGHT:
-                offset -= mc.fontRendererObj.getStringWidth(label);
+                offset -= mc.fontRenderer.getStringWidth(label);
                 break;
             case CENTER:
-                offset -= mc.fontRendererObj.getStringWidth(label) / 2;
+                offset -= mc.fontRenderer.getStringWidth(label) / 2;
                 break;
             case LEFT:
             default:
         }
-        mc.fontRendererObj.drawString(label, xPosition + offset, yPosition, color);
+        mc.fontRenderer.drawString(label, xPosition + offset, yPosition, color);
     }
 
     @Override

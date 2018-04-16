@@ -24,7 +24,7 @@ public class GuiBackpackRename extends Window {
         setWidth(240);
         setHeight(100);
 
-        fontRendererObj = FMLClientHandler.instance().getClient().fontRendererObj;
+        fontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
 
         // create button for ok and disable it at the beginning
         btn_ok = new Button(0, xSize - 100, 70, 60, 20, I18n.format(Localizations.BUTTON_OK));
@@ -38,14 +38,14 @@ public class GuiBackpackRename extends Window {
         addSubPart(btn_cancel);
 
         // create "Rename your Backpack" label at the top in the middle
-        int posX = xSize / 2 - fontRendererObj.getStringWidth(TITLE) / 2;
+        int posX = xSize / 2 - fontRenderer.getStringWidth(TITLE) / 2;
         addSubPart(new Label(posX, 10, 0x000000, TITLE));
 
         // create "New name:" label at the left site above the GuiTextField
         addSubPart(new Label(20, 30, 0x404040, NEW_NAME));
 
         // create text field
-        txt_backpackName = new Textbox(fontRendererObj, 20, 40, 200, 20);
+        txt_backpackName = new Textbox(fontRenderer, 20, 40, 200, 20);
         txt_backpackName.setFocused(true);
         txt_backpackName.setMaxStringLength(32);
         addSubPart(txt_backpackName);
@@ -54,6 +54,13 @@ public class GuiBackpackRename extends Window {
     @Override
     public void initGui() {
         super.initGui();
+
+        Keyboard.enableRepeatEvents(true);
+    }
+
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
 
         Keyboard.enableRepeatEvents(false);
     }
@@ -97,14 +104,14 @@ public class GuiBackpackRename extends Window {
         // add char to GuiTextField
         txt_backpackName.textboxKeyTyped(c, i);
         // enable ok button when GuiTextField content is greater than 0 chars
-        ((GuiButton) buttonList.get(0)).enabled = txt_backpackName.getText().trim().length() > 0;
+        buttonList.get(0).enabled = txt_backpackName.getText().trim().length() > 0;
         // perform click event on ok button when Enter is pressed
         if (c == '\n' || c == '\r') {
-            actionPerformed((GuiButton) buttonList.get(0));
+            actionPerformed(buttonList.get(0));
         }
         // perform click event on cancel button when Esc is pressed
-        if (Integer.valueOf(c) == 27) {
-            actionPerformed((GuiButton) buttonList.get(1));
+        if ((int) c == 27) {
+            actionPerformed(buttonList.get(1));
         }
     }
 
@@ -116,16 +123,5 @@ public class GuiBackpackRename extends Window {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         // move cursor to clicked position in GuiTextField
         txt_backpackName.mouseClicked(mouseX, mouseY, mouseButton);
-    }
-
-    /**
-     * Draws the screen and all the components in it.
-     */
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float something) {
-        // draw transparent background
-        drawDefaultBackground();
-
-        super.drawScreen(mouseX, mouseY, something);
     }
 }

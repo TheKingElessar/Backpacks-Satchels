@@ -1,8 +1,8 @@
 package de.eydamos.backpack.tier;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.item.EFrame;
-import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.backpack.util.NBTItemStackUtil;

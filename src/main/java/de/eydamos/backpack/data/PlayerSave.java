@@ -1,10 +1,12 @@
 package de.eydamos.backpack.data;
 
 import de.eydamos.backpack.Backpack;
+import de.eydamos.backpack.helper.ItemStackHelper;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.misc.Localizations;
 import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTUtil;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,8 +14,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
+import net.minecraft.world.storage.WorldSavedData;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class PlayerSave extends WorldSavedData implements IInventory {
     private EntityPlayer player;
@@ -28,18 +32,20 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void readFromNBT(NBTTagCompound nbt) {
-        inventory = new ItemStack[2];
+        inventory = ItemStackHelper.createInventory(1);
 
         if (NBTUtil.hasTag(nbt, Constants.NBT.BACKPACK)) {
             NBTTagCompound backpack = NBTUtil.getCompoundTag(nbt, Constants.NBT.BACKPACK);
-            inventory[0] = ItemStack.loadItemStackFromNBT(backpack);
+            inventory[0] = new ItemStack(backpack);
         }
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        if (inventory != null && inventory[0] != null) {
+        if (inventory != null && !inventory[0].isEmpty()) {
             NBTTagCompound backpack = new NBTTagCompound();
             inventory[0].writeToNBT(backpack);
 
@@ -53,7 +59,7 @@ public class PlayerSave extends WorldSavedData implements IInventory {
         this.player = player;
 
         if (inventory == null) {
-            inventory = new ItemStack[2];
+            inventory = ItemStackHelper.createInventory(1);
         }
     }
 
@@ -62,7 +68,7 @@ public class PlayerSave extends WorldSavedData implements IInventory {
             return inventory[0];
         }
 
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public static PlayerSave loadPlayer(World world, EntityPlayer player) {
@@ -87,26 +93,38 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.inventory) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public ItemStack getStackInSlot(int index) {
         if (inventory != null && index >= 0 && index < inventory.length) {
             return inventory[index];
         }
 
-        return null;
+        return ItemStack.EMPTY;
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public ItemStack decrStackSize(int index, int amount) {
         ItemStack itemstack = getStackInSlot(index);
 
-        if (itemstack != null) {
-            if (itemstack.stackSize <= amount) {
-                setInventorySlotContents(index, null);
+        if (!itemstack.isEmpty()) {
+            if (itemstack.getCount() <= amount) {
+                setInventorySlotContents(index, ItemStack.EMPTY);
             } else {
                 itemstack = itemstack.splitStack(amount);
 
-                if (getStackInSlot(index).stackSize == 0) {
-                    setInventorySlotContents(index, null);
+                if (getStackInSlot(index).getCount() == 0) {
+                    setInventorySlotContents(index, ItemStack.EMPTY);
                 } else {
                     markDirty();
                 }
@@ -117,29 +135,31 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public ItemStack removeStackFromSlot(int index) {
-        ItemStack itemstack = null;
+        ItemStack itemstack = ItemStack.EMPTY;
 
-        if (getStackInSlot(index) != null) {
+        if (!getStackInSlot(index).isEmpty()) {
             itemstack = getStackInSlot(index);
-            setInventorySlotContents(index, null);
+            setInventorySlotContents(index, ItemStack.EMPTY);
         }
 
         return itemstack;
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void setInventorySlotContents(int index, ItemStack newContent) {
         if (inventory != null && index >= 0 && index < inventory.length) {
             inventory[index] = newContent;
 
-            if (newContent != null && newContent.stackSize > getInventoryStackLimit()) {
-                newContent.stackSize = getInventoryStackLimit();
+            if (!newContent.isEmpty() && newContent.getCount() > getInventoryStackLimit()) {
+                newContent.setCount(getInventoryStackLimit());
             }
 
             markDirty();
 
-            if (index == 0 && GeneralUtil.isServerSide(player.worldObj)) {
+            if (index == 0 && GeneralUtil.isServerSide(player.world)) {
                 Backpack.packetHandler.propagateCarriedBackpack(player);
             }
         }
@@ -147,23 +167,27 @@ public class PlayerSave extends WorldSavedData implements IInventory {
 
     @Override
     public int getInventoryStackLimit() {
-        return 64;
+        return 1;
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
+    @ParametersAreNonnullByDefault
+    public boolean isUsableByPlayer(EntityPlayer player) {
         return true;
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void openInventory(EntityPlayer player) {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void closeInventory(EntityPlayer player) {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return true;
     }
@@ -187,12 +211,13 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     public void clear() {
         if (inventory != null) {
             for (int i = 0; i < inventory.length; ++i) {
-                inventory[i] = null;
+                inventory[i] = ItemStack.EMPTY;
             }
         }
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public String getName() {
         return Localizations.INVENTORY_SPECIAL_SLOTS;
     }
@@ -203,6 +228,7 @@ public class PlayerSave extends WorldSavedData implements IInventory {
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public ITextComponent getDisplayName() {
         return new TextComponentTranslation(getName());
     }

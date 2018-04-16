@@ -3,8 +3,8 @@ package de.eydamos.backpack.helper;
 import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.data.BackpackSave;
 import de.eydamos.backpack.data.PlayerSave;
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.item.ESize;
-import de.eydamos.backpack.misc.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.tier.TierFrame;
 import de.eydamos.backpack.tier.TierLeather;
@@ -95,14 +95,14 @@ public class BackpackHelper {
         ItemStack itemStack = getBackpackFromPlayer(player, heldItem);
 
         if (isBackpack(itemStack)) {
-            return BackpackSave.loadBackpack(player.worldObj, itemStack, player, heldItem);
+            return BackpackSave.loadBackpack(player.world, itemStack, player, heldItem);
         }
 
         return null;
     }
 
     public static boolean isBackpack(ItemStack itemStack) {
-        return itemStack != null && itemStack.getItem() == BackpackItems.backpack;
+        return itemStack.getItem() == BackpackItems.backpack;
     }
 
     public static ItemStack getBackpackFromPlayer(EntityPlayer player, boolean heldItem) {
@@ -110,8 +110,8 @@ public class BackpackHelper {
         if (heldItem) {
             backpack = player.getHeldItemMainhand();
         } else {
-            if (GeneralUtil.isServerSide(player.worldObj)) {
-                PlayerSave playerSave = PlayerSave.loadPlayer(player.worldObj, player);
+            if (GeneralUtil.isServerSide(player.world)) {
+                PlayerSave playerSave = PlayerSave.loadPlayer(player.world, player);
                 backpack = playerSave.getBackpack();
             } else {
                 backpack = Backpack.proxy.getClientBackpack(player);
@@ -122,7 +122,7 @@ public class BackpackHelper {
             return backpack;
         }
 
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public static void setSlotsUsed(ItemStack backpack, int slotsUsed) {

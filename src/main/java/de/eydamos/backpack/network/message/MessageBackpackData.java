@@ -2,7 +2,7 @@ package de.eydamos.backpack.network.message;
 
 import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.helper.BackpackHelper;
-import de.eydamos.backpack.misc.BackpackItems;
+import de.eydamos.backpack.init.BackpackItems;
 import de.eydamos.backpack.misc.Constants;
 import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.backpack.util.NBTItemStackUtil;

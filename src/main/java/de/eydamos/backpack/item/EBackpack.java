@@ -1,6 +1,6 @@
 package de.eydamos.backpack.item;
 
-import net.minecraft.item.Item;
+import de.eydamos.backpack.init.BackpackItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -60,7 +60,6 @@ public enum EBackpack {
     BIG_WHITE(ESize.BIG, EColor.WHITE);
 
     private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
-    private static Item item;
 
     protected ESize size;
     protected EColor color;
@@ -80,10 +79,6 @@ public enum EBackpack {
         damage = size.getDamage() + color.getDamage();
     }
 
-    public static void setItem(Item item) {
-        EBackpack.item = item;
-    }
-
     public String getIdentifier() {
         return identifier;
     }
@@ -93,7 +88,7 @@ public enum EBackpack {
     }
 
     public ItemStack getItemStack() {
-        ItemStack itemStack = new ItemStack(item, 1, damage);
+        ItemStack itemStack = new ItemStack(BackpackItems.backpack, 1, damage);
 
         itemStack.setTagCompound(this.nbtTagCompound);
 

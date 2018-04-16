@@ -35,7 +35,7 @@ public class PacketHandlerBackpack {
         // send new name to server
         networkWrapper.sendToServer(message);
         // save the name on client
-        ((MessageRenameBackpack) message).setName(Minecraft.getMinecraft().thePlayer, name);
+        ((MessageRenameBackpack) message).setName(Minecraft.getMinecraft().player, name);
     }
 
     @SideOnly(Side.CLIENT)

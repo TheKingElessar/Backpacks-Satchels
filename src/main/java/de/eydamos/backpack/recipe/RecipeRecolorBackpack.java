@@ -4,7 +4,6 @@ import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.item.EBackpack;
 import de.eydamos.backpack.item.EColor;
 import de.eydamos.backpack.item.ESize;
-import de.eydamos.backpack.misc.Constants;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
@@ -17,14 +16,14 @@ public class RecipeRecolorBackpack extends AbstractRecipe {
     private boolean backpackFound = false;
 
     public RecipeRecolorBackpack() {
-        super(2, 1, EBackpack.SMALL.getItemStack(), Constants.RECIPE_RECOLOR, ECategory.SHAPELESS);
+        super(2, 1, EBackpack.SMALL.getItemStack(), ECategory.SHAPELESS);
     }
 
     @Override
     protected boolean checkItemAtPosition(InventoryCrafting craftingGridInventory, int col, int row, int expectedCol, int expectedRow) {
         ItemStack itemStack = craftingGridInventory.getStackInRowAndColumn(col, row);
 
-        if (itemStack == null) {
+        if (itemStack.isEmpty()) {
             return true;
         }
 

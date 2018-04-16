@@ -35,7 +35,7 @@ public class MessageRenameBackpack implements IMessage, IMessageHandler<MessageR
     @Override
     public IMessage onMessage(MessageRenameBackpack message, MessageContext ctx) {
         if (ctx.side == Side.SERVER) {
-            EntityPlayerMP entityPlayer = ctx.getServerHandler().playerEntity;
+            EntityPlayerMP entityPlayer = ctx.getServerHandler().player;
             setName(entityPlayer, message.name);
         }
 
@@ -43,7 +43,7 @@ public class MessageRenameBackpack implements IMessage, IMessageHandler<MessageR
     }
 
     public void setName(EntityPlayer entityPlayer, String name) {
-        if (entityPlayer.getHeldItemMainhand() != null) {
+        if (!entityPlayer.getHeldItemMainhand().isEmpty()) {
             ItemStack itemStack = entityPlayer.getHeldItemMainhand();
 
             if (BackpackHelper.isBackpack(itemStack)) {

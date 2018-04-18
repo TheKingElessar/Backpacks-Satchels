@@ -18,7 +18,9 @@ public enum TierLeather {
     III(BackpackItems.tanned_leather, 18, 9);
 
     private final Item item;
+
     private final int baseSlots;
+
     private final int upgradeSlots;
 
     TierLeather(Item item, int baseSlots, int upgradeSlots) {

@@ -67,7 +67,12 @@ public class ItemBackpack extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+    public void addInformation(
+        ItemStack itemStack,
+        @Nullable World world,
+        List<String> tooltip,
+        ITooltipFlag advanced
+    ) {
         TierFrame.addTooltip(itemStack, tooltip);
         TierLeather.addTooltip(itemStack, tooltip);
 
@@ -110,7 +115,7 @@ public class ItemBackpack extends Item {
         }
 
         // when the player is not sneaking
-        if (!player.isSneaking() && !Configurations.OPEN_ONLY_PERSONAL_BACKPACK) {
+        if (!player.isSneaking() && !Configurations.OPEN_ONLY_EQUIPPED_BACKPACK) {
             GuiHelper.displayBackpack(player);
         }
 

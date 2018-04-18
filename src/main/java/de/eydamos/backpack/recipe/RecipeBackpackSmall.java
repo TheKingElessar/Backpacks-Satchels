@@ -12,7 +12,13 @@ public class RecipeBackpackSmall extends AbstractRecipe {
     }
 
     @Override
-    protected boolean checkItemAtPosition(InventoryCrafting craftingGridInventory, int col, int row, int expectedCol, int expectedRow) {
+    protected boolean checkItemAtPosition(
+        InventoryCrafting craftingGridInventory,
+        int col,
+        int row,
+        int expectedCol,
+        int expectedRow
+    ) {
         // col and row are swapped in the method
         ItemStack itemStack = craftingGridInventory.getStackInRowAndColumn(col, row);
         int iteratorPosition = expectedCol + expectedRow * recipeWidth;

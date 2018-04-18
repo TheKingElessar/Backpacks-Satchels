@@ -38,7 +38,12 @@ public class Backpack {
         // key bindings
         proxy.registerKeybindings();
 
-        FMLInterModComms.sendRuntimeMessage(Constants.MOD_ID, "VersionChecker", "addVersionCheck", Constants.UPDATE_FILE);
+        FMLInterModComms.sendRuntimeMessage(
+            Constants.MOD_ID,
+            "VersionChecker",
+            "addVersionCheck",
+            Constants.UPDATE_FILE
+        );
     }
 
     @Mod.EventHandler

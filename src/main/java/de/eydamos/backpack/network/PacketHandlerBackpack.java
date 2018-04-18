@@ -18,6 +18,7 @@ import java.util.List;
 
 public class PacketHandlerBackpack {
     private final SimpleNetworkWrapper networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
+
     private IMessage message;
 
     public void initialise() {

@@ -32,7 +32,8 @@ public class ItemStackHelper {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == EPiece.TOP.getDamage()) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece
+            && itemStack.getItemDamage() == EPiece.TOP.getDamage()) {
             return true;
         }
 
@@ -44,7 +45,8 @@ public class ItemStackHelper {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == EPiece.MIDDLE.getDamage()) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece
+            && itemStack.getItemDamage() == EPiece.MIDDLE.getDamage()) {
             return true;
         }
 
@@ -56,7 +58,8 @@ public class ItemStackHelper {
             return false;
         }
 
-        if (itemStack.getItem() == BackpackItems.backpack_piece && itemStack.getItemDamage() == EPiece.BOTTOM.getDamage()) {
+        if (itemStack.getItem() == BackpackItems.backpack_piece
+            && itemStack.getItemDamage() == EPiece.BOTTOM.getDamage()) {
             return true;
         }
 

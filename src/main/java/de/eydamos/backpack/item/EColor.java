@@ -24,8 +24,11 @@ public enum EColor {
     WHITE(16, "white", Items.DYE, 15);
 
     protected final int damage;
+
     protected final String name;
+
     protected final Item item;
+
     protected final int itemDamage;
 
     EColor(int damage, String name, Item item, int itemDamage) {

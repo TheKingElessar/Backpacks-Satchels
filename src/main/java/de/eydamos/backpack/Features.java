@@ -37,7 +37,11 @@ public enum Features {
         @Override
         void addModel() {
             for (Map.Entry<Integer, String> variant : EStick.getVariants().entrySet()) {
-                ModelLoader.setCustomModelResourceLocation(BackpackItems.stick, variant.getKey(), this.getResource(variant.getValue()));
+                ModelLoader.setCustomModelResourceLocation(
+                    BackpackItems.stick,
+                    variant.getKey(),
+                    this.getResource(variant.getValue())
+                );
             }
         }
 
@@ -54,7 +58,15 @@ public enum Features {
 
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "stick_stone", EItemStack.STICK_STONE.getItemStack(4), "S", "S", 'S', "stone");
+            Features.addShapedRecipe(
+                registry,
+                "stick_stone",
+                EItemStack.STICK_STONE.getItemStack(4),
+                "S",
+                "S",
+                'S',
+                "stone"
+            );
         }
 
         @Override
@@ -70,7 +82,15 @@ public enum Features {
 
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "stick_iron", EItemStack.STICK_IRON.getItemStack(2), "S", "S", 'S', "ingotIron");
+            Features.addShapedRecipe(
+                registry,
+                "stick_iron",
+                EItemStack.STICK_IRON.getItemStack(2),
+                "S",
+                "S",
+                'S',
+                "ingotIron"
+            );
         }
 
         @Override
@@ -86,7 +106,18 @@ public enum Features {
 
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "bound_leather", new ItemStack(BackpackItems.bound_leather), "SSS", "LSL", "SSS", 'S', Items.STRING, 'L', Items.LEATHER);
+            Features.addShapedRecipe(
+                registry,
+                "bound_leather",
+                new ItemStack(BackpackItems.bound_leather),
+                "SSS",
+                "LSL",
+                "SSS",
+                'S',
+                Items.STRING,
+                'L',
+                Items.LEATHER
+            );
         }
 
         @Override
@@ -107,7 +138,11 @@ public enum Features {
 
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            GameRegistry.addSmelting(new ItemStack(BackpackItems.bound_leather), new ItemStack(BackpackItems.tanned_leather), 0.1f);
+            GameRegistry.addSmelting(
+                new ItemStack(BackpackItems.bound_leather),
+                new ItemStack(BackpackItems.tanned_leather),
+                0.1f
+            );
         }
 
         @Override
@@ -129,7 +164,11 @@ public enum Features {
         @Override
         void addModel() {
             for (Map.Entry<Integer, String> variant : EFrame.getVariants().entrySet()) {
-                ModelLoader.setCustomModelResourceLocation(BackpackItems.backpack_frame, variant.getKey(), this.getResource(variant.getValue()));
+                ModelLoader.setCustomModelResourceLocation(
+                    BackpackItems.backpack_frame,
+                    variant.getKey(),
+                    this.getResource(variant.getValue())
+                );
             }
         }
 
@@ -141,8 +180,30 @@ public enum Features {
     BACKPACK_FRAME_WOOD {
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "backpack_frame_wood1", EItemStack.FRAME_WOOD.getItemStack(1), "WSW", "S S", "WSW", 'W', Items.STICK, 'S', Items.STRING);
-            Features.addShapedRecipe(registry, "backpack_frame_wood2", EItemStack.FRAME_WOOD.getItemStack(1), "SWS", "W W", "SWS", 'W', Items.STICK, 'S', Items.STRING);
+            Features.addShapedRecipe(
+                registry,
+                "backpack_frame_wood1",
+                EItemStack.FRAME_WOOD.getItemStack(1),
+                "WSW",
+                "S S",
+                "WSW",
+                'W',
+                Items.STICK,
+                'S',
+                Items.STRING
+            );
+            Features.addShapedRecipe(
+                registry,
+                "backpack_frame_wood2",
+                EItemStack.FRAME_WOOD.getItemStack(1),
+                "SWS",
+                "W W",
+                "SWS",
+                'W',
+                Items.STICK,
+                'S',
+                Items.STRING
+            );
         }
 
         @Override
@@ -153,8 +214,30 @@ public enum Features {
     BACKPACK_FRAME_STONE(STICK_STONE) {
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "backpack_frame_stone1", EItemStack.FRAME_STONE.getItemStack(1), "WSW", "S S", "WSW", 'W', "stickStone", 'S', Items.STRING);
-            Features.addShapedRecipe(registry, "backpack_frame_stone2", EItemStack.FRAME_STONE.getItemStack(1), "SWS", "W W", "SWS", 'W', "stickStone", 'S', Items.STRING);
+            Features.addShapedRecipe(
+                registry,
+                "backpack_frame_stone1",
+                EItemStack.FRAME_STONE.getItemStack(1),
+                "WSW",
+                "S S",
+                "WSW",
+                'W',
+                "stickStone",
+                'S',
+                Items.STRING
+            );
+            Features.addShapedRecipe(
+                registry,
+                "backpack_frame_stone2",
+                EItemStack.FRAME_STONE.getItemStack(1),
+                "SWS",
+                "W W",
+                "SWS",
+                'W',
+                "stickStone",
+                'S',
+                Items.STRING
+            );
         }
 
         @Override
@@ -165,8 +248,30 @@ public enum Features {
     BACKPACK_FRAME_IRON(STICK_IRON) {
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "backpack_frame_iron1", EItemStack.FRAME_IRON.getItemStack(1), "WSW", "S S", "WSW", 'W', "stickIron", 'S', Items.STRING);
-            Features.addShapedRecipe(registry, "backpack_frame_iron2", EItemStack.FRAME_IRON.getItemStack(1), "SWS", "W W", "SWS", 'W', "stickIron", 'S', Items.STRING);
+            Features.addShapedRecipe(
+                registry,
+                "backpack_frame_iron1",
+                EItemStack.FRAME_IRON.getItemStack(1),
+                "WSW",
+                "S S",
+                "WSW",
+                'W',
+                "stickIron",
+                'S',
+                Items.STRING
+            );
+            Features.addShapedRecipe(
+                registry,
+                "backpack_frame_iron2",
+                EItemStack.FRAME_IRON.getItemStack(1),
+                "SWS",
+                "W W",
+                "SWS",
+                'W',
+                "stickIron",
+                'S',
+                Items.STRING
+            );
         }
 
         @Override
@@ -182,15 +287,31 @@ public enum Features {
 
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addRecipe(registry, "backpack_piece_top", new RecipeBackpackPieceTop(EItemStack.BACKPACK_PICE_TOP.getItemStack(1)));
-            Features.addRecipe(registry, "backpack_piece_middle", new RecipeBackpackPieceMiddle(EItemStack.BACKPACK_PICE_MIDDLE.getItemStack(1)));
-            Features.addRecipe(registry, "backpack_piece_bottom", new RecipeBackpackPieceBottom(EItemStack.BACKPACK_PICE_BOTTOM.getItemStack(1)));
+            Features.addRecipe(
+                registry,
+                "backpack_piece_top",
+                new RecipeBackpackPieceTop(EItemStack.BACKPACK_PICE_TOP.getItemStack(1))
+            );
+            Features.addRecipe(
+                registry,
+                "backpack_piece_middle",
+                new RecipeBackpackPieceMiddle(EItemStack.BACKPACK_PICE_MIDDLE.getItemStack(1))
+            );
+            Features.addRecipe(
+                registry,
+                "backpack_piece_bottom",
+                new RecipeBackpackPieceBottom(EItemStack.BACKPACK_PICE_BOTTOM.getItemStack(1))
+            );
         }
 
         @Override
         void addModel() {
             for (Map.Entry<Integer, String> variant : EPiece.getVariants().entrySet()) {
-                ModelLoader.setCustomModelResourceLocation(BackpackItems.backpack_piece, variant.getKey(), this.getResource(variant.getValue()));
+                ModelLoader.setCustomModelResourceLocation(
+                    BackpackItems.backpack_piece,
+                    variant.getKey(),
+                    this.getResource(variant.getValue())
+                );
             }
         }
 
@@ -208,7 +329,11 @@ public enum Features {
         @Override
         void addModel() {
             for (Map.Entry<Integer, String> variant : EBackpack.getVariants().entrySet()) {
-                ModelLoader.setCustomModelResourceLocation(BackpackItems.backpack, variant.getKey(), this.getResource(variant.getValue()));
+                ModelLoader.setCustomModelResourceLocation(
+                    BackpackItems.backpack,
+                    variant.getKey(),
+                    this.getResource(variant.getValue())
+                );
             }
         }
 
@@ -262,8 +387,9 @@ public enum Features {
         }
     };
 
-    /** ==================== Events ==================== **/
-
+    /**
+     * ==================== Events ====================
+     **/
     @SubscribeEvent
     public static void loadItems(RegistryEvent.Register<Item> event) {
         Backpack.logger.info("Loading items...");
@@ -306,10 +432,13 @@ public enum Features {
         Backpack.logger.info(num + " model features loaded.");
     }
 
-    /** ==================== Features class ==================== **/
-
+    /**
+     * ==================== Features class ====================
+     **/
     private static final ResourceLocation RECIPE_GROUP = new ResourceLocation("", "");
+
     private static Item stick;
+
     private Features parent;
 
     Features() {
@@ -329,7 +458,7 @@ public enum Features {
     void addRecipes(IForgeRegistry<IRecipe> registry) {
     }
 
-    void addModel(){
+    void addModel() {
     }
 
     public boolean isEnabled() {
@@ -344,8 +473,16 @@ public enum Features {
         return parent == null || parent.isEnabled();
     }
 
-    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, @Nonnull ItemStack result, Object... ingredients) {
-        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Constants.MOD_ID, name));
+    private static void addShapedRecipe(
+        IForgeRegistry<IRecipe> registry,
+        String name,
+        @Nonnull ItemStack result,
+        Object... ingredients
+    ) {
+        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(
+            Constants.MOD_ID,
+            name
+        ));
     }
 
     private static void addRecipe(IForgeRegistry<IRecipe> registry, String name, AbstractRecipe recipe) {
@@ -354,9 +491,16 @@ public enum Features {
 
     private static void logDisabled(Features feature) {
         if (!feature.hasParentFeature() && feature.parent != null) {
-            Backpack.logger.info("Skipping feature {} as its parent feature {} was disabled.", Configurations.featureName(feature), Configurations.featureName(feature.parent));
+            Backpack.logger.info(
+                "Skipping feature {} as its parent feature {} was disabled.",
+                Configurations.featureName(feature),
+                Configurations.featureName(feature.parent)
+            );
         } else {
-            Backpack.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(feature));
+            Backpack.logger.info(
+                "Skipping feature {} as it was disabled in the config.",
+                Configurations.featureName(feature)
+            );
         }
     }
 

@@ -18,6 +18,7 @@ public enum TierFrame {
     III(EFrame.IRON.getDamage());
 
     private final Item item = BackpackItems.backpack_frame;
+
     private final int damage;
 
     TierFrame(int damage) {

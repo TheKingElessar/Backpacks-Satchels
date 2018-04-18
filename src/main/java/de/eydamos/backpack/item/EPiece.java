@@ -7,9 +7,10 @@ public enum EPiece {
     MIDDLE(1, "middle"),
     BOTTOM(2, "bottom");
 
-    private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
+    private static Hashtable<Integer, String> VARIANTS = new Hashtable<>();
 
     private final int damage;
+
     private final String identifier;
 
     EPiece(int damage, String identifier) {

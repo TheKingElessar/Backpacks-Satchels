@@ -7,11 +7,17 @@ import net.minecraft.client.resources.I18n;
 
 public class Label implements AbstractGuiPart {
     protected int xPosition;
+
     protected int yPosition;
+
     protected int color;
+
     protected int relativePositionX;
+
     protected int relativePositionY;
+
     protected String text;
+
     protected Alignment textAlignment = Alignment.LEFT;
 
     public Label(int posX, int posY, int color, String text) {
@@ -64,7 +70,7 @@ public class Label implements AbstractGuiPart {
     public void draw(Minecraft mc, int mouseX, int mouseY, float something) {
         String label = I18n.format(text);
         int offset = 0;
-        switch(textAlignment) {
+        switch (textAlignment) {
             case RIGHT:
                 offset -= mc.fontRenderer.getStringWidth(label);
                 break;
@@ -82,5 +88,4 @@ public class Label implements AbstractGuiPart {
         xPosition = guiLeft + relativePositionX;
         yPosition = guiTop + relativePositionY;
     }
-
 }

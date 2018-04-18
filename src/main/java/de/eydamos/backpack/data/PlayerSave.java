@@ -21,6 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class PlayerSave extends WorldSavedData implements IInventory {
     private EntityPlayer player;
+
     private ItemStack[] inventory;
 
     public PlayerSave() {

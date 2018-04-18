@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiTextField;
 
 public class Textbox extends GuiTextField implements AbstractGuiPart {
     protected int relativePositionX;
+
     protected int relativePositionY;
 
     public Textbox(FontRenderer fontRenderer, int posX, int posY, int width, int height) {
@@ -40,5 +41,4 @@ public class Textbox extends GuiTextField implements AbstractGuiPart {
         x = guiLeft + relativePositionX;
         y = guiTop + relativePositionY;
     }
-
 }

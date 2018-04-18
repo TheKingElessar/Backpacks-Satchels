@@ -18,10 +18,14 @@ import java.util.Map;
 @ChestContainer
 public class ContainerAdvanced extends Container {
     protected int width;
+
     protected int height;
+
     protected IInventory inventory;
+
     protected EntityPlayer player;
-    protected Map<Boundaries, Integer> boundaries = new HashMap<Boundaries, Integer>();
+
+    protected Map<Boundaries, Integer> boundaries = new HashMap<>();
 
     public ContainerAdvanced(IInventory inventoryToSave, EntityPlayer player) {
         inventory = inventoryToSave;
@@ -49,37 +53,87 @@ public class ContainerAdvanced extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotPos) {
         ItemStack returnStack = ItemStack.EMPTY;
-        Slot slot = (Slot) inventorySlots.get(slotPos);
+        Slot slot = inventorySlots.get(slotPos);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemStack = slot.getStack();
             returnStack = itemStack.copy();
 
-            if (boundaries.containsKey(Boundaries.EXTRA) && slotPos >= boundaries.get(Boundaries.EXTRA) && slotPos < boundaries.get(Boundaries.EXTRA_END)) {
-                if (!mergeItemStack(itemStack, boundaries.get(Boundaries.BACKPACK), boundaries.get(Boundaries.BACKPACK_END), false)) { // to backpack
-                    if (!mergeItemStack(itemStack, boundaries.get(Boundaries.HOTBAR), boundaries.get(Boundaries.HOTBAR_END), true)) { // to hotbar
-                        if (!mergeItemStack(itemStack, boundaries.get(Boundaries.INVENTORY), boundaries.get(Boundaries.INVENTORY_END), false)) { // to inventory
+            if (boundaries.containsKey(Boundaries.EXTRA)
+                && slotPos >= boundaries.get(Boundaries.EXTRA)
+                && slotPos < boundaries.get(Boundaries.EXTRA_END)) {
+                if (!mergeItemStack(
+                    itemStack,
+                    boundaries.get(Boundaries.BACKPACK),
+                    boundaries.get(Boundaries.BACKPACK_END),
+                    false
+                )) { // to backpack
+                    if (!mergeItemStack(
+                        itemStack,
+                        boundaries.get(Boundaries.HOTBAR),
+                        boundaries.get(Boundaries.HOTBAR_END),
+                        true
+                    )) { // to hotbar
+                        if (!mergeItemStack(
+                            itemStack,
+                            boundaries.get(Boundaries.INVENTORY),
+                            boundaries.get(Boundaries.INVENTORY_END),
+                            false
+                        )) { // to inventory
                             return ItemStack.EMPTY;
                         }
                     }
                 }
 
                 slot.onSlotChange(itemStack, returnStack);
-            } else if (slotPos >= boundaries.get(Boundaries.BACKPACK) && slotPos < boundaries.get(Boundaries.BACKPACK_END)) { // from backpack
-                if (!mergeItemStack(itemStack, boundaries.get(Boundaries.HOTBAR), boundaries.get(Boundaries.HOTBAR_END), true)) { // to hotbar
-                    if (!mergeItemStack(itemStack, boundaries.get(Boundaries.INVENTORY), boundaries.get(Boundaries.INVENTORY_END), false)) { // to inventory
+            } else if (slotPos >= boundaries.get(Boundaries.BACKPACK)
+                && slotPos < boundaries.get(Boundaries.BACKPACK_END)) { // from backpack
+                if (!mergeItemStack(
+                    itemStack,
+                    boundaries.get(Boundaries.HOTBAR),
+                    boundaries.get(Boundaries.HOTBAR_END),
+                    true
+                )) { // to hotbar
+                    if (!mergeItemStack(
+                        itemStack,
+                        boundaries.get(Boundaries.INVENTORY),
+                        boundaries.get(Boundaries.INVENTORY_END),
+                        false
+                    )) { // to inventory
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (slotPos >= boundaries.get(Boundaries.INVENTORY) && slotPos < boundaries.get(Boundaries.INVENTORY_END)) { // from inventory
-                if (!mergeItemStack(itemStack, boundaries.get(Boundaries.BACKPACK), boundaries.get(Boundaries.BACKPACK_END), false)) { // to backpack
-                    if (!mergeItemStack(itemStack, boundaries.get(Boundaries.HOTBAR), boundaries.get(Boundaries.HOTBAR_END), true)) { // to hotbar
+            } else if (slotPos >= boundaries.get(Boundaries.INVENTORY)
+                && slotPos < boundaries.get(Boundaries.INVENTORY_END)) { // from inventory
+                if (!mergeItemStack(
+                    itemStack,
+                    boundaries.get(Boundaries.BACKPACK),
+                    boundaries.get(Boundaries.BACKPACK_END),
+                    false
+                )) { // to backpack
+                    if (!mergeItemStack(
+                        itemStack,
+                        boundaries.get(Boundaries.HOTBAR),
+                        boundaries.get(Boundaries.HOTBAR_END),
+                        true
+                    )) { // to hotbar
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (slotPos >= boundaries.get(Boundaries.HOTBAR) && slotPos < boundaries.get(Boundaries.HOTBAR_END)) { // from hotbar
-                if (!mergeItemStack(itemStack, boundaries.get(Boundaries.BACKPACK), boundaries.get(Boundaries.BACKPACK_END), false)) { // to backpack
-                    if (!mergeItemStack(itemStack, boundaries.get(Boundaries.INVENTORY), boundaries.get(Boundaries.INVENTORY_END), false)) { // to inventory
+            } else if (slotPos >= boundaries.get(Boundaries.HOTBAR)
+                && slotPos < boundaries.get(Boundaries.HOTBAR_END)) { // from hotbar
+                if (!mergeItemStack(
+                    itemStack,
+                    boundaries.get(Boundaries.BACKPACK),
+                    boundaries.get(Boundaries.BACKPACK_END),
+                    false
+                )) { // to backpack
+                    if (!mergeItemStack(
+                        itemStack,
+                        boundaries.get(Boundaries.INVENTORY),
+                        boundaries.get(Boundaries.INVENTORY_END),
+                        false
+                    )) { // to inventory
                         return ItemStack.EMPTY;
                     }
                 }
@@ -104,8 +158,7 @@ public class ContainerAdvanced extends Container {
     }
 
     /**
-     * Copy of mergeItemStack from class Container, which will ignore disabled
-     * slots.
+     * Copy of mergeItemStack from class Container, which will ignore disabled slots.
      */
     @Override
     protected boolean mergeItemStack(ItemStack sourceStack, int firstSlot, int lastSlot, boolean backwards) {
@@ -120,12 +173,16 @@ public class ContainerAdvanced extends Container {
         ItemStack slotStack;
 
         if (sourceStack.isStackable()) {
-            while (sourceStack.getCount() > 0 && (!backwards && currentSlotIndex < lastSlot || backwards && currentSlotIndex >= firstSlot)) {
-                slot = (Slot) inventorySlots.get(currentSlotIndex);
-                if (/*!(slot instanceof SlotScrolling && ((SlotScrolling) slot).isDisabled()) && */slot.isItemValid(sourceStack)) {
+            while (sourceStack.getCount() > 0 && (!backwards && currentSlotIndex < lastSlot
+                || backwards && currentSlotIndex >= firstSlot)) {
+                slot = inventorySlots.get(currentSlotIndex);
+                if (/*!(slot instanceof SlotScrolling && ((SlotScrolling) slot).isDisabled()) && */slot.isItemValid(
+                    sourceStack)) {
                     slotStack = slot.getStack();
 
-                    if (!slotStack.isEmpty() && slotStack.getItem() == sourceStack.getItem() && (!sourceStack.getHasSubtypes() || sourceStack.getItemDamage() == slotStack.getItemDamage())
+                    if (!slotStack.isEmpty()
+                        && slotStack.getItem() == sourceStack.getItem()
+                        && (!sourceStack.getHasSubtypes() || sourceStack.getItemDamage() == slotStack.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(sourceStack, slotStack)) {
                         int l = slotStack.getCount() + sourceStack.getCount();
 
@@ -159,8 +216,9 @@ public class ContainerAdvanced extends Container {
             }
 
             while (!backwards && currentSlotIndex < lastSlot || backwards && currentSlotIndex >= firstSlot) {
-                slot = (Slot) inventorySlots.get(currentSlotIndex);
-                if (/*!(slot instanceof SlotScrolling && ((SlotScrolling) slot).isDisabled()) && */slot.isItemValid(sourceStack)) {
+                slot = inventorySlots.get(currentSlotIndex);
+                if (/*!(slot instanceof SlotScrolling && ((SlotScrolling) slot).isDisabled()) && */slot.isItemValid(
+                    sourceStack)) {
                     slotStack = slot.getStack();
 
                     if (slotStack.isEmpty()) {
@@ -196,12 +254,12 @@ public class ContainerAdvanced extends Container {
     /**
      * Handles clicking on a phantom slot.
      *
-     * @param slot        The slot that has been clicked.
-     * @param dragType    The mouse button identifier: 0: left click 1: right click &
-     *                    left click during drag and drop 2: middle click (scrollwheel)
-     * @param clickType   The mouse modifier: 0: normal click 3: drag and drop middle
-     *                    click 5: drag and drop left or right click
-     * @param stackHeld   The stack that the player holds on his mouse.
+     * @param slot      The slot that has been clicked.
+     * @param dragType  The mouse button identifier: 0: left click 1: right click & left click during drag and drop 2:
+     *                  middle click (scrollwheel)
+     * @param clickType The mouse modifier: 0: normal click 3: drag and drop middle click 5: drag and drop left or right
+     *                  click
+     * @param stackHeld The stack that the player holds on his mouse.
      */
     protected void slotPhantomClick(Slot slot, int dragType, ClickType clickType, ItemStack stackHeld) {
         if (((SlotPhantom) slot).canChangeStack()) {
@@ -261,7 +319,7 @@ public class ContainerAdvanced extends Container {
 
     @ContainerSectionCallback
     public Map<ContainerSection, List<Slot>> getContainerSections() {
-        Map<ContainerSection, List<Slot>> slotRefs = new HashMap<ContainerSection, List<Slot>>();
+        Map<ContainerSection, List<Slot>> slotRefs = new HashMap<>();
 
         if (boundaries.containsKey(Boundaries.CRAFTING)) {
             slotRefs.put(ContainerSection.CRAFTING_OUT, inventorySlots.subList(0, 1));

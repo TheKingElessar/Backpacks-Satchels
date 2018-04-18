@@ -12,6 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class Button extends GuiButton implements AbstractGuiPart {
     protected int relativePositionX;
+
     protected int relativePositionY;
 
     public Button(int buttonId, int posX, int posY, int width, int height, String text) {
@@ -54,14 +55,22 @@ public class Button extends GuiButton implements AbstractGuiPart {
     @Override
     @ParametersAreNonnullByDefault
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float something) {
-        if(visible) {
+        if (visible) {
             FontRenderer fontrenderer = mc.fontRenderer;
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
             int offset = getHoverState(hovered);
             GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.tryBlendFuncSeparate(
+                GlStateManager.SourceFactor.SRC_ALPHA,
+                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                GlStateManager.SourceFactor.ONE,
+                GlStateManager.DestFactor.ZERO
+            );
+            GlStateManager.blendFunc(
+                GlStateManager.SourceFactor.SRC_ALPHA,
+                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+            );
 
             Rectangle rectangle = new Rectangle(2, 2);
             rectangle.setBackground(BUTTON_TEXTURES);
@@ -111,11 +120,11 @@ public class Button extends GuiButton implements AbstractGuiPart {
             mouseDragged(mc, mouseX, mouseY);
             int l = 14737632;
 
-            if(packedFGColour != 0) {
+            if (packedFGColour != 0) {
                 l = packedFGColour;
-            } else if(!enabled) {
+            } else if (!enabled) {
                 l = 10526880;
-            } else if(hovered) {
+            } else if (hovered) {
                 l = 16777120;
             }
 

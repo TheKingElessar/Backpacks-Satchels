@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class TabBackpacks extends CreativeTabs {
     public TabBackpacks() {
-        super(CreativeTabs.CREATIVE_TAB_ARRAY.length, Localizations.TAB_BACKPACKS);
+        super(Localizations.TAB_BACKPACKS);
         setBackgroundImageName("item_search.png");
     }
 

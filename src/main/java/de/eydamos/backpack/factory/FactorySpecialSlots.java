@@ -79,7 +79,7 @@ public class FactorySpecialSlots implements IFactory {
 
         GuiSlot guiSlot;
         for (int i = 0; i < container.inventorySlots.size(); i++) {
-            Slot slot = (Slot) container.inventorySlots.get(i);
+            Slot slot = container.inventorySlots.get(i);
             guiSlot = new GuiSlot(slot.xPos - 1, slot.yPos - 1);
             guiBackpack.addSubPart(guiSlot);
         }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @SideOnly(Side.CLIENT)
 public class ContainerWindow extends GuiContainer implements AbstractGui {
-    protected ArrayList<AbstractGuiPart> subParts = new ArrayList<AbstractGuiPart>();
+    protected ArrayList<AbstractGuiPart> subParts = new ArrayList<>();
 
     public ContainerWindow(Container container) {
         super(container);
@@ -43,10 +43,10 @@ public class ContainerWindow extends GuiContainer implements AbstractGui {
     public void initGui() {
         super.initGui();
 
-        for(AbstractGuiPart guiPart : subParts) {
+        for (AbstractGuiPart guiPart : subParts) {
             guiPart.setAbsolutePosition(guiLeft, guiTop);
-            if(guiPart instanceof GuiButton) {
-                buttonList.add((GuiButton)guiPart);
+            if (guiPart instanceof GuiButton) {
+                buttonList.add((GuiButton) guiPart);
             }
         }
     }
@@ -81,7 +81,7 @@ public class ContainerWindow extends GuiContainer implements AbstractGui {
         RenderHelper.drawOuterCornerBottomRight(guiLeft + xSize - 4, guiTop + ySize - 4);
 
         // draw subparts
-        for(AbstractGuiPart guiPart : subParts) {
+        for (AbstractGuiPart guiPart : subParts) {
             guiPart.draw(mc, mouseX, mouseY, something);
         }
     }

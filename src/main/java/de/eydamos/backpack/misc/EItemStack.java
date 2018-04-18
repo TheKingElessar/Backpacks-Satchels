@@ -18,12 +18,35 @@ public enum EItemStack {
     FRAME_WOOD(BackpackItems.backpack_frame, EFrame.WOOD.getDamage()),
     FRAME_STONE(BackpackItems.backpack_frame, EFrame.STONE.getDamage()),
     FRAME_IRON(BackpackItems.backpack_frame, EFrame.IRON.getDamage()),
-    BACKPACK_PICE_TOP(BackpackItems.backpack_piece, EPiece.TOP.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
-    BACKPACK_PICE_MIDDLE(BackpackItems.backpack_piece, EPiece.MIDDLE.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name()),
-    BACKPACK_PICE_BOTTOM(BackpackItems.backpack_piece, EPiece.BOTTOM.getDamage(), Constants.NBT.LEATHER_TIER, TierLeather.III.name(), Constants.NBT.FRAME_TIER, TierFrame.III.name());
+    BACKPACK_PICE_TOP(
+        BackpackItems.backpack_piece,
+        EPiece.TOP.getDamage(),
+        Constants.NBT.LEATHER_TIER,
+        TierLeather.III.name(),
+        Constants.NBT.FRAME_TIER,
+        TierFrame.III.name()
+    ),
+    BACKPACK_PICE_MIDDLE(
+        BackpackItems.backpack_piece,
+        EPiece.MIDDLE.getDamage(),
+        Constants.NBT.LEATHER_TIER,
+        TierLeather.III.name(),
+        Constants.NBT.FRAME_TIER,
+        TierFrame.III.name()
+    ),
+    BACKPACK_PICE_BOTTOM(
+        BackpackItems.backpack_piece,
+        EPiece.BOTTOM.getDamage(),
+        Constants.NBT.LEATHER_TIER,
+        TierLeather.III.name(),
+        Constants.NBT.FRAME_TIER,
+        TierFrame.III.name()
+    );
 
     protected Item item;
+
     protected int damage;
+
     protected NBTTagCompound nbtTagCompound;
 
     EItemStack(Item item, int damage, Object... nbtData) {

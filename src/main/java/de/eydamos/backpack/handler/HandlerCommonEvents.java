@@ -52,9 +52,15 @@ public class HandlerCommonEvents {
                 counter -= Configurations.MAX_BACKPACK_AMOUNT;
                 if (counter > 0) {
                     ITextComponent message = new TextComponentString("[Backpacks] ");
-                    message.appendSibling(new TextComponentTranslation(Localizations.MESSAGE_ALLOWED_BACKPACKS, Configurations.MAX_BACKPACK_AMOUNT));
+                    message.appendSibling(new TextComponentTranslation(
+                        Localizations.MESSAGE_ALLOWED_BACKPACKS,
+                        Configurations.MAX_BACKPACK_AMOUNT
+                    ));
                     player.sendMessage(message);
-                    message = new TextComponentString("[Backpacks] ").appendSibling(new TextComponentTranslation(Localizations.MESSAGE_DROPPED_BACKPACKS, counter));
+                    message = new TextComponentString("[Backpacks] ").appendSibling(new TextComponentTranslation(
+                        Localizations.MESSAGE_DROPPED_BACKPACKS,
+                        counter
+                    ));
                     player.sendMessage(message);
                 }
             }
@@ -69,18 +75,24 @@ public class HandlerCommonEvents {
             File backpackDir = new File(dataDir, Constants.INVENTORIES_PATH);
             if (!backpackDir.exists()) {
                 if (!backpackDir.mkdirs()) {
-                    Backpack.logger.warn("Unable to create backpack/inventory folder. Saving backpack inventory will fail!");
+                    Backpack.logger.warn(
+                        "Unable to create backpack/inventory folder. Saving backpack inventory will fail!"
+                    );
                 }
             }
 
             File playersDir = new File(dataDir, Constants.PLAYERS_PATH);
             if (!playersDir.exists()) {
                 if (!playersDir.mkdirs()) {
-                    Backpack.logger.warn("Unable to create backpack/player folder. Saving player specific backpack data will fail!");
+                    Backpack.logger.warn(
+                        "Unable to create backpack/player folder. Saving player specific backpack data will fail!"
+                    );
                 }
             }
         } catch (Exception e) {
-            Backpack.logger.info("Unable to check if backpack folders are present. If you are a client connecting to a server ignore this info.");
+            Backpack.logger.info(
+                "Unable to check if backpack folders are present. If you are a client connecting to a server ignore this info."
+            );
         }
     }
 

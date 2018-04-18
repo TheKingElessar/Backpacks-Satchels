@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 public class LayerBackpack implements LayerRenderer<AbstractClientPlayer> {
     public static final ModelBiped model = new ModelBackpack();
+
     private final RenderPlayer renderPlayer;
 
     public LayerBackpack(RenderPlayer renderPlayer) {
@@ -20,7 +21,16 @@ public class LayerBackpack implements LayerRenderer<AbstractClientPlayer> {
     }
 
     @Override
-    public void doRenderLayer(AbstractClientPlayer player, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale) {
+    public void doRenderLayer(
+        AbstractClientPlayer player,
+        float p_177141_2_,
+        float p_177141_3_,
+        float partialTicks,
+        float p_177141_5_,
+        float p_177141_6_,
+        float p_177141_7_,
+        float scale
+    ) {
         ItemStack backpack = Backpack.proxy.getClientBackpack(player);
 
         if (backpack != null) {

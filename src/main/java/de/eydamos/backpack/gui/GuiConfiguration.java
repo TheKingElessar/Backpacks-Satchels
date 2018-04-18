@@ -11,6 +11,13 @@ import java.util.List;
 
 public class GuiConfiguration extends GuiConfig {
     public GuiConfiguration(GuiScreen guiScreen, List<IConfigElement> configElements) {
-        super(guiScreen, configElements, Constants.MOD_ID, false, false, I18n.format(Localizations.LABEL_BACKPACK_CONFIG));
+        super(
+            guiScreen,
+            configElements,
+            Constants.MOD_ID,
+            false,
+            false,
+            I18n.format(Localizations.LABEL_BACKPACK_CONFIG)
+        );
     }
 }

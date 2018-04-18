@@ -9,10 +9,12 @@ public enum EFrame {
     STONE(1, "stone", Features.BACKPACK_FRAME_STONE),
     IRON(2, "iron", Features.BACKPACK_FRAME_IRON);
 
-    private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
+    private static Hashtable<Integer, String> VARIANTS = new Hashtable<>();
 
     private final int damage;
+
     private final String identifier;
+
     private final Features feature;
 
     EFrame(int damage, String identifier, Features feature) {

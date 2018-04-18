@@ -51,8 +51,7 @@ public class NBTUtil {
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a String or an empty String if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a String or an empty String if the {@link NBTTagCompound} has no such key.
      */
     public static String getString(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -63,9 +62,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given String value for the given tag on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given String value for the given tag on the {@link NBTTagCompound}. If the {@link NBTTagCompound} is
+     * null it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -82,8 +80,7 @@ public class NBTUtil {
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a Boolean or false if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a Boolean or false if the {@link NBTTagCompound} has no such key.
      */
     public static Boolean getBoolean(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -94,9 +91,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given boolean value for the given tag on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given boolean value for the given tag on the {@link NBTTagCompound}. If the {@link NBTTagCompound} is
+     * null it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -113,8 +109,7 @@ public class NBTUtil {
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a Byte or 0 if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a Byte or 0 if the {@link NBTTagCompound} has no such key.
      */
     public static Byte getByte(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -125,8 +120,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given byte value for the given tag on the {@link NBTTagCompound}
-     * . If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given byte value for the given tag on the {@link NBTTagCompound} . If the {@link NBTTagCompound} is null
+     * it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -143,8 +138,7 @@ public class NBTUtil {
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a Short or 0 if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a Short or 0 if the {@link NBTTagCompound} has no such key.
      */
     public static Short getShort(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -155,9 +149,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given short value for the given tag on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given short value for the given tag on the {@link NBTTagCompound}. If the {@link NBTTagCompound} is null
+     * it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -169,14 +162,12 @@ public class NBTUtil {
     }
 
     /**
-     * Gets an Integer value with the given tag from the {@link NBTTagCompound}
-     * of the given {@link NBTTagCompound}.
+     * Gets an Integer value with the given tag from the {@link NBTTagCompound} of the given {@link NBTTagCompound}.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as an Integer or 0 if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as an Integer or 0 if the {@link NBTTagCompound} has no such key.
      */
     public static Integer getInteger(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -187,9 +178,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given integer value for the given tag on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given integer value for the given tag on the {@link NBTTagCompound}. If the {@link NBTTagCompound} is
+     * null it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -201,14 +191,12 @@ public class NBTUtil {
     }
 
     /**
-     * Gets a Long value with the given tag from the {@link NBTTagCompound} of
-     * the given {@link NBTTagCompound}.
+     * Gets a Long value with the given tag from the {@link NBTTagCompound} of the given {@link NBTTagCompound}.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a Long or 0 if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a Long or 0 if the {@link NBTTagCompound} has no such key.
      */
     public static Long getLong(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -219,8 +207,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given long value for the given tag on the {@link NBTTagCompound}
-     * . If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given long value for the given tag on the {@link NBTTagCompound} . If the {@link NBTTagCompound} is null
+     * it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -232,14 +220,12 @@ public class NBTUtil {
     }
 
     /**
-     * Gets a Float value with the given tag from the {@link NBTTagCompound} of
-     * the given {@link NBTTagCompound}.
+     * Gets a Float value with the given tag from the {@link NBTTagCompound} of the given {@link NBTTagCompound}.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a Float or 0 if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a Float or 0 if the {@link NBTTagCompound} has no such key.
      */
     public static Float getFloat(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -250,9 +236,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given float value for the given tag on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given float value for the given tag on the {@link NBTTagCompound}. If the {@link NBTTagCompound} is null
+     * it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -264,14 +249,12 @@ public class NBTUtil {
     }
 
     /**
-     * Gets a Double value with the given tag from the {@link NBTTagCompound} of
-     * the given {@link NBTTagCompound}.
+     * Gets a Double value with the given tag from the {@link NBTTagCompound} of the given {@link NBTTagCompound}.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a Double or 0 if the
-     * {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a Double or 0 if the {@link NBTTagCompound} has no such key.
      */
     public static Double getDouble(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -282,9 +265,8 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given double value for the given tag on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given double value for the given tag on the {@link NBTTagCompound}. If the {@link NBTTagCompound} is
+     * null it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
@@ -296,15 +278,13 @@ public class NBTUtil {
     }
 
     /**
-     * Gets a {@link NBTTagCompound} with the given tag name from the
-     * {@link NBTTagCompound}.
+     * Gets a {@link NBTTagCompound} with the given tag name from the {@link NBTTagCompound}.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a {@link NBTTagCompound} or an
-     * empty {@link NBTTagCompound} if the {@link NBTTagCompound} has no
-     * such key.
+     * @return The value of the given tag as a {@link NBTTagCompound} or an empty {@link NBTTagCompound} if the {@link
+     * NBTTagCompound} has no such key.
      */
     public static NBTTagCompound getCompoundTag(NBTTagCompound nbtTagCompound, String tagName) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -315,14 +295,12 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given {@link NBTTagCompound} with the given tag name on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given {@link NBTTagCompound} with the given tag name on the {@link NBTTagCompound}. If the {@link
+     * NBTTagCompound} is null it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
-     * @param tagValue       The value which should be set to the given tag as a
-     *                       {@link NBTTagCompound}.
+     * @param tagValue       The value which should be set to the given tag as a {@link NBTTagCompound}.
      */
     public static void setCompoundTag(NBTTagCompound nbtTagCompound, String tagName, NBTTagCompound tagValue) {
         nbtTagCompound = initNBTTagCompound(nbtTagCompound);
@@ -330,14 +308,13 @@ public class NBTUtil {
     }
 
     /**
-     * Gets a {@link NBTTagList} with the given tag name from the
-     * {@link NBTTagCompound}.
+     * Gets a {@link NBTTagList} with the given tag name from the {@link NBTTagCompound}.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to check.
      * @param tagName        The name of the tag for which the value should be determined.
      *
-     * @return The value of the given tag as a {@link NBTTagList} or an empty
-     * {@link NBTTagList} if the {@link NBTTagCompound} has no such key.
+     * @return The value of the given tag as a {@link NBTTagList} or an empty {@link NBTTagList} if the {@link
+     * NBTTagCompound} has no such key.
      */
     public static NBTTagList getTagList(NBTTagCompound nbtTagCompound, String tagName, int tagType) {
         if (hasTag(nbtTagCompound, tagName)) {
@@ -348,14 +325,12 @@ public class NBTUtil {
     }
 
     /**
-     * Sets the given {@link NBTTagCompound} with the given tag name on the
-     * {@link NBTTagCompound}. If the {@link NBTTagCompound} is null it will be
-     * initialized.
+     * Sets the given {@link NBTTagCompound} with the given tag name on the {@link NBTTagCompound}. If the {@link
+     * NBTTagCompound} is null it will be initialized.
      *
      * @param nbtTagCompound The {@link NBTTagCompound} to change.
      * @param tagName        The name of the tag which should be set.
-     * @param tagValue       The value which should be set to the given tag as a
-     *                       {@link NBTTagCompound}.
+     * @param tagValue       The value which should be set to the given tag as a {@link NBTTagCompound}.
      */
     public static void setTagList(NBTTagCompound nbtTagCompound, String tagName, NBTTagList tagValue) {
         nbtTagCompound = initNBTTagCompound(nbtTagCompound);

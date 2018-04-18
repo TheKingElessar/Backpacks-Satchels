@@ -13,7 +13,6 @@ import de.eydamos.backpack.util.NBTItemStackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.FMLLog;
 
 import java.util.UUID;
 

@@ -8,10 +8,12 @@ public enum EStick {
     STONE(0, "stone", Features.STICK_STONE),
     IRON(1, "iron", Features.STICK_IRON);
 
-    private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
+    private static Hashtable<Integer, String> VARIANTS = new Hashtable<>();
 
     private final int damage;
+
     private final String identifier;
+
     private final Features feature;
 
     EStick(int damage, String identifier, Features feature) {

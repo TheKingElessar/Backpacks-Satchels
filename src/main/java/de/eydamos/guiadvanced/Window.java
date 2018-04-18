@@ -9,10 +9,14 @@ import net.minecraft.client.gui.GuiScreen;
 import java.util.ArrayList;
 
 public class Window extends GuiScreen implements AbstractGui {
-    protected ArrayList<AbstractGuiPart> subParts = new ArrayList<AbstractGuiPart>();
+    protected ArrayList<AbstractGuiPart> subParts = new ArrayList<>();
+
     protected int xSize = 0;
+
     protected int ySize = 0;
+
     protected int guiLeft = 0;
+
     protected int guiTop = 0;
 
     @Override
@@ -40,10 +44,10 @@ public class Window extends GuiScreen implements AbstractGui {
         guiLeft = (width - xSize) / 2;
         guiTop = (height - ySize) / 2;
 
-        for(AbstractGuiPart guiPart : subParts) {
+        for (AbstractGuiPart guiPart : subParts) {
             guiPart.setAbsolutePosition(guiLeft, guiTop);
-            if(guiPart instanceof GuiButton) {
-                buttonList.add((GuiButton)guiPart);
+            if (guiPart instanceof GuiButton) {
+                buttonList.add((GuiButton) guiPart);
             }
         }
     }
@@ -79,7 +83,7 @@ public class Window extends GuiScreen implements AbstractGui {
         RenderHelper.drawOuterCornerBottomRight(guiLeft + xSize - 4, guiTop + ySize - 4);
 
         // draw subparts
-        for(AbstractGuiPart guiPart : subParts) {
+        for (AbstractGuiPart guiPart : subParts) {
             guiPart.draw(mc, mouseX, mouseY, something);
         }
 

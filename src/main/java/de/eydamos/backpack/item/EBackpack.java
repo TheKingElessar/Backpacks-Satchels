@@ -60,13 +60,18 @@ public enum EBackpack {
     BIG_ORANGE(ESize.BIG, EColor.ORANGE, Features.BACKPACK_BIG),
     BIG_WHITE(ESize.BIG, EColor.WHITE, Features.BACKPACK_BIG);
 
-    private static Hashtable<Integer, String> VARIANTS = new Hashtable<Integer, String>();
+    private static Hashtable<Integer, String> VARIANTS = new Hashtable<>();
 
     protected ESize size;
+
     protected EColor color;
+
     protected Features feature;
+
     protected String identifier;
+
     protected int damage;
+
     protected NBTTagCompound nbtTagCompound;
 
     EBackpack(ESize size, EColor color, Features feature) {

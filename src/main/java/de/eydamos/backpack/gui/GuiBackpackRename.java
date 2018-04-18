@@ -15,9 +15,11 @@ import java.io.IOException;
 
 public class GuiBackpackRename extends Window {
     private String TITLE = I18n.format(Localizations.INVENTORY_RENAME);
+
     private String NEW_NAME = I18n.format(Localizations.LABEL_NEW_NAME);
 
     protected Textbox txt_backpackName;
+
     protected Button btn_ok, btn_cancel;
 
     public GuiBackpackRename() {
@@ -71,8 +73,7 @@ public class GuiBackpackRename extends Window {
     }
 
     /**
-     * Fired when a control is clicked. This is the equivalent of
-     * ActionListener.actionPerformed(ActionEvent e).
+     * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
     @Override
     protected void actionPerformed(GuiButton guibutton) {
@@ -96,8 +97,7 @@ public class GuiBackpackRename extends Window {
     }
 
     /**
-     * Fired when a key is typed. This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e).
+     * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
     @Override
     protected void keyTyped(char c, int i) {

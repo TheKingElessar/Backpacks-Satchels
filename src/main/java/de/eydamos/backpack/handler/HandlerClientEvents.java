@@ -22,6 +22,7 @@ import java.util.LinkedList;
 @SideOnly(Side.CLIENT)
 public class HandlerClientEvents extends HandlerCommonEvents {
     private static HashSet<RenderLivingBase> seenPlayers = new HashSet<>();
+
     private static LinkedList<RenderLivingBase> toInit = new LinkedList<>();
 
     @SubscribeEvent

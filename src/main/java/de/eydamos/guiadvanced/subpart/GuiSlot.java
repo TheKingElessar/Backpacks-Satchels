@@ -7,10 +7,15 @@ import net.minecraft.client.Minecraft;
 
 public class GuiSlot implements AbstractGuiPart {
     protected int xPosition;
+
     protected int yPosition;
+
     protected int relativePositionX;
+
     protected int relativePositionY;
+
     protected int width;
+
     protected int height;
 
     public GuiSlot(int posX, int posY) {
@@ -99,5 +104,4 @@ public class GuiSlot implements AbstractGuiPart {
         xPosition = guiLeft + relativePositionX;
         yPosition = guiTop + relativePositionY;
     }
-
 }

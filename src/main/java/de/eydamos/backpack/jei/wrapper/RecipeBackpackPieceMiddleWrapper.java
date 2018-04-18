@@ -51,6 +51,9 @@ public class RecipeBackpackPieceMiddleWrapper implements IShapedCraftingRecipeWr
         recipeList.add(null);
 
         ingredients.setInputLists(ItemStack.class, recipeList);
-        ingredients.setOutput(ItemStack.class, EItemStack.getItemStack(BackpackItems.backpack_piece, 1, EPiece.MIDDLE.getDamage()));
+        ingredients.setOutput(
+            ItemStack.class,
+            EItemStack.getItemStack(BackpackItems.backpack_piece, 1, EPiece.MIDDLE.getDamage())
+        );
     }
 }

@@ -9,10 +9,15 @@ import net.minecraft.item.ItemStack;
 
 public class RecipeRecolorBackpack extends AbstractRecipe {
     private int dyeCol;
+
     private int dyeRow;
+
     private int backpackCol;
+
     private int backpackRow;
+
     private boolean dyeFound = false;
+
     private boolean backpackFound = false;
 
     public RecipeRecolorBackpack() {
@@ -20,7 +25,13 @@ public class RecipeRecolorBackpack extends AbstractRecipe {
     }
 
     @Override
-    protected boolean checkItemAtPosition(InventoryCrafting craftingGridInventory, int col, int row, int expectedCol, int expectedRow) {
+    protected boolean checkItemAtPosition(
+        InventoryCrafting craftingGridInventory,
+        int col,
+        int row,
+        int expectedCol,
+        int expectedRow
+    ) {
         ItemStack itemStack = craftingGridInventory.getStackInRowAndColumn(col, row);
 
         if (itemStack.isEmpty()) {

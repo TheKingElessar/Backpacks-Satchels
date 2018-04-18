@@ -57,8 +57,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link String} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link String} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -86,8 +86,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Boolean} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Boolean} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -115,8 +115,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Byte} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Byte} with the given tag name on the {@link NBTTagCompound} of the given {@link ItemStack}.
+     * If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -144,8 +144,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Short} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Short} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -173,8 +173,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Integer} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Integer} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -202,8 +202,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Long} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Long} with the given tag name on the {@link NBTTagCompound} of the given {@link ItemStack}.
+     * If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -231,8 +231,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Float} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Float} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -260,8 +260,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link Double} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link Double} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -273,8 +273,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Gets a {@link NBTTagCompound} with the given tag name from the {@link NBTTagCompound} of the given
-     * {@link ItemStack}.
+     * Gets a {@link NBTTagCompound} with the given tag name from the {@link NBTTagCompound} of the given {@link
+     * ItemStack}.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag for which the value should be determined.
@@ -291,8 +291,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link NBTTagCompound} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link NBTTagCompound} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag which should be set.
@@ -304,7 +304,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Gets a {@link NBTTagList} with the given tag name from the {@link NBTTagCompound} of the given {@link ItemStack}.
+     * Gets a {@link NBTTagList} with the given tag name from the {@link NBTTagCompound} of the given {@link
+     * ItemStack}.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag for which the value should be determined.
@@ -320,8 +321,8 @@ public class NBTItemStackUtil {
     }
 
     /**
-     * Sets the given {@link NBTTagList} with the given tag name on the {@link NBTTagCompound} of the given
-     * {@link ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
+     * Sets the given {@link NBTTagList} with the given tag name on the {@link NBTTagCompound} of the given {@link
+     * ItemStack}. If the {@link NBTTagCompound} is null it will be initialized.
      *
      * @param itemStack The {@link ItemStack} which holds the {@link NBTTagCompound}.
      * @param tagName   The name of the tag for which the value should be determined.

@@ -16,10 +16,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageBackpackData implements IMessage, IMessageHandler<MessageBackpackData, IMessage> {
     private int slots;
+
     private int slotsPerRow;
+
     private int damage;
+
     private String playerUUID;
+
     private String backpackUUID;
+
     private String customName;
 
     public MessageBackpackData() {

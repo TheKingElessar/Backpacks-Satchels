@@ -22,9 +22,13 @@ import java.util.Map;
 
 public class BackpackSave extends WorldSavedData implements IInventory {
     private ItemStack[] currentInventory;
+
     private Hashtable<String, ItemStack[]> inventories = new Hashtable<>();
+
     private ItemStack backpack;
+
     private boolean heldItem;
+
     private EntityPlayer player;
 
     public BackpackSave() {
@@ -99,7 +103,10 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         String UUID = BackpackHelper.getUUID(backpack);
         MapStorage storage = world.getMapStorage();
 
-        BackpackSave instance = (BackpackSave) storage.getOrLoadData(BackpackSave.class, Constants.INVENTORIES_PATH + UUID);
+        BackpackSave instance = (BackpackSave) storage.getOrLoadData(
+            BackpackSave.class,
+            Constants.INVENTORIES_PATH + UUID
+        );
 
         if (instance == null) {
             instance = new BackpackSave(Constants.INVENTORIES_PATH + UUID);

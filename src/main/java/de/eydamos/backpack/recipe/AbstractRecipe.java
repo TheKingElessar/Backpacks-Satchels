@@ -15,26 +15,32 @@ public abstract class AbstractRecipe extends Impl<IRecipe> implements IRecipe {
      * How many horizontal slots this recipe is wide.
      */
     protected final int recipeWidth;
+
     /**
      * How many vertical slots this recipe uses.
      */
     protected final int recipeHeight;
+
     /**
      * The column offset for the recipe.
      */
     protected int colOffset = 0;
+
     /**
      * The row offset for the recipe.
      */
     protected int rowOffset = 0;
+
     /**
      * Is a array of ItemStack that composes the recipe.
      */
     protected ItemStack[] recipeItems;
+
     /**
      * Is the ItemStack that you get when craft the recipe.
      */
     private final ItemStack recipeOutput;
+
     /**
      * The type of the recipe (Shaped / Shapeless)
      */
@@ -161,7 +167,13 @@ public abstract class AbstractRecipe extends Impl<IRecipe> implements IRecipe {
      *
      * @return True if the ItemStack should be at this position, false otherwise.
      */
-    abstract protected boolean checkItemAtPosition(InventoryCrafting craftingGridInventory, int col, int row, int expectedCol, int expectedRow);
+    abstract protected boolean checkItemAtPosition(
+        InventoryCrafting craftingGridInventory,
+        int col,
+        int row,
+        int expectedCol,
+        int expectedRow
+    );
 
     protected boolean allRecipeItemsFulfilled() {
         return true;

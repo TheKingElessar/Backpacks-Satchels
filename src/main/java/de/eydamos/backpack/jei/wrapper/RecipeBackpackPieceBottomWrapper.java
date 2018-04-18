@@ -47,6 +47,9 @@ public class RecipeBackpackPieceBottomWrapper implements IShapedCraftingRecipeWr
         inputs.add(leather);
 
         ingredients.setInputLists(ItemStack.class, inputs);
-        ingredients.setOutput(ItemStack.class, EItemStack.getItemStack(BackpackItems.backpack_piece, 1, EPiece.BOTTOM.getDamage()));
+        ingredients.setOutput(
+            ItemStack.class,
+            EItemStack.getItemStack(BackpackItems.backpack_piece, 1, EPiece.BOTTOM.getDamage())
+        );
     }
 }

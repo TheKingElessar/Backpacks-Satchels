@@ -8,7 +8,9 @@ public enum ESize {
     BIG(200, 3, 6);
 
     protected final int damage;
+
     protected final int slotMultiplier;
+
     protected final int moduleSlots;
 
     ESize(int damage, int slotMultiplier, int moduleSlots) {

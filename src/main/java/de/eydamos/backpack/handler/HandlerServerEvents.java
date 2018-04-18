@@ -18,7 +18,10 @@ public class HandlerServerEvents extends HandlerCommonEvents {
         Backpack.packetHandler.propagateCarriedBackpack(player);
 
         // let player now the backpacks of all players
-        List<EntityPlayerMP> players = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers();
+        List<EntityPlayerMP> players = FMLCommonHandler.instance()
+            .getMinecraftServerInstance()
+            .getPlayerList()
+            .getPlayers();
         Backpack.packetHandler.sendCarriedBackpacks((EntityPlayerMP) player, players);
     }
 }

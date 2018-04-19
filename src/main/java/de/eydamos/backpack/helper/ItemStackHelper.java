@@ -54,7 +54,7 @@ public class ItemStackHelper {
     }
 
     public static boolean isBottomPiece(ItemStack itemStack) {
-        if (itemStack == null || itemStack.isEmpty()) {
+        if (itemStack.isEmpty()) {
             return false;
         }
 

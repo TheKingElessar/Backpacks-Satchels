@@ -33,10 +33,10 @@ public class MessageBackpackData implements IMessage, IMessageHandler<MessageBac
     public MessageBackpackData(EntityPlayer player, ItemStack itemStack) {
         slots = BackpackHelper.getSlots(itemStack);
         slotsPerRow = BackpackHelper.getSlotsPerRow(itemStack);
-        damage = itemStack != null ? itemStack.getItemDamage() : -1;
+        damage = !itemStack.isEmpty() ? itemStack.getItemDamage() : -1;
         playerUUID = GeneralUtil.getPlayerUUID(player);
         backpackUUID = BackpackHelper.getUUID(itemStack);
-        if (itemStack != null && itemStack.hasDisplayName()) {
+        if (!itemStack.isEmpty() && itemStack.hasDisplayName()) {
             customName = itemStack.getDisplayName();
         } else {
             customName = "";
@@ -76,7 +76,7 @@ public class MessageBackpackData implements IMessage, IMessageHandler<MessageBac
 
             Backpack.proxy.setBackpackData(message.playerUUID, backpack);
         } else {
-            Backpack.proxy.setBackpackData(message.playerUUID, null);
+            Backpack.proxy.setBackpackData(message.playerUUID, ItemStack.EMPTY);
         }
 
         return null;

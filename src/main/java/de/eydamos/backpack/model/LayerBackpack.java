@@ -33,7 +33,7 @@ public class LayerBackpack implements LayerRenderer<AbstractClientPlayer> {
     ) {
         ItemStack backpack = Backpack.proxy.getClientBackpack(player);
 
-        if (backpack != null) {
+        if (!backpack.isEmpty()) {
             GL11.glPushMatrix();
 
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

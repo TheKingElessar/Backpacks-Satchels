@@ -101,7 +101,7 @@ public class BackpackHelper {
     }
 
     public static boolean isBackpack(ItemStack itemStack) {
-        return itemStack.getItem() == BackpackItems.backpack;
+        return itemStack.getItem() == BackpackItems.backpack && !itemStack.isEmpty();
     }
 
     public static ItemStack getBackpackFromPlayer(EntityPlayer player, boolean heldItem) {

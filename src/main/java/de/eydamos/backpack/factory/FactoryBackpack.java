@@ -5,6 +5,7 @@ import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.storage.container.Boundaries;
 import de.eydamos.backpack.storage.container.ContainerAdvanced;
 import de.eydamos.backpack.storage.slot.SlotBackpack;
+import de.eydamos.backpack.storage.slot.SlotMainHand;
 import de.eydamos.guiadvanced.form.Label;
 import de.eydamos.guiadvanced.subpart.GuiSlot;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -76,8 +77,14 @@ public class FactoryBackpack implements IFactory {
         y += 6;
 
         // hotbar
+        Slot slot;
         for (int col = 0; col < 9; col++) {
-            container.addSlot(new Slot(player.inventory, col, x, y));
+            if (col == player.inventory.currentItem) {
+                slot = new SlotMainHand(player.inventory, col, x, y);
+            } else {
+                slot = new Slot(player.inventory, col, x, y);
+            }
+            container.addSlot(slot);
             x += SLOT;
         }
 

@@ -11,7 +11,7 @@ public class Constants {
 
     public static final String MOD_NAME = "Backpack";
 
-    public static final String MOD_VERSION = "3.0.1";
+    public static final String MOD_VERSION = "3.0.2";
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
 

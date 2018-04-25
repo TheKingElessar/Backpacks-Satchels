@@ -17,7 +17,7 @@
         * Create directories for empty content roots automatically
         * Create separate module per source set
 * Open the gradle Tab on the right side
-* Create a run configuration for setupDecompWorkspace with `-Xmx4g -Xms4g`
+* Create a run configuration for setupDecompWorkspace with VM Options: `-Xmx4g -Xms4g`
 * Run the task
 * Run task genIntellijRuns once
 * Close and reopen the project

@@ -24,3 +24,6 @@ run
 # project
 notices.txt
 todo.txt
+/data/
+# symlink
+/data

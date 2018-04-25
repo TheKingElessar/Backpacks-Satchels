@@ -125,6 +125,7 @@ public abstract class AbstractRecipe extends Impl<IRecipe> implements IRecipe {
      * Checks if the region of a crafting inventory is match for the recipe.
      */
     private boolean checkMatch(InventoryCrafting craftingGridInventory) {
+        boolean emptyGrid = true;
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 3; ++col) {
                 int expectedCol = col - colOffset;
@@ -139,13 +140,15 @@ public abstract class AbstractRecipe extends Impl<IRecipe> implements IRecipe {
                     return false;
                 }
 
+                emptyGrid = false;
+
                 if (!checkItemAtPosition(craftingGridInventory, col, row, expectedCol, expectedRow)) {
                     return false;
                 }
             }
         }
 
-        return true;
+        return !emptyGrid;
     }
 
     /**

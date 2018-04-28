@@ -1,0 +1,7 @@
+{
+    "extends": {
+        "parent": "button",
+        "xOffset": 72,
+        "yOffset": 0
+    }
+}

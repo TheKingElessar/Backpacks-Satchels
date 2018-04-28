@@ -21,7 +21,7 @@ public class ContainerAdvanced extends Container {
 
     protected int height;
 
-    protected IInventory inventory;
+    protected final IInventory inventory;
 
     protected EntityPlayer player;
 

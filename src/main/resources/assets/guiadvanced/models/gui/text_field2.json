@@ -1,0 +1,13 @@
+{
+    "extends": {
+        "parent": "text_field",
+        "xOffset": 48,
+        "yOffset": 0
+    },
+    "states": {
+        "disabled": {
+            "xOffset": 24,
+            "yOffset": 0
+        }
+    }
+}

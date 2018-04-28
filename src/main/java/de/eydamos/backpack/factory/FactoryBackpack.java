@@ -7,11 +7,11 @@ import de.eydamos.backpack.storage.container.ContainerAdvanced;
 import de.eydamos.backpack.storage.slot.SlotBackpack;
 import de.eydamos.backpack.storage.slot.SlotMainHand;
 import de.eydamos.guiadvanced.form.Label;
+import de.eydamos.guiadvanced.inventory.SlotWithState;
 import de.eydamos.guiadvanced.subpart.GuiSlot;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -64,7 +64,7 @@ public class FactoryBackpack implements IFactory {
         // player inventory
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                container.addSlot(new Slot(player.inventory, col + row * 9 + 9, x, y));
+                container.addSlot(new SlotWithState(player.inventory, col + row * 9 + 9, x, y));
                 x += SLOT;
             }
             y += SLOT;
@@ -77,12 +77,12 @@ public class FactoryBackpack implements IFactory {
         y += 6;
 
         // hotbar
-        Slot slot;
+        SlotWithState slot;
         for (int col = 0; col < 9; col++) {
             if (col == player.inventory.currentItem) {
                 slot = new SlotMainHand(player.inventory, col, x, y);
             } else {
-                slot = new Slot(player.inventory, col, x, y);
+                slot = new SlotWithState(player.inventory, col, x, y);
             }
             container.addSlot(slot);
             x += SLOT;
@@ -116,13 +116,13 @@ public class FactoryBackpack implements IFactory {
 
         GuiSlot guiSlot;
         for (int i = 0; i < container.inventorySlots.size(); i++) {
-            Slot slot = container.inventorySlots.get(i);
-            guiSlot = new GuiSlot(slot.xPos - 1, slot.yPos - 1);
+            SlotWithState slot = (SlotWithState)container.inventorySlots.get(i);
+            guiSlot = new GuiSlot(slot);
             guiBackpack.addSubPart(guiSlot);
         }
 
-        guiBackpack.addSubPart(new Label(X_SPACING, 6, 0x404040, container.getInventoryToSave().getName()));
-        guiBackpack.addSubPart(new Label(X_SPACING, textPositionY, 0x404040, "container.inventory"));
+        guiBackpack.addSubPart(new Label(X_SPACING, 6, container.getInventoryToSave().getName()));
+        guiBackpack.addSubPart(new Label(X_SPACING, textPositionY, "container.inventory"));
 
         return guiBackpack;
     }

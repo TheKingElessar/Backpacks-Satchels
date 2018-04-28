@@ -2,7 +2,7 @@ package de.eydamos.backpack.gui;
 
 import de.eydamos.backpack.handler.HandlerInputEvents;
 import de.eydamos.backpack.storage.container.ContainerAdvanced;
-import de.eydamos.guiadvanced.ContainerWindow;
+import de.eydamos.guiadvanced.window.ContainerWindow;
 
 import java.io.IOException;
 

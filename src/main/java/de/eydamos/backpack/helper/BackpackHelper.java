@@ -97,7 +97,7 @@ public class BackpackHelper {
             return BackpackSave.loadBackpack(player.world, itemStack, player, heldItem);
         }
 
-        return null;
+        return new BackpackSave();
     }
 
     public static boolean isBackpack(ItemStack itemStack) {

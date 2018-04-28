@@ -1,24 +1,29 @@
 package de.eydamos.guiadvanced.form;
 
-import de.eydamos.guiadvanced.misc.AbstractGuiPart;
-import de.eydamos.guiadvanced.util.Rectangle;
-import de.eydamos.guiadvanced.util.RenderHelper.BackgroundRepeat;
+import de.eydamos.guiadvanced.config.State;
+import de.eydamos.guiadvanced.helper.ButtonHelper;
+import de.eydamos.guiadvanced.helper.ElementRenderHelper;
+import de.eydamos.guiadvanced.misc.GuiInterface;
+import de.eydamos.guiadvanced.misc.GuiPartInterface;
+import de.eydamos.guiadvanced.misc.GuiStateInterface;
+import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+public class Button extends GuiButton implements GuiPartInterface, GuiInterface, GuiStateInterface {
+    private final int xOffset;
 
-public class Button extends GuiButton implements AbstractGuiPart {
-    protected int relativePositionX;
+    private final int yOffset;
 
-    protected int relativePositionY;
+    private ElementRenderHelper renderHelper;
 
     public Button(int buttonId, int posX, int posY, int width, int height, String text) {
         super(buttonId, posX, posY, width, height, text);
-        relativePositionX = posX;
-        relativePositionY = posY;
+        xOffset = posX;
+        yOffset = posY;
+        renderHelper = new ButtonHelper();
     }
 
     @Override
@@ -42,24 +47,46 @@ public class Button extends GuiButton implements AbstractGuiPart {
     }
 
     @Override
-    public void draw(Minecraft mc, int mouseX, int mouseY, float something) {
-        // unneeded GuiScreen calls drawButton directly so we overwrite this method
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean value) {
+        enabled = value;
+    }
+
+    @Override
+    public boolean isVisible() {
+        return visible;
+    }
+
+    @Override
+    public void setVisible(boolean value) {
+        visible = value;
     }
 
     @Override
     public void setAbsolutePosition(int guiLeft, int guiTop) {
-        x = guiLeft + relativePositionX;
-        y = guiTop + relativePositionY;
+        x = guiLeft + xOffset;
+        y = guiTop + yOffset;
+    }
+
+    @Override
+    public boolean isMouseOver(int mouseX, int mouseY) {
+        boolean inX = x <= mouseX && mouseX <= x + getWidth();
+        boolean inY = y <= mouseY && mouseY <= y + getHeight();
+
+        return inX && inY;
     }
 
     @Override
     @ParametersAreNonnullByDefault
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float something) {
-        if (visible) {
+        if (isVisible()) {
             FontRenderer fontrenderer = mc.fontRenderer;
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
-            int offset = getHoverState(hovered);
+            hovered = isMouseOver(mouseX, mouseY);
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(
                 GlStateManager.SourceFactor.SRC_ALPHA,
@@ -72,50 +99,15 @@ public class Button extends GuiButton implements AbstractGuiPart {
                 GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
             );
 
-            Rectangle rectangle = new Rectangle(2, 2);
-            rectangle.setBackground(BUTTON_TEXTURES);
-            rectangle.setBackgroundSize(2, 2);
-            // draw upper left corner
-            rectangle.setBackgroundPosition(0, 46 + offset * 20);
-            rectangle.draw(x, y);
-            // draw upper right corner
-            rectangle.setBackgroundPosition(198, 46 + offset * 20);
-            rectangle.draw(x + width - 2, y);
-            // draw lower left corner
-            rectangle.setBackgroundPosition(0, 64 + offset * 20);
-            rectangle.draw(x, y + height - 2);
-            // draw lower right corner
-            rectangle.setBackgroundPosition(198, 64 + offset * 20);
-            rectangle.draw(x + width - 2, y + height - 2);
+            if (!isEnabled()) {
+                renderHelper.setState(State.DISABLED);
+            } else if (hovered) {
+                renderHelper.setState(State.HOVER);
+            } else {
+                renderHelper.setState(State.ENABLED);
+            }
 
-            // borders top/bottom
-            rectangle.setWidth(width - 4);
-            rectangle.setBackgroundRepeat(BackgroundRepeat.REPEAT_X);
-            // draw top border
-            rectangle.setBackgroundPosition(2, 46 + offset * 20);
-            rectangle.draw(x + 2, y);
-            // draw bottom border
-            rectangle.setBackgroundPosition(2, 64 + offset * 20);
-            rectangle.draw(x + 2, y + height - 2);
-
-            // borders left/right
-            rectangle.setWidth(2);
-            rectangle.setHeight(height - 4);
-            rectangle.setBackgroundRepeat(BackgroundRepeat.REPEAT_Y);
-            // draw left border
-            rectangle.setBackgroundPosition(0, 48 + offset * 20);
-            rectangle.draw(x, y + 2);
-            // draw right border
-            rectangle.setBackgroundPosition(198, 48 + offset * 20);
-            rectangle.draw(x + width - 2, y + 2);
-
-            // draw background
-            rectangle.setWidth(width - 4);
-            rectangle.setHeight(height - 4);
-            rectangle.setBackgroundSize(18, 18);
-            rectangle.setBackgroundRepeat(BackgroundRepeat.REPEAT);
-            rectangle.setBackgroundPosition(2, 48 + offset * 20);
-            rectangle.draw(x + 2, y + 2);
+            renderHelper.draw(x, y, getWidth(), getHeight());
 
             mouseDragged(mc, mouseX, mouseY);
             int l = 14737632;
@@ -128,7 +120,7 @@ public class Button extends GuiButton implements AbstractGuiPart {
                 l = 16777120;
             }
 
-            drawCenteredString(fontrenderer, displayString, x + width / 2 + 1, y + (height - 8) / 2, l);
+            drawCenteredString(fontrenderer, displayString, x + getWidth() / 2 + 1, y + (getHeight() - 8) / 2, l);
         }
     }
 }

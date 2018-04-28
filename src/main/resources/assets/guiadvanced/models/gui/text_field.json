@@ -1,0 +1,47 @@
+{
+    "outerCorner": {
+        "size": 2,
+        "topLeft": {
+            "x": 0,
+            "y": 104
+        },
+        "topRight": {
+            "x": 14,
+            "y": 104
+        },
+        "bottomRight": {
+            "x": 14,
+            "y": 118
+        },
+        "bottomLeft": {
+            "x": 0,
+            "y": 118
+        }
+    },
+    "outerBorder": {
+        "thickness": 2,
+        "length": 12,
+        "top": {
+            "x": 2,
+            "y": 104
+        },
+        "right": {
+            "x": 14,
+            "y": 106
+        },
+        "bottom": {
+            "x": 2,
+            "y": 118
+        },
+        "left": {
+            "x": 0,
+            "y": 106
+        }
+    },
+    "background": {
+        "width": 12,
+        "height": 12,
+        "x": 2,
+        "y": 106
+    }
+}

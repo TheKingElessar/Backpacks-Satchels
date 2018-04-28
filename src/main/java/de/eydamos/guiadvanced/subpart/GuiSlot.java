@@ -1,107 +1,48 @@
 package de.eydamos.guiadvanced.subpart;
 
+import de.eydamos.guiadvanced.helper.ElementRenderHelper;
+import de.eydamos.guiadvanced.helper.SlotHelper;
+import de.eydamos.guiadvanced.inventory.SlotWithState;
 import de.eydamos.guiadvanced.misc.AbstractGuiPart;
-import de.eydamos.guiadvanced.util.Rectangle;
-import de.eydamos.guiadvanced.util.RenderHelper.BackgroundRepeat;
 import net.minecraft.client.Minecraft;
 
-public class GuiSlot implements AbstractGuiPart {
-    protected int xPosition;
+public class GuiSlot extends AbstractGuiPart {
+    private final SlotWithState slot;
 
-    protected int yPosition;
+    private ElementRenderHelper renderHelper;
 
-    protected int relativePositionX;
-
-    protected int relativePositionY;
-
-    protected int width;
-
-    protected int height;
-
-    public GuiSlot(int posX, int posY) {
-        this(posX, posY, 18, 18);
+    public GuiSlot(SlotWithState slot) {
+        this(slot, 18, 18);
     }
 
-    public GuiSlot(int posX, int posY, int widthHeight) {
-        this(posX, posY, widthHeight, widthHeight);
+    public GuiSlot(SlotWithState slot, int widthHeight) {
+        this(slot, widthHeight, widthHeight);
     }
 
-    public GuiSlot(int posX, int posY, int width, int height) {
+    public GuiSlot(SlotWithState slot, int width, int height) {
+        super(slot.xPos - 1, slot.yPos - 1);
+        this.slot = slot;
         setWidth(width);
         setHeight(height);
-        relativePositionX = posX;
-        relativePositionY = posY;
+        renderHelper = new SlotHelper();
     }
 
     @Override
-    public int getWidth() {
-        return width;
+    public void drawBackgroundLayers(Minecraft mc, int mouseX, int mouseY, float something) {
+        if (!isVisible()) {
+            return;
+        }
+
+        renderHelper.draw(xPosition, yPosition, getWidth(), getHeight());
     }
 
     @Override
-    public void setWidth(int value) {
-        width = value;
+    public boolean isEnabled() {
+        return slot.isEnabled();
     }
 
     @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setHeight(int value) {
-        height = value;
-    }
-
-    @Override
-    public void draw(Minecraft mc, int mouseX, int mouseY, float something) {
-        Rectangle rectangle = new Rectangle(1, 1);
-        // draw upper left corner
-        rectangle.setBackgroundPosition(201, 0);
-        rectangle.draw(xPosition, yPosition);
-        // draw upper right corner
-        rectangle.setBackgroundPosition(218, 0);
-        rectangle.draw(xPosition + width - 1, yPosition);
-        // draw lower left corner
-        rectangle.setBackgroundPosition(201, 17);
-        rectangle.draw(xPosition, yPosition + height - 1);
-        // draw lower right corner
-        rectangle.setBackgroundPosition(218, 17);
-        rectangle.draw(xPosition + width - 1, yPosition + height - 1);
-
-        // borders top/bottom
-        rectangle.setWidth(width - 2);
-        rectangle.setBackgroundRepeat(BackgroundRepeat.REPEAT_X);
-        // draw top border
-        rectangle.setBackgroundPosition(202, 0);
-        rectangle.draw(xPosition + 1, yPosition);
-        // draw bottom border
-        rectangle.setBackgroundPosition(202, 17);
-        rectangle.draw(xPosition + 1, yPosition + height - 1);
-
-        // borders left/right
-        rectangle.setWidth(1);
-        rectangle.setHeight(height - 2);
-        rectangle.setBackgroundRepeat(BackgroundRepeat.REPEAT_Y);
-        // draw left border
-        rectangle.setBackgroundPosition(201, 1);
-        rectangle.draw(xPosition, yPosition + 1);
-        // draw right border
-        rectangle.setBackgroundPosition(218, 1);
-        rectangle.draw(xPosition + width - 1, yPosition + 1);
-
-        // draw background
-        rectangle.setWidth(width - 2);
-        rectangle.setHeight(height - 2);
-        rectangle.setBackgroundSize(14, 14);
-        rectangle.setBackgroundRepeat(BackgroundRepeat.REPEAT);
-        rectangle.setBackgroundPosition(202, 1);
-        rectangle.draw(xPosition + 1, yPosition + 1);
-    }
-
-    @Override
-    public void setAbsolutePosition(int guiLeft, int guiTop) {
-        xPosition = guiLeft + relativePositionX;
-        yPosition = guiTop + relativePositionY;
+    public void setEnabled(boolean value) {
+        slot.setEnabled(value);
     }
 }

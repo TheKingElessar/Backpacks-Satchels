@@ -5,49 +5,33 @@ import de.eydamos.guiadvanced.util.Alignment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
-public class Label implements AbstractGuiPart {
-    protected int xPosition;
-
-    protected int yPosition;
-
-    protected int color;
-
-    protected int relativePositionX;
-
-    protected int relativePositionY;
+public class Label extends AbstractGuiPart {
+    private int color;
 
     protected String text;
 
-    protected Alignment textAlignment = Alignment.LEFT;
+    private Alignment hAlignment;
 
-    public Label(int posX, int posY, int color, String text) {
-        relativePositionX = posX;
-        relativePositionY = posY;
-        this.color = color;
+    private Alignment vAlignment;
+
+    public Label(int posX, int posY, String text) {
+        this(posX, posY, text, 0x404040, Alignment.LEFT, Alignment.TOP);
+    }
+
+    public Label(int posX, int posY, String text, int color) {
+        this(posX, posY, text, color, Alignment.LEFT, Alignment.TOP);
+    }
+
+    public Label(int posX, int posY, String text, int color, Alignment hAlignment) {
+        this(posX, posY, text, color, hAlignment, Alignment.TOP);
+    }
+
+    public Label(int posX, int posY, String text, int color, Alignment hAlignment, Alignment vAlignment) {
+        super(posX, posY);
         this.text = text;
-    }
-
-    public Label(int posX, int posY, int color, String text, Alignment alignment) {
-        this(posX, posY, color, text);
-        textAlignment = alignment;
-    }
-
-    @Override
-    public int getWidth() {
-        return 0;
-    }
-
-    @Override
-    public void setWidth(int value) {
-    }
-
-    @Override
-    public int getHeight() {
-        return 0;
-    }
-
-    @Override
-    public void setHeight(int value) {
+        setColor(color);
+        setHorizontalAlignment(hAlignment);
+        setVerticalAlignment(vAlignment);
     }
 
     public int getColor() {
@@ -58,34 +42,58 @@ public class Label implements AbstractGuiPart {
         color = value;
     }
 
-    public Alignment getAlignment() {
-        return textAlignment;
+    public Alignment getHorizontalAlignment() {
+        return hAlignment;
     }
 
-    public void setAlignment(Alignment value) {
-        textAlignment = value;
+    public void setHorizontalAlignment(Alignment value) {
+        hAlignment = value;
+    }
+
+    public Alignment getVerticalAlignment() {
+        return vAlignment;
+    }
+
+    public void setVerticalAlignment(Alignment vAlignment) {
+        this.vAlignment = vAlignment;
     }
 
     @Override
-    public void draw(Minecraft mc, int mouseX, int mouseY, float something) {
+    public void drawBackgroundLayers(Minecraft mc, int mouseX, int mouseY, float something) {
+        if (!isVisible()) {
+            return;
+        }
+
         String label = I18n.format(text);
-        int offset = 0;
-        switch (textAlignment) {
+        int xOffset = 0;
+        int yOffset = 0;
+
+        switch (getHorizontalAlignment()) {
             case RIGHT:
-                offset -= mc.fontRenderer.getStringWidth(label);
+                xOffset = getWidth() - getStringWidth(mc, label);
                 break;
             case CENTER:
-                offset -= mc.fontRenderer.getStringWidth(label) / 2;
+                xOffset = getWidth() / 2 - getStringWidth(mc, label) / 2;
                 break;
-            case LEFT:
-            default:
         }
-        mc.fontRenderer.drawString(label, xPosition + offset, yPosition, color);
+
+        switch (getVerticalAlignment()) {
+            case CENTER:
+                yOffset = getHeight() / 2 - getStringHeight(mc) / 2;
+                break;
+            case BOTTOM:
+                yOffset = getHeight() - getStringHeight(mc);
+                break;
+        }
+
+        mc.fontRenderer.drawString(label, xPosition + xOffset, yPosition + yOffset, getColor());
     }
 
-    @Override
-    public void setAbsolutePosition(int guiLeft, int guiTop) {
-        xPosition = guiLeft + relativePositionX;
-        yPosition = guiTop + relativePositionY;
+    private int getStringWidth(Minecraft mc, String text) {
+        return mc.fontRenderer.getStringWidth(text);
+    }
+
+    private int getStringHeight(Minecraft mc) {
+        return mc.fontRenderer.FONT_HEIGHT;
     }
 }

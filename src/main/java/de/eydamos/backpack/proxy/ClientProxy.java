@@ -2,6 +2,10 @@ package de.eydamos.backpack.proxy;
 
 import de.eydamos.backpack.handler.HandlerClientEvents;
 import de.eydamos.backpack.handler.HandlerInputEvents;
+import de.eydamos.guiadvanced.config.ConfigLoader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -10,6 +14,14 @@ import java.util.HashMap;
 
 public class ClientProxy extends CommonProxy {
     private HashMap<String, ItemStack> backpacks = new HashMap<>();
+
+    @Override
+    public void registerResourceLoader() {
+        IResourceManager resourceManager = Minecraft.getMinecraft().getResourceManager();
+        if (resourceManager instanceof IReloadableResourceManager) {
+            ((IReloadableResourceManager) resourceManager).registerReloadListener(new ConfigLoader());
+        }
+    }
 
     @Override
     public void registerHandlers() {

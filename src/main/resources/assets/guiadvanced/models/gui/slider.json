@@ -1,0 +1,14 @@
+{
+    "background": {
+        "width": 12,
+        "height": 15,
+        "x": 48,
+        "y": 56
+    },
+    "states": {
+        "disabled": {
+            "xOffset": 16,
+            "yOffset": 0
+        }
+    }
+}

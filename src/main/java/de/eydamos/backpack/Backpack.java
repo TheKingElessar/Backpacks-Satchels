@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
@@ -23,12 +22,15 @@ public class Backpack {
     @SidedProxy(clientSide = Constants.CLASS_PROXY_CLIENT, serverSide = Constants.CLASS_PROXY_SERVER)
     public static CommonProxy proxy;
 
-    public static final Logger logger = LogManager.getLogger(Constants.MOD_NAME);
+    public static Logger logger;
 
     public static final PacketHandlerBackpack packetHandler = new PacketHandlerBackpack();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        logger = event.getModLog();
+        proxy.registerResourceLoader();
+
         File configFile = event.getSuggestedConfigurationFile();
         Configurations.configExists = configFile.exists();
         Configurations.config = new Configuration(configFile);
@@ -48,7 +50,7 @@ public class Backpack {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        // registerItems all Handlers
+        // register all handlers
         proxy.registerHandlers();
     }
 }

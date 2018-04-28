@@ -1,0 +1,97 @@
+{
+    "outerCorner": {
+        "size": 4,
+        "topLeft": {
+            "x": 0,
+            "y": 0
+        },
+        "topRight": {
+            "x": 44,
+            "y": 0
+        },
+        "bottomRight": {
+            "x": 44,
+            "y": 44
+        },
+        "bottomLeft": {
+            "x": 0,
+            "y": 44
+        }
+    },
+    "innerCorner": {
+        "size": 5,
+        "topLeft": {
+            "x": 12,
+            "y": 13
+        },
+        "topRight": {
+            "x": 31,
+            "y": 12
+        },
+        "bottomRight": {
+            "x": 31,
+            "y": 31
+        },
+        "bottomLeft": {
+            "x": 12,
+            "y": 31
+        }
+    },
+    "outerBorder": {
+        "thickness": 4,
+        "length": 40,
+        "top": {
+            "x": 4,
+            "y": 0
+        },
+        "right": {
+            "x": 44,
+            "y": 4
+        },
+        "bottom": {
+            "x": 4,
+            "y": 44
+        },
+        "left": {
+            "x": 0,
+            "y": 4
+        }
+    },
+    "innerBorder": {
+        "thickness": 4,
+        "length": 14,
+        "top": {
+            "x": 17,
+            "y": 12
+        },
+        "right": {
+            "x": 32,
+            "y": 17
+        },
+        "bottom": {
+            "x": 17,
+            "y": 32
+        },
+        "left": {
+            "x": 12,
+            "y": 17
+        }
+    },
+    "background": {
+        "width": 64,
+        "height": 64,
+        "x": 120,
+        "y": 0,
+        "states": {
+            "disabled": {
+                "xOffset": 72
+            }
+        }
+    },
+    "states": {
+        "disabled": {
+            "xOffset": 56,
+            "yOffset": 0
+        }
+    }
+}

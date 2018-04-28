@@ -1,0 +1,57 @@
+{
+    "outerCorner": {
+        "size": 3,
+        "topLeft": {
+            "x": 0,
+            "y": 80
+        },
+        "topRight": {
+            "x": 13,
+            "y": 80
+        },
+        "bottomRight": {
+            "x": 13,
+            "y": 93
+        },
+        "bottomLeft": {
+            "x": 0,
+            "y": 93
+        }
+    },
+    "outerBorder": {
+        "thickness": 3,
+        "length": 10,
+        "top": {
+            "x": 3,
+            "y": 80
+        },
+        "right": {
+            "x": 13,
+            "y": 83
+        },
+        "bottom": {
+            "x": 3,
+            "y": 93
+        },
+        "left": {
+            "x": 0,
+            "y": 83
+        }
+    },
+    "background": {
+        "width": 10,
+        "height": 10,
+        "x": 3,
+        "y": 83
+    },
+    "states": {
+        "disabled": {
+            "xOffset": 24,
+            "yOffset": 0
+        },
+        "hover": {
+            "xOffset": 48,
+            "yOffset": 0
+        }
+    }
+}

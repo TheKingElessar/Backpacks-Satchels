@@ -1,19 +1,22 @@
 package de.eydamos.guiadvanced.form;
 
-import de.eydamos.guiadvanced.misc.AbstractGuiPart;
+import de.eydamos.guiadvanced.misc.GuiInterface;
+import de.eydamos.guiadvanced.misc.GuiPartInterface;
+import de.eydamos.guiadvanced.misc.GuiStateInterface;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-public class Textbox extends GuiTextField implements AbstractGuiPart {
-    protected int relativePositionX;
+public class Textbox extends GuiTextField implements GuiPartInterface, GuiInterface, GuiStateInterface {
+    private final int xOffset;
 
-    protected int relativePositionY;
+    private final int yOffset;
 
     public Textbox(FontRenderer fontRenderer, int posX, int posY, int width, int height) {
         super(0, fontRenderer, posX, posY, width, height);
-        relativePositionX = posX;
-        relativePositionY = posY;
+        xOffset = posX;
+        yOffset = posY;
     }
 
     @Override
@@ -32,13 +35,31 @@ public class Textbox extends GuiTextField implements AbstractGuiPart {
     }
 
     @Override
-    public void draw(Minecraft mc, int mouseX, int mouseY, float something) {
+    public boolean isEnabled() {
+        return (boolean) ReflectionHelper.getPrivateValue(GuiTextField.class, this, "isEnabled", "field_146226_p");
+    }
+
+    @Override
+    public boolean isVisible() {
+        return getVisible();
+    }
+
+    @Override
+    public void drawBackgroundLayers(Minecraft mc, int mouseX, int mouseY, float something) {
         drawTextBox();
     }
 
     @Override
     public void setAbsolutePosition(int guiLeft, int guiTop) {
-        x = guiLeft + relativePositionX;
-        y = guiTop + relativePositionY;
+        x = guiLeft + xOffset;
+        y = guiTop + yOffset;
+    }
+
+    @Override
+    public boolean isMouseOver(int mouseX, int mouseY) {
+        boolean inX = x <= mouseX && mouseX <= x + getWidth();
+        boolean inY = y <= mouseY && mouseY <= y + getHeight();
+
+        return inX && inY;
     }
 }

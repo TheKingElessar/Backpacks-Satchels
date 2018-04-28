@@ -1,7 +1,7 @@
 package de.eydamos.guiadvanced.util;
 
-import de.eydamos.backpack.misc.Constants;
-import de.eydamos.guiadvanced.util.RenderHelper.BackgroundRepeat;
+import de.eydamos.guiadvanced.GuiAdvanced;
+import de.eydamos.guiadvanced.config.BackgroundRepeat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
@@ -11,23 +11,23 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 
 public class Rectangle {
-    protected int width;
+    private int width;
 
-    protected int height;
+    private int height;
 
-    protected int u = 0;
+    private int u = 0;
 
-    protected int v = 0;
+    private int v = 0;
 
-    protected int z = 0;
+    private int z = 0;
 
-    protected int uMax = 1;
+    private int uMax = 1;
 
-    protected int vMax = 1;
+    private int vMax = 1;
 
-    protected ResourceLocation graphic = Constants.guiCombined;
+    private ResourceLocation graphic = GuiAdvanced.guiCombined;
 
-    protected BackgroundRepeat repeat = BackgroundRepeat.NONE;
+    private BackgroundRepeat repeat = BackgroundRepeat.NONE;
 
     public Rectangle(int width, int height) {
         this.width = width;
@@ -38,30 +38,42 @@ public class Rectangle {
         return FMLClientHandler.instance().getClient();
     }
 
-    public void setWidth(int value) {
+    public Rectangle setWidth(int value) {
         width = value;
+
+        return this;
     }
 
-    public void setHeight(int value) {
+    public Rectangle setHeight(int value) {
         height = value;
+
+        return this;
     }
 
-    public void setBackgroundPosition(int xOffset, int yOffset) {
+    public Rectangle setBackgroundPosition(int xOffset, int yOffset) {
         u = xOffset;
         v = yOffset;
+
+        return this;
     }
 
-    public void setBackgroundSize(int sizeX, int sizeY) {
+    public Rectangle setBackgroundSize(int sizeX, int sizeY) {
         uMax = sizeX;
         vMax = sizeY;
+
+        return this;
     }
 
-    public void setBackgroundRepeat(BackgroundRepeat backgroundRepeat) {
+    public Rectangle setBackgroundRepeat(BackgroundRepeat backgroundRepeat) {
         repeat = backgroundRepeat;
+
+        return this;
     }
 
-    public void setBackground(ResourceLocation resourceLocation) {
+    public Rectangle setBackground(ResourceLocation resourceLocation) {
         graphic = resourceLocation;
+
+        return this;
     }
 
     // look at class net.minecraft.client.gui.Gui if somethings breaks

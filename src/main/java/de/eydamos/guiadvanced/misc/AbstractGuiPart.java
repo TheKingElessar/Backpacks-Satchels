@@ -1,17 +1,78 @@
 package de.eydamos.guiadvanced.misc;
 
-import net.minecraft.client.Minecraft;
+public abstract class AbstractGuiPart implements GuiPartInterface, GuiInterface, GuiStateInterface {
+    protected int xPosition;
 
-public interface AbstractGuiPart {
-    public int getWidth();
+    protected int yPosition;
 
-    public void setWidth(int value);
+    protected final int xOffset;
 
-    public int getHeight();
+    protected final int yOffset;
 
-    public void setHeight(int value);
+    private int width;
 
-    public void draw(Minecraft mc, int mouseX, int mouseY, float something);
+    private int height;
 
-    public void setAbsolutePosition(int guiLeft, int guiTop);
+    private boolean enabled = true;
+
+    private boolean visible = true;
+
+    public AbstractGuiPart(int posX, int posY) {
+        xOffset = posX;
+        yOffset = posY;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public void setWidth(int value) {
+        width = value;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public void setHeight(int value) {
+        height = value;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean value) {
+        enabled = value;
+    }
+
+    @Override
+    public boolean isVisible() {
+        return visible;
+    }
+
+    @Override
+    public void setVisible(boolean value) {
+        visible = value;
+    }
+
+    @Override
+    public void setAbsolutePosition(int guiLeft, int guiTop) {
+        xPosition = guiLeft + xOffset;
+        yPosition = guiTop + yOffset;
+    }
+
+    @Override
+    public boolean isMouseOver(int mouseX, int mouseY) {
+        boolean inX = xPosition <= mouseX && mouseX <= xPosition + getWidth();
+        boolean inY = yPosition <= mouseY && mouseY <= yPosition + getHeight();
+
+        return inX && inY;
+    }
 }

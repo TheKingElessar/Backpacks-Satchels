@@ -31,8 +31,6 @@ public class Constants {
 
     public static final String PLAYERS_PATH = DOMAIN + File.separator + "player" + File.separator;
 
-    public static final ResourceLocation guiCombined = new ResourceLocation(DOMAIN, "textures/gui/gui_combined.png");
-
     public static final ResourceLocation modelTexture = new ResourceLocation(DOMAIN, "textures/model/backpack.png");
 
     public static final CreativeTabs tabBackpacks = new TabBackpacks();

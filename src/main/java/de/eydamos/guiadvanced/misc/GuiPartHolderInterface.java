@@ -2,7 +2,7 @@ package de.eydamos.guiadvanced.misc;
 
 import java.util.List;
 
-public interface GuiPartHolderInterface extends GuiStateInterface {
+public interface GuiPartHolderInterface extends GuiInterface, GuiStateInterface {
     /**
      * Returns the identifier of the part holder, which is used to add sub parts to it.
      *

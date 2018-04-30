@@ -3,6 +3,7 @@ package de.eydamos.guiadvanced.window;
 import de.eydamos.guiadvanced.config.State;
 import de.eydamos.guiadvanced.helper.ElementRenderHelper;
 import de.eydamos.guiadvanced.helper.WindowHelper;
+import de.eydamos.guiadvanced.misc.GuiItemRendererAwareInterface;
 import de.eydamos.guiadvanced.misc.GuiPartHolderInterface;
 import de.eydamos.guiadvanced.misc.GuiPartInterface;
 import de.eydamos.guiadvanced.misc.WindowInterface;
@@ -102,6 +103,27 @@ public class Window extends GuiScreen implements WindowInterface {
         partHolders.values().forEach(holder -> holder.setEnabled(false));
     }
 
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+
+        subParts.forEach(subPart -> subPart.onMouseDown(mouseX, mouseY, mouseButton));
+    }
+
+    @Override
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        super.mouseReleased(mouseX, mouseY, state);
+
+        subParts.forEach(subPart -> subPart.onMouseUp(mouseX, mouseY, state));
+    }
+
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        super.keyTyped(typedChar, keyCode);
+
+        subParts.forEach(subPart -> subPart.onKeyDown(typedChar, keyCode));
+    }
+
     /* ========== overrides from GuiScreen ========== */
     @Override
     public void initGui() {
@@ -114,6 +136,12 @@ public class Window extends GuiScreen implements WindowInterface {
                 buttonList.add((GuiButton) guiPart);
             }
         }
+
+        partHolders.values().forEach(holder -> {
+            if (holder instanceof GuiItemRendererAwareInterface) {
+                ((GuiItemRendererAwareInterface) holder).setGuiItemRenderer(itemRender);
+            }
+        });
     }
 
     @Override
@@ -134,26 +162,5 @@ public class Window extends GuiScreen implements WindowInterface {
 
         // draw tooltips of sub parts
         subParts.forEach(subPart -> subPart.drawTooltips(mc, mouseX, mouseY, partialTicks));
-    }
-
-    @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
-
-        subParts.forEach(subPart -> subPart.onMouseDown(mouseX, mouseY, mouseButton));
-    }
-
-    @Override
-    protected void mouseReleased(int mouseX, int mouseY, int state) {
-        super.mouseReleased(mouseX, mouseY, state);
-
-        subParts.forEach(subPart -> subPart.onMouseUp(mouseX, mouseY, state));
-    }
-
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        super.keyTyped(typedChar, keyCode);
-
-        subParts.forEach(subPart -> subPart.onKeyDown(typedChar, keyCode));
     }
 }

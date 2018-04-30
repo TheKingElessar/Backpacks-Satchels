@@ -3,6 +3,7 @@ package de.eydamos.guiadvanced.window;
 import de.eydamos.guiadvanced.config.State;
 import de.eydamos.guiadvanced.helper.ElementRenderHelper;
 import de.eydamos.guiadvanced.helper.WindowHelper;
+import de.eydamos.guiadvanced.misc.GuiItemRendererAwareInterface;
 import de.eydamos.guiadvanced.misc.GuiPartHolderInterface;
 import de.eydamos.guiadvanced.misc.GuiPartInterface;
 import de.eydamos.guiadvanced.misc.WindowInterface;
@@ -96,6 +97,27 @@ public class ContainerWindow extends GuiContainer implements WindowInterface {
         partHolders.values().forEach(holder -> holder.setEnabled(false));
     }
 
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+
+        subParts.forEach(subPart -> subPart.onMouseDown(mouseX, mouseY, mouseButton));
+    }
+
+    @Override
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        super.mouseReleased(mouseX, mouseY, state);
+
+        subParts.forEach(subPart -> subPart.onMouseUp(mouseX, mouseY, state));
+    }
+
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        super.keyTyped(typedChar, keyCode);
+
+        subParts.forEach(subPart -> subPart.onKeyDown(typedChar, keyCode));
+    }
+
     /* ========== overrides from GuiContainer ========== */
     @Override
     public void initGui() {
@@ -105,6 +127,12 @@ public class ContainerWindow extends GuiContainer implements WindowInterface {
             subPart.setAbsolutePosition(guiLeft, guiTop);
             if (subPart instanceof GuiButton) {
                 buttonList.add((GuiButton) subPart);
+            }
+        });
+
+        partHolders.values().forEach(holder -> {
+            if (holder instanceof GuiItemRendererAwareInterface) {
+                ((GuiItemRendererAwareInterface) holder).setGuiItemRenderer(itemRender);
             }
         });
     }
@@ -135,23 +163,11 @@ public class ContainerWindow extends GuiContainer implements WindowInterface {
     }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
+    protected boolean hasClickedOutside(int mouseX, int mouseY, int guiLeft, int guiTop) {
+        if (super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop)) {
+            return partHolders.values().stream().noneMatch(holder -> holder.isMouseOver(mouseX, mouseY));
+        }
 
-        subParts.forEach(subPart -> subPart.onMouseDown(mouseX, mouseY, mouseButton));
-    }
-
-    @Override
-    protected void mouseReleased(int mouseX, int mouseY, int state) {
-        super.mouseReleased(mouseX, mouseY, state);
-
-        subParts.forEach(subPart -> subPart.onMouseUp(mouseX, mouseY, state));
-    }
-
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        super.keyTyped(typedChar, keyCode);
-
-        subParts.forEach(subPart -> subPart.onKeyDown(typedChar, keyCode));
+        return false;
     }
 }

@@ -141,9 +141,10 @@ public class ItemBackpack extends Item {
 
             @Override
             public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-                if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !stack.isEmpty()) {
+                if (hasCapability(capability, facing)) {
                     return (T) new InvWrapper(BackpackSave.loadBackpack(Backpack.proxy.getWorldForMapStorage(), stack, null, false));
                 }
+
                 return null;
             }
         };

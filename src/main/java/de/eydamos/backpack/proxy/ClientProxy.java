@@ -50,9 +50,10 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public World getWorldForMapStorage() {
-        if(!GeneralUtil.isServerSide()) {
+        if (!GeneralUtil.isServerSide()) {
             return Minecraft.getMinecraft().world;
         }
+
         return super.getWorldForMapStorage();
     }
 }

@@ -1,6 +1,8 @@
 package de.eydamos.backpack.item;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import de.eydamos.backpack.Backpack;
+import de.eydamos.backpack.data.BackpackSave;
 import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.backpack.helper.GuiHelper;
 import de.eydamos.backpack.init.BackpackItems;
@@ -18,13 +20,19 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
@@ -120,5 +128,25 @@ public class ItemBackpack extends Item {
         }
 
         return new ActionResult<>(EnumActionResult.PASS, itemStack);
+    }
+
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        return new ICapabilityProvider() {
+
+            @Override
+            public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+                return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !stack.isEmpty();
+            }
+
+            @Override
+            public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+                if (hasCapability(capability, facing)) {
+                    return (T) new InvWrapper(BackpackSave.loadBackpack(Backpack.proxy.getWorldForMapStorage(), stack, null, false));
+                }
+
+                return null;
+            }
+        };
     }
 }

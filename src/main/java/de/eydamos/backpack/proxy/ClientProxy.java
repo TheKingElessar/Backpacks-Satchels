@@ -2,11 +2,13 @@ package de.eydamos.backpack.proxy;
 
 import de.eydamos.backpack.handler.HandlerClientEvents;
 import de.eydamos.backpack.handler.HandlerInputEvents;
+import de.eydamos.backpack.util.GeneralUtil;
 import de.eydamos.guiadvanced.config.ConfigLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -44,5 +46,13 @@ public class ClientProxy extends CommonProxy {
     @Override
     public ItemStack getClientBackpack(String playerUUID) {
         return backpacks.get(playerUUID);
+    }
+
+    @Override
+    public World getWorldForMapStorage() {
+        if(!GeneralUtil.isServerSide()) {
+            return Minecraft.getMinecraft().world;
+        }
+        return super.getWorldForMapStorage();
     }
 }

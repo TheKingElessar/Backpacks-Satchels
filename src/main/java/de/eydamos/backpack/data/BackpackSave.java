@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Hashtable;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
 
     private boolean heldItem;
 
-    private EntityPlayer player;
+    @Nullable private EntityPlayer player;
 
     public BackpackSave() {
         super(Constants.INVENTORIES_PATH + "DUMMY");
@@ -85,7 +86,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         return nbt;
     }
 
-    private void initialize(ItemStack backpack, EntityPlayer player, boolean heldItem) {
+    private void initialize(ItemStack backpack, @Nullable EntityPlayer player, boolean heldItem) {
         this.backpack = backpack;
         this.player = player;
         this.heldItem = heldItem;
@@ -99,7 +100,7 @@ public class BackpackSave extends WorldSavedData implements IInventory {
         }
     }
 
-    public static BackpackSave loadBackpack(World world, ItemStack backpack, EntityPlayer player, boolean heldItem) {
+    public static BackpackSave loadBackpack(World world, ItemStack backpack, @Nullable EntityPlayer player, boolean heldItem) {
         String UUID = BackpackHelper.getUUID(backpack);
         MapStorage storage = world.getMapStorage();
 
@@ -282,6 +283,6 @@ public class BackpackSave extends WorldSavedData implements IInventory {
             }
         }
 
-        BackpackHelper.setSlotsUsed(BackpackHelper.getBackpackFromPlayer(player, heldItem), slotsUsed);
+        BackpackHelper.setSlotsUsed(player == null ? backpack : BackpackHelper.getBackpackFromPlayer(player, heldItem), slotsUsed);
     }
 }

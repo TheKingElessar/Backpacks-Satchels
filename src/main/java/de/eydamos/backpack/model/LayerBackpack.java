@@ -32,6 +32,7 @@ public class LayerBackpack implements LayerRenderer<AbstractClientPlayer> {
         float scale
     ) {
         ItemStack backpack = Backpack.proxy.getClientBackpack(player);
+        if(backpack == null) return;
 
         if (!backpack.isEmpty()) {
             GL11.glPushMatrix();

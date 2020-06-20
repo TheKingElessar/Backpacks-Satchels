@@ -1,5 +1,6 @@
 package de.eydamos.backpack.storage.slot;
 
+import de.eydamos.backpack.helper.BackpackHelper;
 import de.eydamos.guiadvanced.inventory.SlotWithState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,6 +12,6 @@ public class SlotMainHand extends SlotWithState {
 
     @Override
     public boolean canTakeStack(EntityPlayer playerIn) {
-        return false;
-    }
+        if (BackpackHelper.isBackpack(playerIn.getHeldItemMainhand())) return false;
+        else return true;    }
 }

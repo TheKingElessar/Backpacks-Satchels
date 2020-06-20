@@ -12,6 +12,8 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static de.eydamos.backpack.handler.HandlerSatchels.isSatchel;
+
 @SideOnly(value = Side.CLIENT)
 public class HandlerInputEvents {
     // 48 represents the B key
@@ -29,10 +31,22 @@ public class HandlerInputEvents {
             if (mc.inGameHasFocus && (player = mc.player) != null) {
                 if (player.isSneaking()) {
                     Backpack.packetHandler.sendOpenGui(Constants.Guis.SPECIAL_SLOTS);
-                } else {
-                    Backpack.packetHandler.sendOpenGui(Constants.Guis.CARRIED_BACKPACK);
+                }
+                else
+                {
+                    if (isSatchel(player))
+                    {
+                        Backpack.packetHandler.sendOpenGui(Constants.Guis.CARRIED_SATCHEL);
+                    }
+                    
+                    else
+                    {
+                        Backpack.packetHandler.sendOpenGui(Constants.Guis.CARRIED_BACKPACK);
+                    }
                 }
             }
         }
+        
     }
+    
 }

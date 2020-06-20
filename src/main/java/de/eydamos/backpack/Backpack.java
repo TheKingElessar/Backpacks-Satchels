@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT, guiFactory = Constants.CLASS_GUI_FACTORY)
+@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.MOD_VERSION, certificateFingerprint = Constants.FINGERPRINT, guiFactory = Constants.CLASS_GUI_FACTORY, dependencies = "required-after:thermalexpansion@[5.5.0,)")
 public class Backpack {
     @Mod.Instance(Constants.MOD_ID)
     public static Backpack instance;

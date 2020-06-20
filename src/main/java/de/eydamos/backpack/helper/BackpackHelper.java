@@ -1,5 +1,6 @@
 package de.eydamos.backpack.helper;
 
+import cofh.thermalexpansion.item.ItemSatchel;
 import de.eydamos.backpack.Backpack;
 import de.eydamos.backpack.data.BackpackSave;
 import de.eydamos.backpack.data.PlayerSave;
@@ -99,9 +100,21 @@ public class BackpackHelper {
 
         return new BackpackSave();
     }
-
-    public static boolean isBackpack(ItemStack itemStack) {
-        return itemStack.getItem() == BackpackItems.backpack && !itemStack.isEmpty();
+    
+    public static boolean isBackpack(ItemStack itemStack)
+    {
+        if (!itemStack.isEmpty())
+        {
+            if (itemStack.getItem() == BackpackItems.backpack)
+            {
+                return true;
+            }
+            else if (itemStack.getItem() == ItemSatchel.satchelBasic.getItem())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static ItemStack getBackpackFromPlayer(EntityPlayer player, boolean heldItem) {

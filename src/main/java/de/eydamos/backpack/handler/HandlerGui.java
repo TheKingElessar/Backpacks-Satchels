@@ -1,5 +1,7 @@
 package de.eydamos.backpack.handler;
 
+import cofh.thermalexpansion.gui.client.storage.GuiSatchel;
+import cofh.thermalexpansion.gui.container.storage.ContainerSatchel;
 import de.eydamos.backpack.factory.FactoryBackpack;
 import de.eydamos.backpack.factory.FactorySpecialSlots;
 import de.eydamos.backpack.gui.GuiBackpackRename;
@@ -20,6 +22,9 @@ public class HandlerGui implements IGuiHandler {
                 return FactorySpecialSlots.getGuiContainer(player);
             case Constants.Guis.CARRIED_BACKPACK:
                 return FactoryBackpack.getGuiContainer(player, false);
+            case Constants.Guis.CARRIED_SATCHEL:
+                return new GuiSatchel(player.inventory, new ContainerSatchel(HandlerSatchels.getSatchel(player), player.inventory));
+            
         }
 
         return null;
@@ -36,6 +41,15 @@ public class HandlerGui implements IGuiHandler {
                 return FactorySpecialSlots.getContainer(player);
             case Constants.Guis.CARRIED_BACKPACK:
                 return FactoryBackpack.getContainer(player, false);
+            case Constants.Guis.CARRIED_SATCHEL:
+                // Todo: The server must be closing it. Something wrong here?
+                ContainerSatchel containerSatchel = new ContainerSatchel(HandlerSatchels.getSatchel(player), player.inventory);
+                if (containerSatchel == null)
+                {
+                    System.out.println("Server GUI thing is NULL");
+                }
+                return containerSatchel;
+            
         }
 
         return null;

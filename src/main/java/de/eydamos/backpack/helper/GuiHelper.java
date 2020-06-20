@@ -23,4 +23,8 @@ public class GuiHelper {
     public static void displayCarriedBackpack(EntityPlayer player) {
         player.openGui(Backpack.instance, Constants.Guis.CARRIED_BACKPACK, player.world, 0, 0, 0);
     }
+    
+    public static void displayCarriedSatchel(EntityPlayer player) {
+        player.openGui(Backpack.instance, Constants.Guis.CARRIED_SATCHEL, player.world, 0, 0, 0);
+    }
 }

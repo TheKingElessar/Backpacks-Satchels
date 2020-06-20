@@ -43,6 +43,8 @@ public class Constants {
         public static final byte SPECIAL_SLOTS = 2;
 
         public static final byte CARRIED_BACKPACK = 3;
+        
+        public static final byte CARRIED_SATCHEL = 4;
     }
 
     public class GuiCommands {
